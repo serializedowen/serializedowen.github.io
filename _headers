@@ -1,0 +1,52 @@
+## Created with gatsby-plugin-netlify
+
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+/static/*
+  Cache-Control: public, max-age=31536000, immutable
+/sw.js
+  Cache-Control: no-cache
+/offline-plugin-app-shell-fallback/
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </component---node-modules-gatsby-plugin-offline-app-shell-js-02726155db312029e51b.js>; rel=preload; as=script
+/xylophonmusik
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/alper-musig-clare
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/jux-bei-pforzheim
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/scittle-luo
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/coding-is-fun
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/categories/music
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/categories/technology
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/categories/general
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/categories/coding
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/categories/
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/contact/
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
+/success/
+  Link: </webpack-runtime-524b8701ee73efb73e1c.js>; rel=preload; as=script
+  Link: </0-34ea52bf976be0d47bfd.js>; rel=preload; as=script
