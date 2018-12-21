@@ -47,7 +47,7 @@
     "lint:js": "eslint . --ext .js,.jsx --ignore-path .gitignore",
     "lint:js:fix": "eslint . --ext .js,.jsx --fix --ignore-path .gitignore",
     "lint:md": "prettier --write blog/**/*.md",
-    "deploy": "gatsby build && gh-pages -d public -b gh-pages"
+    "deploy": "gatsby build && gh-pages -d public -b master"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
