@@ -20,6 +20,7 @@
     "gatsby-remark-prismjs": "^3.0.3",
     "gatsby-source-filesystem": "^2.0.7",
     "gatsby-transformer-remark": "^2.1.11",
+    "gh-pages": "^2.0.1",
     "lodash": "^4.17.11",
     "polished": "^2.3.0",
     "prismjs": "^1.15.0",
@@ -45,7 +46,8 @@
     "lint": "yarn run lint:md && yarn run lint:js:fix",
     "lint:js": "eslint . --ext .js,.jsx --ignore-path .gitignore",
     "lint:js:fix": "eslint . --ext .js,.jsx --fix --ignore-path .gitignore",
-    "lint:md": "prettier --write blog/**/*.md"
+    "lint:md": "prettier --write blog/**/*.md",
+    "deploy": "gatsby build && gh-pages -d public -b gh-pages"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
