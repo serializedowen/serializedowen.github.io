@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
-import { Layout, Article, Wrapper, Button, SectionTitle } from 'components';
+import { Layout, Article, Wrapper, Button, SectionTitle, Navigation } from 'components';
 import { media } from '../utils/media';
 
 const Content = styled.div`
@@ -47,8 +47,8 @@ const IndexPage = ({
       <Hero>
         <h1>Hi.</h1>
         <p>
-          I&apos;m John Doe, a Senior UX Developer with five years of industry experience, specializing in developing
-          React apps with the best UX users can get.
+          I&apos;m SerializedOwen, a Senior UX Developer with five years of industry experience, specializing in
+          developing React apps with the best UX users can get.
         </p>
         <Link to="/contact">
           <Button big>

@@ -7,6 +7,7 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { SEO } from 'components';
 import theme from '../../config/Theme';
 import { media } from '../utils/media';
+import Navigation from './Navigation';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -82,10 +83,12 @@ const Layout = ({ children }) => (
         <React.Fragment>
           <SEO />
           <GlobalStyle />
+          <Navigation />
+
           {children}
           <Footer>
-            &copy; 2018 by John Doe. All rights reserved. <br />
-            <a href="https://github.com/LekoArts/gatsby-starter-minimal-blog">GitHub Repository</a> <br />
+            &copy; 2018 by SerializedOwen. All rights reserved. <br />
+            <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
             <span>Last build: {data.site.buildTime}</span>
           </Footer>
         </React.Fragment>
