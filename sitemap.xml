@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url> <loc>https://serializedowen.github.io/jux-bei-pforzheim</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/xylophonmusik</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/scittle-luo</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/test</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/alper-musig-clare</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/categories/technology</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/categories/music</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/jux-bei-pforzheim</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/test</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/xylophonmusik</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/categories/general</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/categories/technology</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/categories/css-tricks</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/categories/music</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/categories/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/contact/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/resume/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/success/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
