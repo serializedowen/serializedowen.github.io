@@ -9,7 +9,7 @@ const Nav = styled.nav.attrs({
 })`
   background: ${props => props.theme.colors.primary};
   height: 50px;
-  overflow: scroll;
+  overflow: auto;
   max-width: 1080px;
   a {
     margin-left: 1rem;
@@ -20,11 +20,17 @@ const Nav = styled.nav.attrs({
 
 const NavWrap = styled.div`
   padding-left: 2em;
-  display: flex;
+
   background: ${props => props.theme.colors.primary};
   padding-right: 2em;
 
-  & > * {
+  & > div {
+    display: flex;
+    margin: auto;
+    max-width: 1000px;
+  }
+
+  & > div > * {
     display: flex;
     box-shadow: inset 0 -1px 0 0px rgba(0, 0, 0, 0.1);
     align-items: center;
@@ -41,17 +47,20 @@ const Icons = styled.span`
 
 const Navigation = () => (
   <NavWrap>
-    <Nav>
-      <Link to="/">Home</Link>
-      <Link to="/contact">Contact</Link>
-      <Link to="/categories">Categories</Link>
-      {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
-    </Nav>
-    <Icons>
-      <SocialIcon.GitHub link="https://github.com/serializedowen" />
-      <SocialIcon.LinkedIn />
-      <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
-    </Icons>
+    <div>
+      <Nav>
+        <Link to="/">Home</Link>
+        <Link to="/contact">Contact</Link>
+        <Link to="/categories">Categories</Link>
+        {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
+      </Nav>
+      <Icons>
+        <SocialIcon.GitHub link="https://github.com/serializedowen" />
+        <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+        <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
+        <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
+      </Icons>
+    </div>
   </NavWrap>
 );
 

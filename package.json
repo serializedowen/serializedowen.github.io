@@ -22,6 +22,7 @@
     "gatsby-transformer-remark": "^2.1.11",
     "gh-pages": "^2.0.1",
     "lodash": "^4.17.11",
+    "medium-editor": "^5.23.3",
     "polished": "^2.3.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",
