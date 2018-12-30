@@ -2,12 +2,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { SEO } from 'components';
 import theme from '../../config/Theme';
 import { media } from '../utils/media';
 import Navigation from './Navigation';
+import SocialIcon from './SocialIcon';
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -87,6 +88,12 @@ const Layout = ({ children }) => (
 
           {children}
           <Footer>
+            <div>
+              <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
+              <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+              <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
+              <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
+            </div>
             &copy; 2018 by SerializedOwen. All rights reserved. <br />
             <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
             <span>Last build: {data.site.buildTime}</span>

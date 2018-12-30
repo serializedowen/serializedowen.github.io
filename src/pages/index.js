@@ -47,8 +47,8 @@ const IndexPage = ({
       <Hero>
         <h1>Hi.</h1>
         <p>
-          I&apos;m SerializedOwen, a Senior UX Developer with five years of industry experience, specializing in
-          developing React apps with the best UX users can get.
+          I'm SerializedOwen, a Full-stack Web Developer with five years of industry experience, specializing in React,
+          Node.js and PHP
         </p>
         <Link to="/contact">
           <Button big>

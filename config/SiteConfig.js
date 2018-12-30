@@ -1,8 +1,8 @@
 module.exports = {
   pathPrefix: '/', // Prefix for all links. If you deploy your site to example.com/portfolio your pathPrefix should be "portfolio"
 
-  siteTitle: 'Minimal Blog', // Navigation and Site Title
-  siteTitleAlt: 'Minimal Blog - Gatsby Starter', // Alternative Site title for SEO
+  siteTitle: '@SerializedOwen', // Navigation and Site Title
+  siteTitleAlt: 'SerializedOwen - portfolio', // Alternative Site title for SEO
   siteUrl: 'https://serializedowen.github.io', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element
   siteBanner: '/social/banner.jpg', // Your image for og:image tag. You can find it in the /static folder
@@ -13,7 +13,7 @@ module.exports = {
 
   // siteFBAppID: '123456789', // Facebook App ID - Optional
   userTwitter: '', // Twitter Username - Optional
-  ogSiteName: 'serializedowen - portfolio', // Facebook Site Name - Optional
+  ogSiteName: 'SerializedOwen - portfolio', // Facebook Site Name - Optional
   ogLanguage: 'en_US', // Facebook Language
 
   // Manifest and Progress color

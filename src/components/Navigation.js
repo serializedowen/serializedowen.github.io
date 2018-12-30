@@ -50,9 +50,9 @@ const Navigation = () => (
     <div>
       <Nav>
         <Link to="/">Home</Link>
+        <Link to="/resume">Resume</Link>
         <Link to="/contact">Contact</Link>
-        <Link to="/categories">Categories</Link>
-        {/* <Link to={`/categories/${kebabCase(category)}`}>{category}</Link> */}
+        <Link to="/categories">Blog</Link>
       </Nav>
       <Icons>
         <SocialIcon.GitHub link="https://github.com/serializedowen" />

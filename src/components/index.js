@@ -8,5 +8,6 @@ import SEO from './SEO';
 import Subline from './Subline';
 import Wrapper from './Wrapper';
 import Navigation from './Navigation';
+import Content from './Content';
 
-export { Article, Button, Header, Layout, PrevNext, SectionTitle, SEO, Subline, Wrapper, Navigation };
+export { Article, Button, Header, Layout, PrevNext, SectionTitle, SEO, Subline, Wrapper, Navigation, Content };

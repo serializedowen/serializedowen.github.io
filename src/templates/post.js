@@ -4,29 +4,13 @@ import Helmet from 'react-helmet';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import kebabCase from 'lodash/kebabCase';
-import { Layout, Wrapper, Header, Subline, SEO, PrevNext } from 'components';
-import MediumEditor from 'medium-editor';
-import { media } from '../utils/media';
+import { Layout, Wrapper, Header, Subline, SEO, PrevNext, Content } from 'components';
 import config from '../../config/SiteConfig';
 import '../utils/medium-editor.css';
 import '../utils/prismjs-theme.css';
 
-const Content = styled.article`
-  grid-column: 2;
-  box-shadow: 0 4px 120px rgba(0, 0, 0, 0.1);
-  max-width: 1000px;
-  border-radius: 1rem;
-  padding: 2rem 4rem;
-  background-color: ${props => props.theme.colors.bg};
-  z-index: 9000;
-  margin-top: -3rem;
-  @media ${media.tablet} {
-    padding: 3rem 3rem;
-  }
-  @media ${media.phone} {
-    padding: 2rem 1.5rem;
-  }
-`;
+// using import cause failure at production build
+const MediumEditor = require('medium-editor');
 
 const Title = styled.h1`
   margin-bottom: 1rem;

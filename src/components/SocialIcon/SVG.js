@@ -7,7 +7,7 @@ const SVG = styled.svg.attrs({
   width: '1em',
   xmlns: 'http://www.w3.org/2000/svg',
 })`
-  fill: ${props => props.theme.colors.secondary || 'black'};
+  fill: ${props => props.fillColor || props.theme.colors.secondary || 'black'};
 `;
 
 const SVGG = ({ children, link, ...rest }) =>
