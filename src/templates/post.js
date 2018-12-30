@@ -5,7 +5,7 @@ import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import kebabCase from 'lodash/kebabCase';
 import { Layout, Wrapper, Header, Subline, SEO, PrevNext } from 'components';
-import MediumEditor from 'medium-editor';
+// import MediumEditor from 'medium-editor';
 import { media } from '../utils/media';
 import config from '../../config/SiteConfig';
 import '../utils/medium-editor.css';
@@ -39,6 +39,7 @@ const PostContent = styled.div`
 
 class Post extends Component {
   componentDidMount() {
+    const MediumEditor = require('medium-editor');
     this.editor = new MediumEditor('.editable', { elementsContainer: document.querySelector('#medium-toolbar') });
   }
 
@@ -56,15 +57,7 @@ class Post extends Component {
       <Layout>
         <Wrapper>
           <SEO postPath={slug} postNode={postNode} postSEO />
-          <Helmet title={`${post.title} | ${config.siteTitle}`}>
-            <link
-              rel="stylesheet"
-              href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
-              type="text/css"
-              media="screen"
-              charset="utf-8"
-            />
-          </Helmet>
+          <Helmet title={`${post.title} | ${config.siteTitle}`} />
           <Header>
             <Link to="/">{config.siteTitle}</Link>
           </Header>
