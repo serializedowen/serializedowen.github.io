@@ -7,6 +7,7 @@ import kebabCase from 'lodash/kebabCase';
 import { Layout, Wrapper, Header, Subline, SEO, PrevNext, Content } from 'components';
 import config from '../../config/SiteConfig';
 import '../utils/medium-editor.css';
+import 'medium-editor/dist/css/medium-editor.min.css';
 import '../utils/prismjs-theme.css';
 
 const Title = styled.h1`

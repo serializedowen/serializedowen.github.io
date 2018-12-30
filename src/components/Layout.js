@@ -91,7 +91,7 @@ const Layout = ({ children }) => (
             <div>
               <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
               <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-              <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
+              <SocialIcon.Wechat fillColor="black" link={withPrefix('/social/QRcode.jpg')} />
               <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
             </div>
             &copy; 2018 by SerializedOwen. All rights reserved. <br />
