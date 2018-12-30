@@ -40,15 +40,7 @@ class Post extends Component {
       <Layout>
         <Wrapper>
           <SEO postPath={slug} postNode={postNode} postSEO />
-          <Helmet title={`${post.title} | ${config.siteTitle}`}>
-            <link
-              rel="stylesheet"
-              href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
-              type="text/css"
-              media="screen"
-              charset="utf-8"
-            />
-          </Helmet>
+          <Helmet title={`${post.title} | ${config.siteTitle}`} />
           <Header>
             <Link to="/">{config.siteTitle}</Link>
           </Header>
