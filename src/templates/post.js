@@ -9,9 +9,6 @@ import config from '../../config/SiteConfig';
 import '../utils/medium-editor.css';
 import '../utils/prismjs-theme.css';
 
-// using import cause failure at production build
-const MediumEditor = require('medium-editor');
-
 const Title = styled.h1`
   margin-bottom: 1rem;
 `;
@@ -23,6 +20,9 @@ const PostContent = styled.div`
 
 class Post extends Component {
   componentDidMount() {
+    // using import cause failure at production build
+    /* eslint global-require:0 */
+    const MediumEditor = require('medium-editor');
     this.editor = new MediumEditor('.editable', { elementsContainer: document.querySelector('#medium-toolbar') });
   }
 
