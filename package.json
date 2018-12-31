@@ -4,6 +4,8 @@
   "version": "2.0.0",
   "author": "serializedowen <jiah.wang@mail.utoronto.ca>",
   "dependencies": {
+    "@reach/router": "^1.2.1",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.8.0",
     "gatsby": "^2.0.37",
     "gatsby-plugin-catch-links": "^2.0.6",
@@ -36,8 +38,7 @@
   },
   "keywords": [
     "gatsby",
-    "gatsby-starter",
-    "lekoarts"
+    "gatsby-starter"
   ],
   "license": "MIT",
   "main": "n/a",
