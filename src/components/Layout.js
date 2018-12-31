@@ -82,26 +82,24 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <ThemeProvider theme={theme}>
-        <PageTransition>
-          <React.Fragment>
-            <SEO />
-            <GlobalStyle />
-            <Navigation />
+        <React.Fragment>
+          <SEO />
+          <GlobalStyle />
+          <Navigation />
+          <PageTransition>{children}</PageTransition>
 
-            {children}
-            <Footer>
-              <div>
-                <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
-                <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-                <SocialIcon.Wechat fillColor="black" link={withPrefix('/social/QRcode.jpg')} />
-                <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
-              </div>
-              &copy; 2018 by SerializedOwen. All rights reserved. <br />
-              <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
-              <span>Last build: {data.site.buildTime}</span>
-            </Footer>
-          </React.Fragment>
-        </PageTransition>
+          <Footer>
+            <div>
+              <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
+              <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+              <SocialIcon.Wechat fillColor="black" link={withPrefix('/social/QRcode.jpg')} />
+              <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
+            </div>
+            &copy; 2018 by SerializedOwen. All rights reserved. <br />
+            <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
+            <span>Last build: {data.site.buildTime}</span>
+          </Footer>
+        </React.Fragment>
       </ThemeProvider>
     )}
   />
