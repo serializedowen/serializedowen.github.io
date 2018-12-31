@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'gatsby';
 import { Layout, Wrapper, Header, Content } from 'components';
+import PageTransition from 'gatsby-plugin-page-transitions';
 import config from '../../config/SiteConfig';
 
 export default function resume() {

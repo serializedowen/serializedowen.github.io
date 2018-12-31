@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import { SEO } from 'components';
+import PageTransition from 'gatsby-plugin-page-transitions';
 import theme from '../../config/Theme';
 import { media } from '../utils/media';
 import Navigation from './Navigation';
@@ -81,24 +82,26 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <ThemeProvider theme={theme}>
-        <React.Fragment>
-          <SEO />
-          <GlobalStyle />
-          <Navigation />
+        <PageTransition>
+          <React.Fragment>
+            <SEO />
+            <GlobalStyle />
+            <Navigation />
 
-          {children}
-          <Footer>
-            <div>
-              <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
-              <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-              <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
-              <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
-            </div>
-            &copy; 2018 by SerializedOwen. All rights reserved. <br />
-            <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
-            <span>Last build: {data.site.buildTime}</span>
-          </Footer>
-        </React.Fragment>
+            {children}
+            <Footer>
+              <div>
+                <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
+                <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+                <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
+                <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
+              </div>
+              &copy; 2018 by SerializedOwen. All rights reserved. <br />
+              <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
+              <span>Last build: {data.site.buildTime}</span>
+            </Footer>
+          </React.Fragment>
+        </PageTransition>
       </ThemeProvider>
     )}
   />
