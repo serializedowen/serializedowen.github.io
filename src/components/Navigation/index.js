@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, withPrefix } from 'gatsby';
-import SocialIcon from './SocialIcon';
+import SocialIcon from '../SocialIcon';
+import AuthenticationMenu from './AuthenticationMenu';
 
 const Nav = styled.nav.attrs({
   role: 'navigation',
@@ -12,8 +12,8 @@ const Nav = styled.nav.attrs({
   overflow: auto;
   max-width: 1080px;
   a {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     color: ${props => props.theme.colors.secondary};
   }
 `;
@@ -60,6 +60,7 @@ const Navigation = () => (
         <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
         <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
       </Icons>
+      <AuthenticationMenu />
     </div>
   </NavWrap>
 );
