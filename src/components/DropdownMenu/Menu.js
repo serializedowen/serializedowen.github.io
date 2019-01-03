@@ -8,9 +8,10 @@ const MenuWrap = styled.div`
   color: white;
   & > menu {
     transition: all ${props => props.theme.transitions.normal};
-
     display: none;
     position: absolute;
+    border-radius: 5px;
+
     flex-direction: column;
     ${MenuItem} {
       padding-left: 1rem;
