@@ -2,22 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
-import { Layout, Article, Wrapper, Button, SectionTitle } from 'components';
+import { Layout, Article, Wrapper, Button, SectionTitle, Content } from 'components';
 import { media } from '../utils/media';
-
-const Content = styled.div`
-  grid-column: 2;
-  box-shadow: 0 4px 120px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  padding: 3rem 6rem;
-  @media ${media.tablet} {
-    padding: 3rem 2rem;
-  }
-  @media ${media.phone} {
-    padding: 2rem 1.5rem;
-  }
-  overflow: hidden;
-`;
 
 const Hero = styled.div`
   grid-column: 2;

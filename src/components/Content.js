@@ -9,6 +9,8 @@ const Content = styled.div`
   background-color: ${props => props.theme.colors.bg};
   z-index: 9000;
   margin-top: -3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   @media ${media.tablet} {
     padding: 3rem 3rem;
   }

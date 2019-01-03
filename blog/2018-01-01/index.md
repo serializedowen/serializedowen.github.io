@@ -1,7 +1,7 @@
 ---
-date: "2018-01-01"
-title: "Scittle Luo"
-category: "General"
+date: '2018-01-01'
+title: 'Example'
+category: 'General'
 ---
 
 [View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
@@ -145,13 +145,13 @@ Paragraph:
 
     ---------------------------------------
 
-This is [an example](http://example.com "Example") link.
+This is [an example](http://example.com 'Example') link.
 
 [This link](http://example.com) has no title attr.
 
 This is [an example][id] reference-style link.
 
-[id]: http://example.com "Optional Title"
+[id]: http://example.com 'Optional Title'
 
     This is [an example](http://example.com "Example") link.
 
@@ -181,6 +181,6 @@ This paragraph has some `code` in it.
 
     This paragraph has some `code` in it.
 
-![Alt Text](https://placehold.it/200x50 "Image Title")
+![Alt Text](https://placehold.it/200x50 'Image Title')
 
     ![Alt Text](https://placehold.it/200x50 "Image Title")
