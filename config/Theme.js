@@ -9,6 +9,7 @@ const colors = {
     ultraLight: 'rgba(0, 0, 0, 0.25)',
   },
 };
+const boxShadow = '0px 8px 16px 0px rgba(0, 0, 0, 0.2)';
 
 const transitions = {
   normal: '0.5s',
@@ -22,6 +23,7 @@ const theme = {
   colors,
   transitions,
   fontSize,
+  boxShadow,
 };
 
 export default theme;
