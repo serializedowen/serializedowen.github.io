@@ -1,5 +1,5 @@
-import bodyParser from 'body-parser';
-import express from 'express';
+const bodyParser = require('body-parser');
+const express = require('express');
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { printSchema } from 'graphql/utilities/schemaPrinter';
 import schema from './data/schema';
@@ -9,10 +9,17 @@ const setupGraphQLServer = () => {
   const graphQLServer = express();
 
   // /api/graphql
-  graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({ schema, context: {} }));
+  graphQLServer.use(
+    '/graphql',
+    bodyParser.json(),
+    graphqlExpress({ schema, context: {} })
+  );
 
   // /api/graphiql
-  graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/api/graphql' }));
+  graphQLServer.use(
+    '/graphiql',
+    graphiqlExpress({ endpointURL: '/api/graphql' })
+  );
 
   // /api/schema
   graphQLServer.use('/schema', (req, res) => {

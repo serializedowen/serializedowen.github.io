@@ -2,14 +2,14 @@
   "name": "functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
-    "build": "./node_modules/.bin/tslint --project tsconfig.json && ./node_modules/.bin/tsc",
+    "build": "npm run lint && ./node_modules/.bin/tsc",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
-  "main": "lib/index.ts",
+  "main": "lib/index.js",
   "dependencies": {
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0",
