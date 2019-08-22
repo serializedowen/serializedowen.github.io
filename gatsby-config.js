@@ -1,11 +1,11 @@
-const config = require('./config/SiteConfig');
+const config = require('./config/SiteConfig')
 
-const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix;
+const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
 
 module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
-    siteUrl: config.siteUrl + pathPrefix,
+    siteUrl: config.siteUrl + pathPrefix
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -15,30 +15,30 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'post',
-        path: `${__dirname}/blog`,
-      },
+        path: `${__dirname}/blog`
+      }
     },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: 'gatsby-remark-external-links',
-            options: {
-              target: '_blank',
-              rel: 'nofollow noopener noreferrer',
-            },
-          },
-          'gatsby-remark-prismjs',
-          'gatsby-remark-autolink-headers',
-        ],
-      },
+          // {
+          //   resolve: 'gatsby-remark-external-links',
+          //   options: {
+          //     target: '_blank',
+          //     rel: 'nofollow noopener noreferrer'
+          //   }
+          // },
+          // 'gatsby-remark-autolink-headers',
+          'gatsby-remark-prismjs'
+        ]
+      }
     },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: 'src/utils/typography.js',
-      },
+        pathToConfigModule: 'src/utils/typography.js'
+      }
     },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sitemap',
@@ -53,8 +53,8 @@ module.exports = {
         background_color: config.backgroundColor,
         theme_color: config.themeColor,
         display: 'standalone',
-        icon: config.favicon,
-      },
+        icon: config.favicon
+      }
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify',
@@ -69,11 +69,11 @@ module.exports = {
               // It's important to specify the maxWidth (in pixels) of
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
-              maxWidth: 590,
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
+              maxWidth: 590
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

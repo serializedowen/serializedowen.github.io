@@ -1,42 +1,52 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { Link, graphql } from 'gatsby';
-import styled from 'styled-components';
-import kebabCase from 'lodash/kebabCase';
-import { Layout, Wrapper, Header, Subline, SEO, PrevNext, Content } from 'components';
-import config from '../../config/SiteConfig';
-import '../utils/medium-editor.css';
-import 'medium-editor/dist/css/medium-editor.min.css';
-import '../utils/prismjs-theme.css';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
+import { Link, graphql } from 'gatsby'
+import styled from 'styled-components'
+import kebabCase from 'lodash/kebabCase'
+import {
+  Layout,
+  Wrapper,
+  Header,
+  Subline,
+  SEO,
+  PrevNext,
+  Content
+} from 'components'
+import config from '../../config/SiteConfig'
+import '../utils/medium-editor.css'
+import 'medium-editor/dist/css/medium-editor.min.css'
+// import '../utils/prismjs-theme.css'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
-`;
+`
 
 const PostContent = styled.div`
   outline: none;
   margin-top: 4rem;
-`;
+`
 
 class Post extends Component {
   componentDidMount() {
     // using import cause failure at production build
     /* eslint global-require:0 */
-    const MediumEditor = require('medium-editor');
-    this.editor = new MediumEditor('.editable', { elementsContainer: document.querySelector('#medium-toolbar') });
+    // const MediumEditor = require('medium-editor')
+    // this.editor = new MediumEditor('.editable', {
+    //   elementsContainer: document.querySelector('#medium-toolbar')
+    // })
   }
 
   componentWillUnmount() {
-    this.editor = null;
+    this.editor = null
   }
 
   render() {
     const {
       pageContext: { slug, prev, next },
-      data: { markdownRemark: postNode },
-    } = this.props;
-    const post = postNode.frontmatter;
+      data: { markdownRemark: postNode }
+    } = this.props
+    const post = postNode.frontmatter
     return (
       <Layout>
         <Wrapper>
@@ -50,14 +60,19 @@ class Post extends Component {
             <div id="medium-toolbar" />
             <Subline>
               {post.date} &mdash; {postNode.timeToRead} Min Read &mdash; In{' '}
-              <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link>
+              <Link to={`/categories/${kebabCase(post.category)}`}>
+                {post.category}
+              </Link>
             </Subline>
-            <PostContent className="editable" dangerouslySetInnerHTML={{ __html: postNode.html }} />
+            <PostContent
+              className="editable"
+              dangerouslySetInnerHTML={{ __html: postNode.html }}
+            />
             <PrevNext prev={prev} next={next} />
           </Content>
         </Wrapper>
       </Layout>
-    );
+    )
   }
 }
 
@@ -87,25 +102,25 @@ class Post extends Component {
 //   );
 // };
 
-export default Post;
+export default Post
 
 Post.propTypes = {
   pageContext: PropTypes.shape({
     slug: PropTypes.string.isRequired,
     next: PropTypes.object,
-    prev: PropTypes.object,
+    prev: PropTypes.object
   }),
   data: PropTypes.shape({
-    markdownRemark: PropTypes.object.isRequired,
-  }).isRequired,
-};
+    markdownRemark: PropTypes.object.isRequired
+  }).isRequired
+}
 
 Post.defaultProps = {
   pageContext: PropTypes.shape({
     next: null,
-    prev: null,
-  }),
-};
+    prev: null
+  })
+}
 
 export const postQuery = graphql`
   query postBySlug($slug: String!) {
@@ -120,4 +135,4 @@ export const postQuery = graphql`
       timeToRead
     }
   }
-`;
+`
