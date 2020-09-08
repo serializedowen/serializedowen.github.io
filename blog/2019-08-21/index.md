@@ -4,11 +4,6 @@ title: 'CSS Sticky Balls'
 category: 'CSS Tricks'
 ---
 
-```javascript
-var s = 'JavaScript syntax highlighting'
-alert(s)
-```
-
 ```html
 <div class="effect">
   <div class="blueball1"></div>

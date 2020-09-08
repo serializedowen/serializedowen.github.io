@@ -4,6 +4,7 @@
   "version": "2.0.0",
   "author": "serializedowen <jiah.wang@mail.utoronto.ca>",
   "dependencies": {
+    "@mdx-js/mdx": "^1.6.16",
     "@reach/router": "^1.2.1",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.8.0",
