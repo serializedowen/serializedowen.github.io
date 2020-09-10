@@ -95,6 +95,16 @@
   Link: </component---src-templates-post-js-c630c7b5362723200788.js>; rel=preload; as=script
   Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
   Link: </page-data/test/page-data.json>; rel=preload; as=fetch; crossorigin
+/tap-tap-bug
+  Link: </webpack-runtime-61f8bb41518af47e1f1d.js>; rel=preload; as=script
+  Link: </styles-c2fe8482057191dca484.js>; rel=preload; as=script
+  Link: </42aef400-55afecb04969a733e28a.js>; rel=preload; as=script
+  Link: </app-0f083a76899b2ae6ce4b.js>; rel=preload; as=script
+  Link: </styles-c2fe8482057191dca484.js>; rel=preload; as=script
+  Link: </4dd43bf7c692c82b44e17f5a83384b37f7fd6965-a63587a9ac51a57d7f3d.js>; rel=preload; as=script
+  Link: </component---src-templates-post-js-c630c7b5362723200788.js>; rel=preload; as=script
+  Link: </page-data/app-data.json>; rel=preload; as=fetch; crossorigin
+  Link: </page-data/tap-tap-bug/page-data.json>; rel=preload; as=fetch; crossorigin
 /css-sticky-balls
   Link: </webpack-runtime-61f8bb41518af47e1f1d.js>; rel=preload; as=script
   Link: </styles-c2fe8482057191dca484.js>; rel=preload; as=script
