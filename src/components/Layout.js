@@ -1,25 +1,27 @@
 /* eslint no-unused-expressions:0 */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { StaticQuery, graphql, withPrefix } from 'gatsby';
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
-import { SEO } from 'components';
-import PageTransition from 'gatsby-plugin-page-transitions';
-import theme from '../../config/Theme';
-import { media } from '../utils/media';
-import Navigation from './Navigation';
-import SocialIcon from './SocialIcon';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { StaticQuery, graphql, withPrefix } from 'gatsby'
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { SEO } from 'components'
+import PageTransition from 'gatsby-plugin-page-transitions'
+import theme from '../../config/Theme'
+import { media } from '../utils/media'
+import Navigation from './Navigation'
+import SocialIcon from './SocialIcon'
+import Parallax from './Parallax'
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
     color: ${theme.colors.bg};
     background: ${theme.colors.primary};
+    
   }
   body {
     background: ${theme.colors.bg};
-    color: ${theme.default};
-    font-display: swap;
+    color: ${theme.colors.light};
+
     @media ${media.phone} {
       font-size: 14px;
     }
@@ -61,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
       outline: none;
     }
   }
-`;
+`
 
 const Footer = styled.footer`
   text-align: center;
@@ -69,7 +71,7 @@ const Footer = styled.footer`
   span {
     font-size: 0.75rem;
   }
-`;
+`
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -83,6 +85,7 @@ const Layout = ({ children }) => (
     render={data => (
       <ThemeProvider theme={theme}>
         <React.Fragment>
+          <Parallax />
           <SEO />
           <GlobalStyle />
           <Navigation />
@@ -90,23 +93,38 @@ const Layout = ({ children }) => (
 
           <Footer>
             <div>
-              <SocialIcon.GitHub fillColor="black" link="https://github.com/serializedowen" />
-              <SocialIcon.LinkedIn fillColor="black" link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-              <SocialIcon.Wechat fillColor="black" link={withPrefix('/social/QRcode.jpg')} />
-              <SocialIcon.Facebook fillColor="black" link="https://www.facebook.com/owentheoracle" />
+              <SocialIcon.GitHub
+                fillColor="black"
+                link="https://github.com/serializedowen"
+              />
+              <SocialIcon.LinkedIn
+                fillColor="black"
+                link="https://www.linkedin.com/in/jiahao-wang-7319b45b/"
+              />
+              <SocialIcon.Wechat
+                fillColor="black"
+                link={withPrefix('/social/QRcode.jpg')}
+              />
+              <SocialIcon.Facebook
+                fillColor="black"
+                link="https://www.facebook.com/owentheoracle"
+              />
             </div>
             &copy; 2018 by SerializedOwen. All rights reserved. <br />
-            <a href="https://github.com/serializedowen/serializedowen.github.io">GitHub Repository</a> <br />
+            <a href="https://github.com/serializedowen/serializedowen.github.io">
+              GitHub Repository
+            </a>{' '}
+            <br />
             <span>Last build: {data.site.buildTime}</span>
           </Footer>
         </React.Fragment>
       </ThemeProvider>
     )}
   />
-);
+)
 
-export default Layout;
+export default Layout
 
 Layout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
-};
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired
+}

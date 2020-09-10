@@ -1,13 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link, withPrefix } from 'gatsby';
-import SocialIcon from '../SocialIcon';
-import AuthenticationMenu from './AuthenticationMenu';
+import React from 'react'
+import styled from 'styled-components'
+import { Link, withPrefix } from 'gatsby'
+import { opacify } from 'polished'
+
+import SocialIcon from '../SocialIcon'
+import AuthenticationMenu from './AuthenticationMenu'
 
 const Nav = styled.nav.attrs({
-  role: 'navigation',
+  role: 'navigation'
 })`
-  background: ${props => props.theme.colors.primary};
+  background: ${props => opacify(0.8, props.theme.colors.primary)};
+  opacity: 0.9;
   height: 50px;
   overflow: auto;
   max-width: 1080px;
@@ -21,14 +24,17 @@ const Nav = styled.nav.attrs({
       background: rgba(255, 255, 255, 0.4);
     }
   }
-`;
+`
 
 const NavWrap = styled.div`
   padding-left: 2em;
   position: sticky;
   z-index: 9999;
   top: 0;
-  background: ${props => props.theme.colors.primary};
+  opacity: 0.9;
+
+  background: ${props => opacify(0.8, props.theme.colors.primary)};
+
   padding-right: 2em;
 
   & > div {
@@ -43,14 +49,14 @@ const NavWrap = styled.div`
     align-items: center;
     z-index: 10;
   }
-`;
+`
 
 const Icons = styled.span`
   margin-left: auto;
   & > * {
     margin: 0.3rem;
   }
-`;
+`
 
 const Navigation = () => (
   <NavWrap>
@@ -70,6 +76,6 @@ const Navigation = () => (
       <AuthenticationMenu />
     </div>
   </NavWrap>
-);
+)
 
-export default Navigation;
+export default Navigation
