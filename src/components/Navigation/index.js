@@ -5,6 +5,7 @@ import { opacify } from 'polished'
 
 import SocialIcon from '../SocialIcon'
 import AuthenticationMenu from './AuthenticationMenu'
+import GitHubLink from '../GitHubLink'
 
 const Nav = styled.nav.attrs({
   role: 'navigation'
@@ -60,6 +61,7 @@ const Icons = styled.span`
 
 const Navigation = () => (
   <NavWrap>
+    <GitHubLink></GitHubLink>
     <div>
       <Nav>
         <Link to="/">Home</Link>
@@ -73,7 +75,7 @@ const Navigation = () => (
         <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
         <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
       </Icons>
-      <AuthenticationMenu />
+      {/* <AuthenticationMenu /> */}
     </div>
   </NavWrap>
 )
