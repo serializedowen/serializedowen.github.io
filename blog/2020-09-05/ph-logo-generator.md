@@ -8,4 +8,4 @@ Pornhub flavored logo generator.
 
 Demo available at [Click Me!](https://serializedowen.github.io/pornhub-styled-logo-generator/)
 
-<iframe src="https://serializedowen.github.io/pornhub-styled-logo-generator/" width="100%" height="500px" frameborder="0">
+<iframe src="/pornhub-styled-logo-generator/" width="100%" height="500px" frameborder="0">

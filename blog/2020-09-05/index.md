@@ -1,6 +1,6 @@
 ---
 date: '2020-09-08'
-title: 'vue-img-watermark'
+title: 'Frontend watermarking images.'
 category: 'Packages'
 ---
 

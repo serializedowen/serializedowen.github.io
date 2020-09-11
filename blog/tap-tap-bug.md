@@ -6,4 +6,4 @@ category: 'Packages'
 
 A dead simple canvas game.
 
-<iframe src="https://serializedowen.github.io/Tap-Tap-Bug/" width="100%" height="700px" frameborder="0"></iframe>
+<iframe src="/Tap-Tap-Bug/" width="100%" height="700px" frameborder="0"></iframe>

@@ -1,8 +1,9 @@
 ---
 date: '2020-05-20'
-title: 'love-dispatcher'
+title: 'Love Dispatcher w/ secrets'
 category: 'Packages'
 ---
 
-<div></div>
-<iframe src="http://121.40.138.206/" width="100%" height="700px" frameborder="0"></iframe>
+crack your way through the game
+
+<iframe src="/love-dispatcher/" width="100%" height="700px" frameborder="0"></iframe>

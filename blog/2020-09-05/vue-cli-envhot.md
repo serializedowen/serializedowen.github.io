@@ -1,6 +1,6 @@
 ---
 date: '2020-09-08'
-title: 'vue-cli-plugin-envhot'
+title: 'Hot reload .env files'
 category: 'Packages'
 ---
 
