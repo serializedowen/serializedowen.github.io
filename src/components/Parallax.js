@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Parallaxee = styled.div`
   position: fixed;
-  background-image: url('parallax.jpg');
+  background-image: url('/parallax.jpg');
   background-attachment: fixed;
   background-position: center;
   /* transform: translate(-50%, 50%); */
@@ -15,18 +15,22 @@ const Parallaxee = styled.div`
 
 export default function Parallax() {
   useEffect(() => {
-    console.log('sssee')
+    let timer
 
     lax.setup() // init
 
     const updateLax = () => {
       lax.update(window.scrollY)
-      window.requestAnimationFrame(updateLax)
+      timer = window.requestAnimationFrame(updateLax)
     }
 
     console.log(lax)
 
-    window.requestAnimationFrame(updateLax)
+    timer = window.requestAnimationFrame(updateLax)
+
+    return () => {
+      window.cancelAnimationFrame(timer)
+    }
   }, [])
-  return <Parallaxee className="lax" data-lax-preset="blurIn" />
+  return <Parallaxee className="lax" data-lax-preset="blurOut" />
 }
