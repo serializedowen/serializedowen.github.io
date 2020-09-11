@@ -68,8 +68,14 @@ const GlobalStyle = createGlobalStyle`
 const Footer = styled.footer`
   text-align: center;
   padding: 3rem 0;
+  color: ${theme.colors.secondary};
+
   span {
     font-size: 0.75rem;
+  }
+
+  a {
+    color: ${theme.colors.secondary};
   }
 `
 
@@ -93,22 +99,10 @@ const Layout = ({ children }) => (
 
           <Footer>
             <div>
-              <SocialIcon.GitHub
-                fillColor="black"
-                link="https://github.com/serializedowen"
-              />
-              <SocialIcon.LinkedIn
-                fillColor="black"
-                link="https://www.linkedin.com/in/jiahao-wang-7319b45b/"
-              />
-              <SocialIcon.Wechat
-                fillColor="black"
-                link={withPrefix('/social/QRcode.jpg')}
-              />
-              <SocialIcon.Facebook
-                fillColor="black"
-                link="https://www.facebook.com/owentheoracle"
-              />
+              <SocialIcon.GitHub link="https://github.com/serializedowen" />
+              <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+              <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
+              <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
             </div>
             &copy; 2018 by SerializedOwen. All rights reserved. <br />
             <a href="https://github.com/serializedowen/serializedowen.github.io">
