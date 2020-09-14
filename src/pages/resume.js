@@ -1,9 +1,9 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
-import { Layout, Wrapper, Header, Content } from 'components';
-import PageTransition from 'gatsby-plugin-page-transitions';
-import config from '../../config/SiteConfig';
+import React from 'react'
+import Helmet from 'react-helmet'
+import { Link } from 'gatsby'
+import { Layout, Wrapper, Header, Content } from 'components'
+
+import config from '../../config/SiteConfig'
 
 export default function resume() {
   return (
@@ -17,28 +17,53 @@ export default function resume() {
           <p style={{ textAlign: 'center' }}>
             <strong>Owen Wang</strong>
           </p>
-          <p style={{ textAlign: 'center' }}>(647) 685 - 0595 / jiah.wang@mail.utoronto.ca</p>
+          {/* <p style={{ textAlign: 'center' }}>(647) 685 - 0595 / jiah.wang@mail.utoronto.ca</p> */}
+          <p style={{ textAlign: 'center' }}>
+            182 6818 7161 / jiah.wang@mail.utoronto.ca
+          </p>
           <p>&nbsp;</p>
           <p>
             <strong>PROFESSIONAL EXPERIENCE</strong>
           </p>
           <p>
+            <em>浙江远传信息技术股份有限公司&nbsp;&nbsp;</em>
+            <em>&nbsp;</em>Sept 2019 - current
+          </p>
+          <p>
+            <strong>Front-end Web Developer - 前端开发工程师</strong>
+          </p>
+          <ul>
+            <li>Delivered numerous vue based web projects</li>
+            <li>Upgraded existing vue projects to use typescript</li>
+            <li>
+              Developed Vue-Cli plugin to accelerate workflow and ease the
+              development process
+            </li>
+          </ul>
+          <p>&nbsp;</p>
+          <p>
             <em>King Business Development&nbsp;&nbsp;</em>
-            <em>&nbsp;</em>June 2018- current
+            <em>&nbsp;</em>June 2018 - Mar 2019
           </p>
           <p>
             <strong>Full Stack Developer</strong>
           </p>
           <ul>
             <li>
-              Responsible for developing a full stack SPA to manage all veterinary health products throughout Canada.
-              (React/PHP)
+              Responsible for developing a full stack SPA to manage all
+              veterinary health products throughout Canada. (React/PHP)
             </li>
-            <li>Developed a major content management system for the government of Canada utilizing Wordpress</li>
             <li>
-              Modernized and standardized the company codebase; integrated Eslint and webpack ; migrated from grunt
+              Developed a major content management system for the government of
+              Canada utilizing Wordpress
             </li>
-            <li>Extended unit-tests coverage for codebase and integrated travis ci</li>
+            <li>
+              Modernized and standardized the company codebase; integrated
+              Eslint and webpack ; migrated from grunt
+            </li>
+            <li>
+              Extended unit-tests coverage for codebase and integrated travis ci
+            </li>
           </ul>
           <p>&nbsp;</p>
           <p>
@@ -50,13 +75,26 @@ export default function resume() {
           </p>
           <ul>
             <li>
-              Responsible for modelling the status of perfusion tubes in Matlab and developing algorithms to predict new
-              status given real-time data
+              Responsible for modelling the status of perfusion tubes in Matlab
+              and developing algorithms to predict new status given real-time
+              data
             </li>
-            <li>Received feedback for being a quick learner and demonstrated strong initiative at work</li>
-            <li>Further solidified understanding of modern machine learning algorithms including SVM and PCA</li>
-            <li>Optimized the algorithm and significantly lowered the classification error rate</li>
-            <li>Put models through multiple test scenarios and received desired result</li>
+            <li>
+              Received feedback for being a quick learner and demonstrated
+              strong initiative at work
+            </li>
+            <li>
+              Further solidified understanding of modern machine learning
+              algorithms including SVM and PCA
+            </li>
+            <li>
+              Optimized the algorithm and significantly lowered the
+              classification error rate
+            </li>
+            <li>
+              Put models through multiple test scenarios and received desired
+              result
+            </li>
           </ul>
           <p>&nbsp;</p>
           <p>
@@ -67,12 +105,18 @@ export default function resume() {
             <strong>Test Developer</strong>
           </p>
           <ul>
-            <li>Developed multiple GUI tests suites under a Java + SilkTest environment;</li>
             <li>
-              Developed solid understanding of algorithms and methodologies during the process of developing and
-              deploying new tests;
+              Developed multiple GUI tests suites under a Java + SilkTest
+              environment;
             </li>
-            <li>Effectively scheduled time to meet multiple deadlines and expectations;</li>
+            <li>
+              Developed solid understanding of algorithms and methodologies
+              during the process of developing and deploying new tests;
+            </li>
+            <li>
+              Effectively scheduled time to meet multiple deadlines and
+              expectations;
+            </li>
           </ul>
           <p>&nbsp;</p>
           <p>
@@ -80,16 +124,18 @@ export default function resume() {
           </p>
           <ul>
             <li>
-              Developed plug-in for citation tool Zotero in JavaScript/XUL, allowing user to batch edit tags of
-              citations.
+              Developed plug-in for citation tool Zotero in JavaScript/XUL,
+              allowing user to batch edit tags of citations.
             </li>
             <li>
-              Designed and developed a fully functional website aiming for hook up undergrads and start-ups using MEAN
-              stack, deployed at: <em>https://kickstartup.herokuapp.com/</em>
+              Designed and developed a fully functional website aiming for hook
+              up undergrads and start-ups using MEAN stack, deployed at:{' '}
+              <em>https://kickstartup.herokuapp.com/</em>
             </li>
             <li>
-              Implemented an Android application in Java which allow doctors/nurses to collect, update, maintain patient
-              data through mobile devices
+              Implemented an Android application in Java which allow
+              doctors/nurses to collect, update, maintain patient data through
+              mobile devices
             </li>
             <li>
               Prototype Chat app in active development, hosted at{' '}
@@ -105,21 +151,37 @@ export default function resume() {
           </p>
           <ul>
             <li>
-              Extensive experience with programming languages: 5 years of experience in Python, 4 years of experience in
-              Java, C, PHP and JavaScript, also experienced in Haskell, SQL, Matlab, TypeScript
+              Extensive experience with programming languages: 5 years of
+              experience in Python, 4 years of experience in Java, C, PHP and
+              JavaScript, also experienced in Haskell, SQL, Matlab, TypeScript
+            </li>
+
+            <li>
+              Hands-on experience in all stages of Web Development process,
+              proficient with JavaScript/ES6 (Angular, React, Vue),
+              Node.js(Express, koa, Nest.js, egg.js), HTML5/CSS3,NoSQL
+              databases.Frequently pursuing new concepts/frameworks, currently
+              learning Electron, Rxjs and Vue3.
             </li>
             <li>
-              Hands-on experience in all stages of Web Development process, proficient with JavaScript/ES6 (Angular,
-              React), Node.js(Express, Koa), HTML5/CSS3, NoSQL databases and frequently adapting to new
-              concepts/frameworks, currently learning Electron, Rxjs and GraphQL.
+              Intermediate knowdedge of Spring Framework. Include SpringMVC,
+              SpringBoot, SpringCloud, Tomcat etc. Ability to develop/deploy
+              simple Spring projects.
             </li>
             <li>
-              Strong logical thinking, deep understanding of advanced algorithm designs ranging from greedy algorithms
-              to dynamic programming, LeetCode frequeneer.
+              Pioneer in open source developement, developed multiple
+              open-source tool/gadget range from vue-cli twinks to image
+              watermark generator. (Check github for details)
             </li>
             <li>
-              Functional Programming / Event-driven Programming evangelist, strong believer of &ldquo;Any application
-              that can be written in JavaScript, will eventually be written in JavaScript.&rdquo;
+              Strong logical thinking, deep understanding of advanced algorithm
+              designs ranging from greedy algorithms to dynamic programming,
+              LeetCode frequeneer.
+            </li>
+            <li>
+              Functional Programming / Event-driven Programming evangelist,
+              strong believer of &ldquo;Any application that can be written in
+              JavaScript, will eventually be written in JavaScript.&rdquo;
             </li>
           </ul>
           <p>&nbsp;</p>
@@ -133,17 +195,23 @@ export default function resume() {
             <strong> &nbsp;</strong>September 2012 &ndash; June 2016
           </p>
           <p>
-            <strong>University of Toronto Scarborough</strong>, Scarborough, Ontario
+            <strong>University of Toronto Scarborough</strong>, Scarborough,
+            Ontario
           </p>
           <ul>
             <li>
-              Computer Science Specialist Program &ndash; Software Engineering Stream, notable courses includes:
-              Introduction to machine learning, Introduction to artificial intelligence, Web Development;
+              Computer Science Specialist Program &ndash; Software Engineering
+              Stream, notable courses includes: Introduction to machine
+              learning, Introduction to artificial intelligence, Web
+              Development;
             </li>
-            <li>Cumulative GPA of 3.65 out of 4.0; 1st, 3rd and 4th year Dean&rsquo;s List</li>
+            <li>
+              Cumulative GPA of 3.65 out of 4.0; 1st, 3rd and 4th year
+              Dean&rsquo;s List
+            </li>
           </ul>
         </Content>
       </Wrapper>
     </Layout>
-  );
+  )
 }
