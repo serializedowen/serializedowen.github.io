@@ -1,5 +1,6 @@
 {
   "name": "portfolio",
+  "private": true,
   "description": "serializedowen - Portfolio",
   "version": "2.0.0",
   "author": "serializedowen <jiah.wang@mail.utoronto.ca>",
