@@ -15,28 +15,31 @@ import Transtion from './Transition'
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
-    color: ${theme.colors.bg};
-    background: ${theme.colors.primary};
+    color: black;
+    background: ${theme.colors.text};
+    
+
+
     
   }
   body {
     background: ${theme.colors.bg};
-    color: ${theme.colors.light};
+    color: ${theme.colors.text};
 
     @media ${media.phone} {
       font-size: 14px;
     }
   }
   a {
-    color: ${theme.colors.grey.dark};
+    color: #808080;
     text-decoration: none;
     transition: all ${theme.transitions.normal};
   }
   a:hover {
-    color: ${theme.colors.primary};
+    color: ${theme.colors.text};
   }
   h1, h2, h3, h4 {
-    color: ${theme.colors.grey.dark};
+    color: ${theme.colors.text};
   }
   blockquote {
     font-style: italic;

@@ -2,14 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
-import {
-  Layout,
-  Article,
-  Wrapper,
-  Button,
-  SectionTitle,
-  Content
-} from 'components'
+import { Article, Wrapper, Button, SectionTitle, Content } from 'components'
 import { media } from '../utils/media'
 
 const Hero = styled.div`
