@@ -48,59 +48,31 @@ class Post extends Component {
     } = this.props
     const post = postNode.frontmatter
     return (
-      <Layout>
-        <Wrapper>
-          <SEO postPath={slug} postNode={postNode} postSEO />
-          <Helmet title={`${post.title} | ${config.siteTitle}`} />
-          <Header>
-            <Link to="/">{config.siteTitle}</Link>
-          </Header>
-          <Content>
-            <Title>{post.title}</Title>
-            <div id="medium-toolbar" />
-            <Subline>
-              {post.date} &mdash; {postNode.timeToRead} Min Read &mdash; In{' '}
-              <Link to={`/categories/${kebabCase(post.category)}`}>
-                {post.category}
-              </Link>
-            </Subline>
-            <PostContent
-              className="editable"
-              dangerouslySetInnerHTML={{ __html: postNode.html }}
-            />
-            <PrevNext prev={prev} next={next} />
-          </Content>
-        </Wrapper>
-      </Layout>
+      <Wrapper>
+        <SEO postPath={slug} postNode={postNode} postSEO />
+        <Helmet title={`${post.title} | ${config.siteTitle}`} />
+        <Header>
+          <Link to="/">{config.siteTitle}</Link>
+        </Header>
+        <Content>
+          <Title>{post.title}</Title>
+          <div id="medium-toolbar" />
+          <Subline>
+            {post.date} &mdash; {postNode.timeToRead} Min Read &mdash; In{' '}
+            <Link to={`/categories/${kebabCase(post.category)}`}>
+              {post.category}
+            </Link>
+          </Subline>
+          <PostContent
+            className="editable"
+            dangerouslySetInnerHTML={{ __html: postNode.html }}
+          />
+          <PrevNext prev={prev} next={next} />
+        </Content>
+      </Wrapper>
     )
   }
 }
-
-// const Post = ({ pageContext: { slug, prev, next }, data: { markdownRemark: postNode } }) => {
-//   const post = postNode.frontmatter;
-
-//   return (
-//     <Layout>
-//       <Wrapper>
-//         <SEO postPath={slug} postNode={postNode} postSEO />
-//         <Helmet title={`${post.title} | ${config.siteTitle}`} link={[{ rel: 'stylesheet' }]} />
-
-//         <Header>
-//           <Link to="/">{config.siteTitle}</Link>
-//         </Header>
-//         <Content>
-//           <Title>{post.title}</Title>
-//           <Subline>
-//             {post.date} &mdash; {postNode.timeToRead} Min Read &mdash; In{' '}
-//             <Link to={`/categories/${kebabCase(post.category)}`}>{post.category}</Link>
-//           </Subline>
-//           <PostContent className="editable" dangerouslySetInnerHTML={{ __html: postNode.html }} />
-//           <PrevNext prev={prev} next={next} />
-//         </Content>
-//       </Wrapper>
-//     </Layout>
-//   );
-// };
 
 export default Post
 

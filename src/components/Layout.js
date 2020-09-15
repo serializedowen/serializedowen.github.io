@@ -4,13 +4,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { SEO } from 'components'
-import PageTransition from 'gatsby-plugin-page-transitions'
+import SEO from './SEO'
+
 import theme from '../../config/Theme'
 import { media } from '../utils/media'
 import Navigation from './Navigation'
 import SocialIcon from './SocialIcon'
 import Parallax from './Parallax'
+import Transtion from './Transition'
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -79,7 +80,7 @@ const Footer = styled.footer`
   }
 `
 
-const Layout = ({ children }) => (
+const Layout = ({ children, location }) => (
   <StaticQuery
     query={graphql`
       query LayoutQuery {
@@ -95,7 +96,8 @@ const Layout = ({ children }) => (
           <SEO />
           <GlobalStyle />
           <Navigation />
-          <PageTransition>{children}</PageTransition>
+          {/* {children} */}
+          <Transtion location={location}>{children}</Transtion>
 
           <Footer>
             <div>

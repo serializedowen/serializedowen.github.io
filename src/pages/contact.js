@@ -1,12 +1,12 @@
 /* eslint jsx-a11y/label-has-for:0 */
 
-import React from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'gatsby';
-import styled from 'styled-components';
-import { Layout, Wrapper, Header, Button, Content as Con } from 'components';
+import React from 'react'
+import Helmet from 'react-helmet'
+import { Link } from 'gatsby'
+import styled from 'styled-components'
+import { Layout, Wrapper, Header, Button, Content as Con } from 'components'
 
-import config from '../../config/SiteConfig';
+import config from '../../config/SiteConfig'
 
 const Content = styled(Con)`
   form {
@@ -27,42 +27,50 @@ const Content = styled(Con)`
       }
     }
   }
-`;
+`
 
 const Contact = () => (
-  <Layout>
-    <Wrapper>
-      <Helmet title={`Contact | ${config.siteTitle}`} />
-      <Header>
-        <Link to="/">{config.siteTitle}</Link>
-      </Header>
-      <Content>
-        <h1>Contact</h1>
-        <form name="contact-form" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action="/success">
-          <p>
-            <label htmlFor="contact-name">
-              Name
-              <input name="name" id="contact-name" type="text" required />
-            </label>
-          </p>
-          <p>
-            <label htmlFor="contact-email">
-              E-Mail <input name="email" id="contact-email" type="email" required />
-            </label>
-          </p>
-          <p>
-            <label htmlFor="contact-message">
-              Your Message <textarea name="message" id="contact-message" required />
-            </label>
-          </p>
-          <p>
-            <Button>Send</Button>
-          </p>
-          <input type="hidden" name="form-name" value="contact-form" />
-        </form>
-      </Content>
-    </Wrapper>
-  </Layout>
-);
+  // <Layout>
+  <Wrapper>
+    <Helmet title={`Contact | ${config.siteTitle}`} />
+    <Header>
+      <Link to="/">{config.siteTitle}</Link>
+    </Header>
+    <Content>
+      <h1>Contact</h1>
+      <form
+        name="contact-form"
+        method="post"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        action="/success"
+      >
+        <p>
+          <label htmlFor="contact-name">
+            Name
+            <input name="name" id="contact-name" type="text" required />
+          </label>
+        </p>
+        <p>
+          <label htmlFor="contact-email">
+            E-Mail{' '}
+            <input name="email" id="contact-email" type="email" required />
+          </label>
+        </p>
+        <p>
+          <label htmlFor="contact-message">
+            Your Message{' '}
+            <textarea name="message" id="contact-message" required />
+          </label>
+        </p>
+        <p>
+          <Button>Send</Button>
+        </p>
+        <input type="hidden" name="form-name" value="contact-form" />
+      </form>
+    </Content>
+  </Wrapper>
+  // </Layout>
+)
 
-export default Contact;
+export default Contact
