@@ -58,17 +58,19 @@ const IndexPage = ({
     </Hero>
     <Content>
       <SectionTitle>Latest stories</SectionTitle>
-      {postEdges.map(post => (
-        <Article
-          title={post.node.frontmatter.title}
-          date={post.node.frontmatter.date}
-          excerpt={post.node.excerpt}
-          timeToRead={post.node.timeToRead}
-          slug={post.node.fields.slug}
-          category={post.node.frontmatter.category}
-          key={post.node.fields.slug}
-        />
-      ))}
+      {postEdges
+        .filter((post, index) => index < 10)
+        .map(post => (
+          <Article
+            title={post.node.frontmatter.title}
+            date={post.node.frontmatter.date}
+            excerpt={post.node.excerpt}
+            timeToRead={post.node.timeToRead}
+            slug={post.node.fields.slug}
+            category={post.node.frontmatter.category}
+            key={post.node.fields.slug}
+          />
+        ))}
     </Content>
   </Wrapper>
   // </Layout>
