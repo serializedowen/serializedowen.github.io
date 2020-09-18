@@ -65,7 +65,7 @@ const Navigation = () => (
     <div>
       <Nav>
         <Link to="/">Home</Link>
-        <Link to="/resume">Resume</Link>
+        {/* <Link to="/">Resume</Link> */}
         <Link to="/contact">Contact</Link>
         <Link to="/categories">Blog</Link>
       </Nav>
