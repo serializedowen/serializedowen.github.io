@@ -28,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
   a {
-    color: ${theme.colors.grey.dark};
+    color: ${theme.colors.anchor};
     text-decoration: none;
     transition: all ${theme.transitions.normal};
   }

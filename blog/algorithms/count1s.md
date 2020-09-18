@@ -28,7 +28,7 @@ const sum1s = num => {
     numstr[0] > 1
       ? 10 ** (numstr.length - 1) +
         numstr[0] * (numstr.length - 1) * 10 ** (numstr.length - 2)
-      : sum1s(10 ** (numstr.length - 1) - 1)
+      : sum1s(10 ** (numstr.length - 1) - 1) + 1
 
   return curr + sum1s(numstr.substr(1))
 }

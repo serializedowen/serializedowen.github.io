@@ -18,18 +18,13 @@ const Parallaxee = styled.div`
 export default function Parallax() {
   useEffect(() => {
     let timer
-
     lax.setup() // init
-
     const updateLax = () => {
       lax.update(window.scrollY)
       timer = window.requestAnimationFrame(updateLax)
     }
 
-    console.log(lax)
-
     timer = window.requestAnimationFrame(updateLax)
-
     return () => {
       window.cancelAnimationFrame(timer)
     }

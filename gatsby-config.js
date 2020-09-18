@@ -60,7 +60,9 @@ module.exports = {
               rel: 'nofollow noopener noreferrer'
             }
           },
+
           'gatsby-remark-responsive-iframe',
+          'gatsby-remark-script',
           'gatsby-remark-autolink-headers',
           {
             resolve: 'gatsby-remark-prismjs',
