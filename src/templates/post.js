@@ -5,7 +5,7 @@ import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
 import {
-  Layout,
+  ProgressBar,
   Wrapper,
   Header,
   Subline,
@@ -16,6 +16,7 @@ import {
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
+
 // import '../utils/prismjs-theme.css'
 
 const Title = styled.h1`
@@ -27,18 +28,36 @@ const PostContent = styled.div`
   margin-top: 4rem;
 `
 
+let func
+
 class Post extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { progress: 0 }
+  }
+
   componentDidMount() {
     // using import cause failure at production build
     /* eslint global-require:0 */
-    // const MediumEditor = require('medium-editor')
-    // this.editor = new MediumEditor('.editable', {
-    //   elementsContainer: document.querySelector('#medium-toolbar')
-    // })
+
+    const height = document.body.scrollHeight
+    const { innerHeight } = window
+
+    func = () => {
+      this.setState({
+        progress: Number((window.scrollY * 100) / (height - innerHeight))
+      })
+    }
+    window.addEventListener('scroll', func)
+    const MediumEditor = require('medium-editor')
+    this.editor = new MediumEditor('.editable', {
+      elementsContainer: document.querySelector('#medium-toolbar')
+    })
   }
 
   componentWillUnmount() {
     this.editor = null
+    func && window.removeEventListener('scroll', func)
   }
 
   render() {
@@ -46,9 +65,12 @@ class Post extends Component {
       pageContext: { slug, prev, next },
       data: { markdownRemark: postNode }
     } = this.props
+
+    const { progress } = this.state
     const post = postNode.frontmatter
     return (
       <Wrapper>
+        <ProgressBar progress={progress}></ProgressBar>
         <SEO postPath={slug} postNode={postNode} postSEO />
         <Helmet title={`${post.title} | ${config.siteTitle}`} />
         <Header>
