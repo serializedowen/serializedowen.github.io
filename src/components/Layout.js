@@ -120,7 +120,7 @@ const Layout = ({ children, location }) => (
             <br />
             <span>Last build: {data.site.buildTime}</span>
             <br />
-            <a href="http://beian.miit.gov.cn/">浙ICP备2027743803888</a>
+            <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
           </Footer>
         </React.Fragment>
       </ThemeProvider>
