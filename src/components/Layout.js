@@ -4,8 +4,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import SEO from './SEO'
+import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop'
 
+import SEO from './SEO'
 import theme from '../../config/Theme'
 import { media } from '../utils/media'
 import Navigation from './Navigation'
@@ -100,7 +101,11 @@ const Layout = ({ children, location }) => (
           {/* {children} */}
           <Transtion location={location}>{children}</Transtion>
 
-          <Scroller>^</Scroller>
+          <Scroller>
+            <VerticalAlignTopIcon
+              style={{ marginRight: '0px', transform: 'scale(1.5)' }}
+            ></VerticalAlignTopIcon>
+          </Scroller>
           <Footer>
             <div>
               <SocialIcon.GitHub link="https://github.com/serializedowen" />
@@ -114,6 +119,8 @@ const Layout = ({ children, location }) => (
             </a>{' '}
             <br />
             <span>Last build: {data.site.buildTime}</span>
+            <br />
+            <a href="http://beian.miit.gov.cn/">浙ICP备2027743803888</a>
           </Footer>
         </React.Fragment>
       </ThemeProvider>
