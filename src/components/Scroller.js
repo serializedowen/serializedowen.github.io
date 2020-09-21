@@ -7,17 +7,24 @@ import smoothScroll from '../utils/smoothScroll'
 const RoundedButton = styled(Button)`
   border-radius: 50%;
   position: fixed;
+  z-index: 9999;
   width: 60px;
+  display: inline-flex;
+  justify-content: center;
+  align-content: center;
   height: 60px;
   bottom: 1em;
   right: 1em;
 `
 
 export default function Scroller({ onClick, ...rest }) {
-  const clickCb = useCallback(() => {
-    smoothScroll(0)
-    return onClick && onClick()
-  }, [onClick])
+  const clickCb = useCallback(
+    (...args) => {
+      smoothScroll(0)
+      return onClick && onClick(...args)
+    },
+    [onClick]
+  )
 
   return <RoundedButton {...rest} onClick={clickCb}></RoundedButton>
 }
