@@ -12,6 +12,7 @@ import Navigation from './Navigation'
 import SocialIcon from './SocialIcon'
 import Parallax from './Parallax'
 import Transtion from './Transition'
+import Scroller from './Scroller'
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -99,6 +100,7 @@ const Layout = ({ children, location }) => (
           {/* {children} */}
           <Transtion location={location}>{children}</Transtion>
 
+          <Scroller>^</Scroller>
           <Footer>
             <div>
               <SocialIcon.GitHub link="https://github.com/serializedowen" />
