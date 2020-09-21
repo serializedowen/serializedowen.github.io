@@ -5,6 +5,8 @@
   "version": "2.0.0",
   "author": "serializedowen <jiah.wang@mail.utoronto.ca>",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@mdx-js/mdx": "^1.6.16",
     "@reach/router": "^1.2.1",
     "babel-plugin-lodash": "^3.3.4",
@@ -56,7 +58,7 @@
     "lint:js": "eslint . --ext .js,.jsx --ignore-path .gitignore",
     "lint:js:fix": "eslint . --ext .js,.jsx --fix --ignore-path .gitignore",
     "lint:md": "prettier --write blog/**/*.md",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "deploy": "rimraf public/ && rimraf .cache/ && gatsby build && gh-pages -d public -b master"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -68,6 +70,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "rimraf": "^3.0.2"
   }
 }
