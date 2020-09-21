@@ -84,10 +84,10 @@ category: 'CSS Tricks'
   </div>
 </div>
 
-<script>
+<script type="text/javascript">
 
 
-  const buttons = document.querySelectorAll('button')
+const buttons = document.querySelectorAll('button')
   buttons.forEach(button => {
     button.onclick = function(e) {
 
@@ -102,7 +102,7 @@ category: 'CSS Tricks'
         ripple.remove()
       }, 600) // 1second = 1000ms
     }
-  })
+})
 
 </script>
 
