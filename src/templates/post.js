@@ -39,20 +39,23 @@ class Post extends Component {
   componentDidMount() {
     // using import cause failure at production build
     /* eslint global-require:0 */
+    // const MediumEditor = require('medium-editor')
+    // this.editor = new MediumEditor('.editable', {
+    //   elementsContainer: document.querySelector('#medium-toolbar')
+    // })
 
-    const height = document.body.scrollHeight
-    const { innerHeight } = window
+    setTimeout(() => {
+      const height = document.body.clientHeight
+      const { innerHeight } = window
 
-    func = () => {
-      this.setState({
-        progress: Number((window.scrollY * 100) / (height - innerHeight))
-      })
-    }
-    window.addEventListener('scroll', func)
-    const MediumEditor = require('medium-editor')
-    this.editor = new MediumEditor('.editable', {
-      elementsContainer: document.querySelector('#medium-toolbar')
-    })
+      console.log(height, innerHeight)
+      func = () => {
+        this.setState({
+          progress: Number((window.scrollY * 100) / (height - innerHeight))
+        })
+      }
+      window.addEventListener('scroll', func)
+    }, 500)
   }
 
   componentWillUnmount() {
