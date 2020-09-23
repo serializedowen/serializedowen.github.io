@@ -1,4 +1,4 @@
 module.exports = async ({ markdownAST }, pluginOptions = {}) => {
-  console.log(markdownAST)
+  // console.log(markdownAST)
   return markdownAST
 }

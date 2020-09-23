@@ -5,7 +5,7 @@ import { Transition } from 'react-transition-group'
 
 const scaleIn = keyframes`
   0% {
-    transform: scale(0.2);
+    transform: scale(0);
     opacity: 0.5;
   },
 

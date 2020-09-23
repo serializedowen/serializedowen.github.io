@@ -21,12 +21,12 @@ export default function Parallax() {
     lax.setup() // init
     const updateLax = () => {
       lax.update(window.scrollY)
-      timer = window.requestAnimationFrame(updateLax)
+      timer = requestAnimationFrame(updateLax)
     }
 
-    timer = window.requestAnimationFrame(updateLax)
+    timer = requestAnimationFrame(updateLax)
     return () => {
-      window.cancelAnimationFrame(timer)
+      cancelAnimationFrame(timer)
     }
   }, [])
   return (

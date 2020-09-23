@@ -82,51 +82,76 @@ const Footer = styled.footer`
   }
 `
 
-const Layout = ({ children, location }) => (
-  <StaticQuery
-    query={graphql`
-      query LayoutQuery {
-        site {
-          buildTime(formatString: "DD.MM.YYYY")
+const Layout = ({ children, location, pageContext }) => {
+  console.log(pageContext)
+  return (
+    <StaticQuery
+      query={graphql`
+        query LayoutQuery {
+          site {
+            buildTime(formatString: "DD.MM.YYYY")
+          }
         }
-      }
-    `}
-    render={data => (
-      <ThemeProvider theme={theme}>
-        <React.Fragment>
-          <Parallax />
-          <SEO />
-          <GlobalStyle />
-          <Navigation />
-          {/* {children} */}
-          <Transtion location={location}>{children}</Transtion>
+      `}
+      render={data => {
+        switch (pageContext.layout) {
+          case 'docs':
+            return (
+              <ThemeProvider theme={theme}>
+                <SEO />
+                <GlobalStyle />
+                <Navigation />
+                {children}
+                <Scroller>
+                  <VerticalAlignTopIcon
+                    style={{ marginRight: '0px', transform: 'scale(1.5)' }}
+                  ></VerticalAlignTopIcon>
+                </Scroller>
+              </ThemeProvider>
+            )
 
-          <Scroller>
-            <VerticalAlignTopIcon
-              style={{ marginRight: '0px', transform: 'scale(1.5)' }}
-            ></VerticalAlignTopIcon>
-          </Scroller>
-          <Footer>
-            <div>
-              <SocialIcon.GitHub link="https://github.com/serializedowen" />
-              <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-              <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
-              <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
-            </div>
-            &copy; 2018 by SerializedOwen. All rights reserved. <br />
-            <a href="https://github.com/serializedowen/serializedowen.github.io">
-              GitHub Repository
-            </a>{' '}
-            <br />
-            <span>Last build: {data.site.buildTime}</span>
-            <br />
-            <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
-          </Footer>
-        </React.Fragment>
-      </ThemeProvider>
-    )}
-  />
-)
+          default:
+            return (
+              <ThemeProvider theme={theme}>
+                <React.Fragment>
+                  <Parallax />
+                  <SEO />
+                  <GlobalStyle />
+                  <Navigation />
+                  {/* {children} */}
+                  <Transtion location={location}>{children}</Transtion>
+
+                  <Scroller>
+                    <VerticalAlignTopIcon
+                      style={{ marginRight: '0px', transform: 'scale(1.5)' }}
+                    ></VerticalAlignTopIcon>
+                  </Scroller>
+                  <Footer>
+                    <div>
+                      <SocialIcon.GitHub link="https://github.com/serializedowen" />
+                      <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+                      <SocialIcon.Wechat
+                        link={withPrefix('/social/QRcode.jpg')}
+                      />
+                      <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
+                    </div>
+                    &copy; 2018 by SerializedOwen. All rights reserved. <br />
+                    <a href="https://github.com/serializedowen/serializedowen.github.io">
+                      GitHub Repository
+                    </a>{' '}
+                    <br />
+                    <span>Last build: {data.site.buildTime}</span>
+                    <br />
+                    <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
+                  </Footer>
+                </React.Fragment>
+              </ThemeProvider>
+            )
+        }
+      }}
+    />
+  )
+}
 
 export default Layout
 
