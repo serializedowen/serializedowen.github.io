@@ -126,7 +126,9 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
           gridTemplateColumns: '240px 1fr 100px'
         }}
       >
-        <nav style={{ overflowY: 'auto' }}>{MenuTree(tree.children)}</nav>
+        <nav style={{ overflowY: 'auto' }}>
+          {MenuTree(tree.children, pageContext.slug)}
+        </nav>
 
         {/* <MenuList style={{ overflowY: 'auto' }}>
           {navigationMeta.map(meta => (
