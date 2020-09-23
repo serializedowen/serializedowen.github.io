@@ -1,6 +1,6 @@
 ---
 date: '2018-01-01'
-title: 'Example'
+title: 'Markdown Cheatsheet'
 category: 'General'
 ---
 
@@ -164,8 +164,6 @@ This is [an example][id] reference-style link.
 _single asterisks_
 
 _single underscores_
-
-**double asterisks**
 
 **double underscores**
 
