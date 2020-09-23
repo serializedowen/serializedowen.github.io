@@ -10,16 +10,24 @@ exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type === 'MarkdownRemark') {
     if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
+      Object.prototype.hasOwnProperty.call(node.frontmatter, 'nested')
+    ) {
+      slug = `/docs/${path.relative(
+        path.join(__dirname, '/blog'),
+        path.parse(node.fileAbsolutePath).dir
+      )}/${_.kebabCase(node.frontmatter.slug || node.frontmatter.title)}`
+    } else if (
+      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
     ) {
       slug = `/${_.kebabCase(node.frontmatter.slug)}`
-    }
-    if (
+    } else if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'title')
     ) {
       slug = `/${_.kebabCase(node.frontmatter.title)}`
     }
+
     createNodeField({ node, name: 'slug', value: slug })
 
     searchData.push({ ...node.frontmatter, content: node.internal.content })
@@ -33,24 +41,30 @@ exports.onPostBuild = async (_, pluginOptions) => {
   })
 }
 
+exports.onCreatePage = ({ page, actions }) => {}
+
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve('src/templates/post.js')
     const categoryPage = path.resolve('src/templates/category.js')
+    const docsPage = path.resolve('src/templates/docs.js')
+    const docPage = path.resolve('src/templates/doc.js')
     resolve(
       graphql(`
         {
           posts: allMarkdownRemark {
             edges {
               node {
+                fileAbsolutePath
                 fields {
                   slug
                 }
                 frontmatter {
                   title
                   category
+                  nested
                 }
               }
             }
@@ -68,15 +82,30 @@ exports.createPages = ({ graphql, actions }) => {
           const next = index === 0 ? null : posts[index - 1].node
           const prev = index === posts.length - 1 ? null : posts[index + 1].node
 
-          createPage({
-            path: edge.node.fields.slug,
-            component: postPage,
-            context: {
-              slug: edge.node.fields.slug,
-              prev,
-              next
-            }
-          })
+          if (edge.node.frontmatter.nested) {
+            createPage({
+              path: edge.node.fields.slug,
+              component: docPage,
+              context: {
+                slug: edge.node.fields.slug,
+                prev,
+                next,
+                layout: 'docs'
+              }
+            })
+
+            // console.log(relative)
+          } else {
+            createPage({
+              path: edge.node.fields.slug,
+              component: postPage,
+              context: {
+                slug: edge.node.fields.slug,
+                prev,
+                next
+              }
+            })
+          }
         })
 
         let categories = []
@@ -88,6 +117,13 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         categories = _.uniq(categories)
+
+        categories = categories.filter(cat => cat !== 'docs')
+
+        createPage({
+          component: path.resolve(docsPage),
+          path: '/docs'
+        })
 
         categories.forEach(category => {
           createPage({
