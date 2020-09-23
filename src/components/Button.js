@@ -27,6 +27,7 @@ const Ripple = styled.span`
   left: ${props => props.x || '-50%'};
   top: ${props => props.y || '-50%'};
 
+  border-radius: 50%;
   width: 200%;
   height: 200%;
   background-color: white;
