@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
-import { Wrapper, Subline, SectionTitle, Content } from 'components'
+import { Wrapper, Subline, SectionTitle, Content, PrevNext } from 'components'
 import config from '../../config/SiteConfig'
 import MenuList from '@material-ui/core/MenuList'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -21,6 +21,7 @@ const ActiveMenuItem = styled(ListItem)`
 const MenuTree = (nodes, actualSlug, level = 0) => {
   if (!nodes) return null
 
+  console.log(nodes)
   const [open, setopen] = useState(nodes.map(() => true))
 
   return nodes.map((node, index) => {
@@ -81,18 +82,20 @@ const buildNodeTree = metas => {
 
     if (!paths) return
 
-    const desc = parent.children.filter(item => item.title === paths[0])[0]
+    let desc = parent.children.filter(item => item.title === paths[0])[0]
 
     if (paths.length === 1) {
       if (desc) return
       return parent.children.push({ title: paths[0], isLeaf: true, slug })
     }
 
-    if (desc) {
-      paths.shift()
-      return addNode(paths, desc, slug)
+    if (!desc) {
+      desc = { title: paths[0] }
+      parent.children.push(desc)
     }
-    return parent.children.push({ title: paths[0] })
+
+    paths.shift()
+    return addNode(paths, desc, slug)
   }
 
   metas.map(meta => addNode(meta.parents, ret, meta.slug))
@@ -108,7 +111,7 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
     slug: edge.node.fields.slug,
     parents: edge.node.fields.slug.split('/').slice(3)
   }))
-
+  console.log(navigationMeta)
   // navigationMeta.forEach(meta => meta.parents.pop())
 
   const tree = buildNodeTree(navigationMeta)
@@ -142,10 +145,10 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
           ))}
         </MenuList> */}
 
-        <div
-          style={{ overflowY: 'auto', margin: '2em' }}
-          dangerouslySetInnerHTML={{ __html: markdownRemark.html }}
-        ></div>
+        <article style={{ overflowY: 'auto', margin: '2em' }}>
+          <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
+          <PrevNext prev={pageContext.prev} next={pageContext.next} />
+        </article>
         <div>Table of Contents</div>
       </div>
     </div>
