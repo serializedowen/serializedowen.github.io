@@ -8,6 +8,7 @@ module.exports = {
     siteUrl: config.siteUrl + pathPrefix
   },
   plugins: [
+    'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-layout`,
@@ -52,7 +53,7 @@ module.exports = {
         icon: config.favicon
       }
     },
-    'gatsby-plugin-offline',
+    // 'gatsby-plugin-offline',
     'gatsby-plugin-netlify',
     `gatsby-plugin-sharp`,
     {
