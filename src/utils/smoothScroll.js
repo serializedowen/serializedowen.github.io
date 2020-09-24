@@ -11,9 +11,9 @@ export default function smoothScroll(top) {
 
   if (useJS) {
     const scrollFunction = () => {
-      const current = scrollTarget.scrollY
+      const current =
+        scrollTarget === window ? scrollTarget.scrollY : scrollTarget.scrollTop
 
-      console.log(current)
       if (Math.abs(current, top) < step) return scrollTarget.scrollTo({ top })
 
       if (current > top) {
