@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
-import { Wrapper, Subline, SectionTitle, Content, PrevNext } from 'components'
-import config from '../../config/SiteConfig'
+import { PrevNext } from 'components'
+
 import EditIcon from '@material-ui/icons/Edit'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -15,7 +15,7 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
-
+import media from '../utils/media'
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
 `
@@ -133,6 +133,19 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
   const { edges } = allMarkdownRemark
   const [navOpen, setnavOpen] = useState(true)
   const [tocOpen, settocOpen] = useState(true)
+  const docContainer = useRef(null)
+
+  useEffect(() => {
+    const smoothScroll = require('../utils/smoothScroll')
+    console.log(media)
+
+    setTimeout(() => {
+      smoothScroll.setTarget(docContainer.current)
+    }, 0)
+    return () => {
+      smoothScroll.setTarget(window)
+    }
+  }, [])
 
   const classes = useStyles()
 
@@ -153,7 +166,9 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
         display: 'flex'
       }}
     >
-      <Helmet title={`'' | ${config.siteTitle}`} />
+      <Helmet
+        title={` react-router-dom 中文文档 | ${markdownRemark.frontmatter.title}`}
+      />
 
       <Drawer
         open={navOpen}
@@ -165,6 +180,7 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
       </Drawer>
 
       <article
+        ref={docContainer}
         className={classes.content}
         style={{
           scrollBehavior: 'smooth',
@@ -232,7 +248,9 @@ export const postQuery = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
-
+      frontmatter {
+        title
+      }
       tableOfContents
       lastModified
       headings {
