@@ -9,11 +9,11 @@ exports.onCreateNode = ({ node, actions }) => {
   let slug
   if (node.internal.type === 'MarkdownRemark') {
     if (
-      Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
-      Object.prototype.hasOwnProperty.call(node.frontmatter, 'nested')
+      Object.prototype.hasOwnProperty.call(node, 'sourceType') &&
+      node.sourceType === 'docs'
     ) {
-      slug = `/docs/${path.relative(
-        path.join(__dirname, '/blog'),
+      slug = `/${path.relative(
+        __dirname,
         path.parse(node.fileAbsolutePath).dir
       )}/${_.kebabCase(node.frontmatter.slug || node.frontmatter.title)}`
     } else if (
@@ -46,7 +46,56 @@ exports.onCreatePage = ({ page, actions }) => {}
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
+  const asyncDoc = new Promise((resolve, reject) => {
+    const docsPage = path.resolve('src/templates/docs.js')
+    const docPage = path.resolve('src/templates/doc.js')
+
+    resolve(
+      graphql(`
+        {
+          docs: allMarkdownRemark {
+            edges {
+              node {
+                fileAbsolutePath
+                sourceType
+                fields {
+                  slug
+                }
+                frontmatter {
+                  title
+                  category
+                }
+              }
+            }
+          }
+        }
+      `).then(result => {
+        if (result.errors) {
+          console.log(result.errors)
+          reject(result.errors)
+        }
+
+        const docs = result.data.docs.edges.filter(
+          edge => edge.node.sourceType === 'docs'
+        )
+
+        docs.forEach(edge =>
+          createPage({
+            path: edge.node.fields.slug,
+            component: docPage,
+            context: {
+              slug: edge.node.fields.slug,
+              // prev: '1',
+              // next: '1',
+              layout: 'docs'
+            }
+          })
+        )
+      })
+    )
+  })
+
+  const asyncPost = new Promise((resolve, reject) => {
     const postPage = path.resolve('src/templates/post.js')
     const categoryPage = path.resolve('src/templates/category.js')
     const docsPage = path.resolve('src/templates/docs.js')
@@ -61,10 +110,10 @@ exports.createPages = ({ graphql, actions }) => {
                 fields {
                   slug
                 }
+                sourceType
                 frontmatter {
                   title
                   category
-                  nested
                 }
               }
             }
@@ -76,36 +125,23 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const posts = result.data.posts.edges
+        const posts = result.data.posts.edges.filter(
+          edge => edge.node.sourceType === 'posts'
+        )
 
         posts.forEach((edge, index) => {
           const next = index === 0 ? null : posts[index - 1].node
           const prev = index === posts.length - 1 ? null : posts[index + 1].node
 
-          if (edge.node.frontmatter.nested) {
-            createPage({
-              path: edge.node.fields.slug,
-              component: docPage,
-              context: {
-                slug: edge.node.fields.slug,
-                prev,
-                next,
-                layout: 'docs'
-              }
-            })
-
-            // console.log(relative)
-          } else {
-            createPage({
-              path: edge.node.fields.slug,
-              component: postPage,
-              context: {
-                slug: edge.node.fields.slug,
-                prev,
-                next
-              }
-            })
-          }
+          createPage({
+            path: edge.node.fields.slug,
+            component: postPage,
+            context: {
+              slug: edge.node.fields.slug,
+              prev,
+              next
+            }
+          })
         })
 
         let categories = []
@@ -117,13 +153,6 @@ exports.createPages = ({ graphql, actions }) => {
         })
 
         categories = _.uniq(categories)
-
-        categories = categories.filter(cat => cat !== 'docs')
-
-        createPage({
-          component: path.resolve(docsPage),
-          path: '/docs'
-        })
 
         categories.forEach(category => {
           createPage({
@@ -137,6 +166,8 @@ exports.createPages = ({ graphql, actions }) => {
       })
     )
   })
+
+  return Promise.all([asyncDoc, asyncPost])
 }
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {

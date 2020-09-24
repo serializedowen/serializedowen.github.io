@@ -4,8 +4,9 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import { Wrapper, Subline, SectionTitle, Content, PrevNext } from 'components'
 import config from '../../config/SiteConfig'
-import MenuList from '@material-ui/core/MenuList'
-import MenuItem from '@material-ui/core/MenuItem'
+import EditIcon from '@material-ui/icons/Edit'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
 import ListItem from '@material-ui/core/ListItem'
 import List from '@material-ui/core/List'
 import Button from '@material-ui/core/Button'
@@ -13,15 +14,37 @@ import styled from 'styled-components'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
+import { makeStyles } from '@material-ui/core/styles'
 
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
 `
 
+const drawerWidth = 240
+
+const useStyles = makeStyles(theme => ({
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    marginTop: '50px'
+  },
+  drawerContainer: {
+    overflow: 'auto'
+  },
+  content: {
+    overflowY: 'auto',
+    flexGrow: 1,
+    transition: '0.2s',
+    padding: theme.spacing(3)
+  }
+}))
+
 const MenuTree = (nodes, actualSlug, level = 0) => {
   if (!nodes) return null
 
-  console.log(nodes)
   const [open, setopen] = useState(nodes.map(() => true))
 
   return nodes.map((node, index) => {
@@ -69,6 +92,8 @@ const MenuTree = (nodes, actualSlug, level = 0) => {
         <Collapse in={open[index]}>
           {MenuTree(node.children, actualSlug, level + 1)}
         </Collapse>
+
+        <Divider></Divider>
       </List>
     )
   })
@@ -77,7 +102,7 @@ const MenuTree = (nodes, actualSlug, level = 0) => {
 const buildNodeTree = metas => {
   const ret = { children: [] }
 
-  const addNode = (paths, parent, slug) => {
+  const addNode = (paths, parent, slug, title) => {
     parent.children = parent.children || []
 
     if (!paths) return
@@ -86,7 +111,8 @@ const buildNodeTree = metas => {
 
     if (paths.length === 1) {
       if (desc) return
-      return parent.children.push({ title: paths[0], isLeaf: true, slug })
+
+      return parent.children.push({ title, isLeaf: true, slug })
     }
 
     if (!desc) {
@@ -95,62 +121,97 @@ const buildNodeTree = metas => {
     }
 
     paths.shift()
-    return addNode(paths, desc, slug)
+    return addNode(paths, desc, slug, title)
   }
 
-  metas.map(meta => addNode(meta.parents, ret, meta.slug))
+  metas.map(meta => addNode(meta.parents, ret, meta.slug, meta.title))
 
   return ret
 }
 
 const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
   const { edges } = allMarkdownRemark
+  const [navOpen, setnavOpen] = useState(true)
+  const [tocOpen, settocOpen] = useState(true)
+
+  const classes = useStyles()
 
   const navigationMeta = edges.map(edge => ({
     title: edge.node.frontmatter.title,
     slug: edge.node.fields.slug,
     parents: edge.node.fields.slug.split('/').slice(3)
   }))
-  console.log(navigationMeta)
-  // navigationMeta.forEach(meta => meta.parents.pop())
 
   const tree = buildNodeTree(navigationMeta)
 
   return (
-    <div>
+    <div
+      style={{
+        width: '100%',
+        height: 'calc(100vh - 50px)',
+        backgroundColor: 'white',
+        display: 'flex'
+      }}
+    >
       <Helmet title={`'' | ${config.siteTitle}`} />
 
-      <div
+      <Drawer
+        open={navOpen}
+        variant="persistent"
+        classes={{ paper: classes.drawerPaper }}
+        className={classes.drawer}
+      >
+        {MenuTree(tree.children, pageContext.slug)}
+      </Drawer>
+
+      <article
+        className={classes.content}
         style={{
-          width: '100%',
-          height: 'calc(100vh - 50px)',
-          backgroundColor: 'white',
-          display: 'grid',
-          gridTemplateColumns: '240px 1fr 100px'
+          scrollBehavior: 'smooth',
+          position: 'relative',
+          marginLeft: navOpen ? '0px ' : -drawerWidth + 'px',
+          marginRight: tocOpen ? '0px' : -drawerWidth + 'px'
         }}
       >
-        <nav style={{ overflowY: 'auto' }}>
-          {MenuTree(tree.children, pageContext.slug)}
-        </nav>
+        <Button
+          onClick={() => setnavOpen(val => !val)}
+          // style={{ position: 'absolute', left: '0px', top: '20px' }}
+        >
+          导航
+        </Button>
+        <Button onClick={() => settocOpen(val => !val)}>摘要</Button>
 
-        {/* <MenuList style={{ overflowY: 'auto' }}>
-          {navigationMeta.map(meta => (
-            <Link to={meta.slug}>
-              {meta.slug === pageContext.slug ? (
-                <ActiveMenuItem key={meta.title}>{meta.title}</ActiveMenuItem>
-              ) : (
-                <MenuItem key={meta.title}>{meta.title}</MenuItem>
-              )}
-            </Link>
-          ))}
-        </MenuList> */}
+        <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
 
-        <article style={{ overflowY: 'auto', margin: '2em' }}>
-          <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
-          <PrevNext prev={pageContext.prev} next={pageContext.next} />
-        </article>
-        <div>Table of Contents</div>
-      </div>
+        <div style={{ display: 'inline-block' }}>
+          <a
+            href={
+              'https://github.com/serializedowen/serializedowen.github.io/blob/dev' +
+              pageContext.slug +
+              '.md'
+            }
+          >
+            <Button variant="outlined" color="primary">
+              <EditIcon></EditIcon>在Github上编辑
+            </Button>
+          </a>
+          <span>最后修改时间：{markdownRemark.lastModified}</span>
+        </div>
+
+        <PrevNext prev={pageContext.prev} next={pageContext.next} />
+      </article>
+
+      <Drawer
+        variant="persistent"
+        open={tocOpen}
+        anchor="right"
+        classes={{ paper: classes.drawerPaper }}
+        className={classes.drawer}
+      >
+        <div
+          dangerouslySetInnerHTML={{ __html: markdownRemark.tableOfContents }}
+        ></div>
+      </Drawer>
     </div>
   )
 }
@@ -171,6 +232,13 @@ export const postQuery = graphql`
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
+
+      tableOfContents
+      lastModified
+      headings {
+        id
+        depth
+      }
     }
 
     allMarkdownRemark(

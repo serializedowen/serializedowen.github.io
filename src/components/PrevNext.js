@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Link } from 'gatsby';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import { Link } from 'gatsby'
+import Button from '@material-ui/core/Button'
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
     align-items: center;
   }
   justify-items: center;
-`;
+`
 
 const Prev = styled.div`
   span {
@@ -20,7 +21,7 @@ const Prev = styled.div`
     font-size: 0.8rem;
     color: ${props => props.theme.colors.grey.light};
   }
-`;
+`
 
 const Next = styled.div`
   margin-left: auto;
@@ -30,34 +31,38 @@ const Next = styled.div`
     font-size: 0.8rem;
     color: ${props => props.theme.colors.grey.light};
   }
-`;
+`
 
 const PrevNext = ({ next, prev }) => (
   <Wrapper>
     {prev && (
       <Prev>
         <span>Previous</span>
-        <Link to={prev.fields.slug}>{prev.frontmatter.title}</Link>
+        <Link to={prev.fields.slug}>
+          <Button>{prev.frontmatter.title}</Button>
+        </Link>
       </Prev>
     )}
 
     {next && (
       <Next>
         <span>Next</span>
-        <Link to={next.fields.slug}>{next.frontmatter.title}</Link>
+        <Link to={next.fields.slug}>
+          <Button>{next.frontmatter.title}</Button>
+        </Link>
       </Next>
     )}
   </Wrapper>
-);
+)
 
-export default PrevNext;
+export default PrevNext
 
 PrevNext.propTypes = {
   next: PropTypes.object,
-  prev: PropTypes.object,
-};
+  prev: PropTypes.object
+}
 
 PrevNext.defaultProps = {
   next: null,
-  prev: null,
-};
+  prev: null
+}
