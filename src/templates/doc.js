@@ -15,7 +15,7 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
-import media from '../utils/media'
+
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
 `
@@ -136,8 +136,19 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
   const docContainer = useRef(null)
 
   useEffect(() => {
+    const screenWidth = window.screen.width
+
+    if (screenWidth < 700) {
+      settocOpen(false)
+    }
+
+    if (screenWidth < 500) {
+      setnavOpen(false)
+    }
+  }, [])
+
+  useEffect(() => {
     const smoothScroll = require('../utils/smoothScroll')
-    console.log(media)
 
     setTimeout(() => {
       smoothScroll.setTarget(docContainer.current)
