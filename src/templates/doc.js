@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import { PrevNext } from 'components'
-
+import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -15,7 +15,8 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
-
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
 `
@@ -138,11 +139,11 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
   useEffect(() => {
     const screenWidth = window.screen.width
 
-    if (screenWidth < 700) {
+    if (screenWidth < 1000) {
       settocOpen(false)
     }
 
-    if (screenWidth < 500) {
+    if (screenWidth < 700) {
       setnavOpen(false)
     }
   }, [])
@@ -200,13 +201,27 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
           marginRight: tocOpen ? '0px' : -drawerWidth + 'px'
         }}
       >
-        <Button
+        <IconButton
           onClick={() => setnavOpen(val => !val)}
-          // style={{ position: 'absolute', left: '0px', top: '20px' }}
+          variant="contained"
+          style={{
+            position: 'fixed',
+            left: navOpen ? drawerWidth + 'px' : '0px',
+            top: '100px'
+          }}
         >
-          导航
-        </Button>
-        <Button onClick={() => settocOpen(val => !val)}>摘要</Button>
+          {navOpen ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+        </IconButton>
+        <IconButton
+          onClick={() => settocOpen(val => !val)}
+          style={{
+            position: 'fixed',
+            right: tocOpen ? drawerWidth + 'px' : '0px',
+            top: '100px'
+          }}
+        >
+          {tocOpen ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+        </IconButton>
 
         <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
 
