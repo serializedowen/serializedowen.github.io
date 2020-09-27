@@ -17,6 +17,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import withENLayout from 'src/layouts/withENLayout'
+
+import Transition from '../components/Transition'
+
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
 `
@@ -130,7 +134,11 @@ const buildNodeTree = metas => {
   return ret
 }
 
-const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
+const Doc = ({
+  data: { allMarkdownRemark, markdownRemark },
+  pageContext,
+  location
+}) => {
   const { edges } = allMarkdownRemark
   const [navOpen, setnavOpen] = useState(true)
   const [tocOpen, settocOpen] = useState(true)
@@ -191,74 +199,78 @@ const Doc = ({ data: { allMarkdownRemark, markdownRemark }, pageContext }) => {
         {MenuTree(tree.children, pageContext.slug)}
       </Drawer>
 
-      <article
-        ref={docContainer}
-        className={classes.content}
-        style={{
-          scrollBehavior: 'smooth',
-          position: 'relative',
-          marginLeft: navOpen ? '0px ' : -drawerWidth + 'px',
-          marginRight: tocOpen ? '0px' : -drawerWidth + 'px'
-        }}
-      >
-        <IconButton
-          onClick={() => setnavOpen(val => !val)}
-          variant="contained"
+      <Transition location={location}>
+        <article
+          ref={docContainer}
+          className={classes.content}
           style={{
-            position: 'fixed',
-            left: navOpen ? drawerWidth + 'px' : '0px',
-            top: '100px'
+            scrollBehavior: 'smooth',
+            position: 'relative',
+            marginLeft: navOpen ? '0px ' : -drawerWidth + 'px',
+            marginRight: tocOpen ? '0px' : -drawerWidth + 'px'
           }}
         >
-          {navOpen ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
-        </IconButton>
-        <IconButton
-          onClick={() => settocOpen(val => !val)}
-          style={{
-            position: 'fixed',
-            right: tocOpen ? drawerWidth + 'px' : '0px',
-            top: '100px'
-          }}
-        >
-          {tocOpen ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
-        </IconButton>
-
-        <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
-
-        <div style={{ display: 'inline-block' }}>
-          <a
-            href={
-              'https://github.com/serializedowen/serializedowen.github.io/blob/dev' +
-              pageContext.slug +
-              '.md'
-            }
+          <IconButton
+            onClick={() => setnavOpen(val => !val)}
+            variant="contained"
+            style={{
+              position: 'fixed',
+              left: navOpen ? drawerWidth + 'px' : '0px',
+              top: '100px'
+            }}
           >
-            <Button variant="outlined" color="primary">
-              <EditIcon></EditIcon>在Github上编辑
-            </Button>
-          </a>
-          <span>最后修改时间：{markdownRemark.lastModified}</span>
-        </div>
+            {navOpen ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
+          </IconButton>
+          <IconButton
+            onClick={() => settocOpen(val => !val)}
+            style={{
+              position: 'fixed',
+              right: tocOpen ? drawerWidth + 'px' : '0px',
+              top: '100px'
+            }}
+          >
+            {tocOpen ? <ArrowForwardIosIcon /> : <ArrowBackIosIcon />}
+          </IconButton>
 
-        <PrevNext prev={pageContext.prev} next={pageContext.next} />
-      </article>
+          <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }}></div>
 
-      <Drawer
-        variant="persistent"
-        open={tocOpen}
-        anchor="right"
-        classes={{ paper: classes.drawerPaper }}
-        className={classes.drawer}
-      >
-        <div
-          dangerouslySetInnerHTML={{ __html: markdownRemark.tableOfContents }}
-        ></div>
-      </Drawer>
+          <div style={{ display: 'inline-block' }}>
+            <a
+              href={
+                'https://github.com/serializedowen/serializedowen.github.io/blob/dev' +
+                pageContext.slug +
+                '.md'
+              }
+            >
+              <Button variant="outlined" color="primary">
+                <EditIcon></EditIcon>在Github上编辑
+              </Button>
+            </a>
+            <span>最后修改时间：{markdownRemark.lastModified}</span>
+          </div>
+
+          <PrevNext prev={pageContext.prev} next={pageContext.next} />
+        </article>
+
+        <Drawer
+          variant="persistent"
+          open={tocOpen}
+          anchor="right"
+          classes={{ paper: classes.drawerPaper }}
+          className={classes.drawer}
+        >
+          <div
+            dangerouslySetInnerHTML={{
+              __html: markdownRemark.tableOfContents
+            }}
+          ></div>
+        </Drawer>
+      </Transition>
     </div>
   )
 }
 
-export default Doc
+export default withENLayout(Doc)
 
 Doc.propTypes = {
   data: PropTypes.shape({

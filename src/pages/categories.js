@@ -4,7 +4,8 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 import kebabCase from 'lodash/kebabCase'
-import { Layout, Wrapper, Header, SectionTitle, Content } from 'components'
+import { Wrapper, Header, SectionTitle, Content } from 'components'
+import withENLayout from 'src/layouts/withENLayout'
 
 import config from '../../config/SiteConfig'
 
@@ -19,7 +20,6 @@ const Category = ({
     allMarkdownRemark: { group }
   }
 }) => (
-  // <Layout>
   <Wrapper>
     <Helmet title={`Categories | ${config.siteTitle}`} />
     <Header>
@@ -31,16 +31,16 @@ const Category = ({
         <Title key={category.fieldValue}>
           <Link to={`/categories/${kebabCase(category.fieldValue)}`}>
             {category.fieldValue}
-          </Link>{' '}
+          </Link>
           ({category.totalCount})
         </Title>
       ))}
     </Content>
   </Wrapper>
-  // </Layout>
 )
 
-export default Category
+export { Category }
+export default withENLayout(Category)
 
 Category.propTypes = {
   data: PropTypes.shape({

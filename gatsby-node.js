@@ -41,9 +41,11 @@ exports.onPostBuild = async (_, pluginOptions) => {
   })
 }
 
-exports.onCreatePage = ({ page, actions }) => {}
+exports.onCreatePage = ({ page, actions }) => {
+  console.log(page)
+}
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   const asyncDoc = new Promise((resolve, reject) => {
@@ -174,6 +176,22 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules']
+    }
+  })
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        src: path.resolve(__dirname, 'src')
+      }
+    }
+  })
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        config: path.resolve(__dirname, 'config')
+      }
     }
   })
 }

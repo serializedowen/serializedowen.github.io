@@ -11,33 +11,35 @@ import {
   Content
 } from 'components'
 import config from '../../config/SiteConfig'
-
+import Layout from 'src/layouts/withENLayout'
 const Category = ({ data: { allMarkdownRemark } }) => {
   const { edges, totalCount } = allMarkdownRemark
 
   return (
-    <Wrapper>
-      <Helmet title={`'' | ${config.siteTitle}`} />
-      <Header>
-        <Link to="/">{config.siteTitle}</Link>
-      </Header>
-      <div>
-        <Subline sectionTitle>
-          (See <Link to="/categories">all categories</Link>)
-        </Subline>
-        {edges.map(post => (
-          <Article
-            title={post.node.frontmatter.title}
-            date={post.node.frontmatter.date}
-            excerpt={post.node.excerpt}
-            timeToRead={post.node.timeToRead}
-            slug={post.node.fields.slug}
-            category={post.node.frontmatter.category}
-            key={post.node.fields.slug}
-          />
-        ))}
-      </div>
-    </Wrapper>
+    <Layout>
+      <Wrapper>
+        <Helmet title={`'' | ${config.siteTitle}`} />
+        <Header>
+          <Link to="/">{config.siteTitle}</Link>
+        </Header>
+        <div>
+          <Subline sectionTitle>
+            (See <Link to="/categories">all categories</Link>)
+          </Subline>
+          {edges.map(post => (
+            <Article
+              title={post.node.frontmatter.title}
+              date={post.node.frontmatter.date}
+              excerpt={post.node.excerpt}
+              timeToRead={post.node.timeToRead}
+              slug={post.node.fields.slug}
+              category={post.node.frontmatter.category}
+              key={post.node.fields.slug}
+            />
+          ))}
+        </div>
+      </Wrapper>
+    </Layout>
   )
 }
 

@@ -3,6 +3,4 @@ module.exports = async ({ markdownAST }, pluginOptions = {}) => {
   return markdownAST
 }
 
-exports.onCreateNode = (...args) => {
-  debugger
-}
+exports.onCreateNode = (...args) => {}

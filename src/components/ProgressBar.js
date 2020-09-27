@@ -6,7 +6,7 @@ const Progress = styled.div`
   /* background-color: ${props => props.theme.colors.secondary}; */
   background-color: #4EA6EC;
   height: 2px;
-  z-index: 9999;
+  z-index: 200;
   width: 100%;
   transition: 0.2s;
   left: -100%;

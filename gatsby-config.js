@@ -1,19 +1,30 @@
 const config = require('./config/SiteConfig')
-
+const languages = require('./config/languages')
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
 
 module.exports = {
   pathPrefix: config.pathPrefix,
   siteMetadata: {
-    siteUrl: config.siteUrl + pathPrefix
+    siteUrl: config.siteUrl + pathPrefix,
+    languages
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        langKeyDefault: languages.defaultLangKey,
+        langKeyDefault: 'en',
+        useLangKeyLayout: false,
+        prefixDefault: false,
+        pagesPath: ['/src/pages', '/src/templates']
+      }
+    },
     'gatsby-plugin-material-ui',
     'gatsby-plugin-react-helmet',
     {
       resolve: `gatsby-plugin-layout`,
       options: {
-        component: require.resolve(`./src/components/Layout.js`)
+        component: require.resolve(`./src/layouts/TransitionWrapper`)
       }
     },
     'gatsby-plugin-styled-components',

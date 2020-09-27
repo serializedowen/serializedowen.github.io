@@ -5,15 +5,28 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop'
+import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n'
+import { IntlProvider, FormattedMessage } from 'react-intl'
 
-import SEO from './SEO'
+import {
+  createMuiTheme,
+  ThemeProvider as MuiThemeProvider
+} from '@material-ui/core/styles'
+
+import SEO from '../components/SEO'
 import theme from '../../config/Theme'
 import { media } from '../utils/media'
-import Navigation from './Navigation'
-import SocialIcon from './SocialIcon'
-import Parallax from './Parallax'
-import Transtion from './Transition'
-import Scroller from './Scroller'
+import Navigation from '../components/Navigation'
+import SocialIcon from '../components/SocialIcon'
+import Parallax from '../components/Parallax'
+import Transtion from '../components/Transition'
+import Scroller from '../components/Scroller'
+
+const muiTheme = createMuiTheme({
+  palette: {
+    type: 'dark'
+  }
+})
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
@@ -82,72 +95,71 @@ const Footer = styled.footer`
   }
 `
 
-const Layout = ({ children, location, pageContext }) => {
-  console.log(pageContext)
+const Layout = ({ children, location, pageContext, i18nMessages }) => {
+  console.log(i18nMessages)
   return (
     <StaticQuery
       query={graphql`
         query LayoutQuery {
           site {
             buildTime(formatString: "DD.MM.YYYY")
+            siteMetadata {
+              languages {
+                defaultLangKey
+                langs
+              }
+            }
           }
         }
       `}
       render={data => {
-        switch (pageContext.layout) {
-          case 'docs':
-            return (
-              <ThemeProvider theme={theme}>
-                <SEO />
-                <GlobalStyle />
-                <Navigation />
-                {children}
-                <Scroller>
-                  <VerticalAlignTopIcon
-                    style={{ marginRight: '0px', transform: 'scale(1.5)' }}
-                  ></VerticalAlignTopIcon>
-                </Scroller>
-              </ThemeProvider>
-            )
+        const url = location.pathname
+        const { langs, defaultLangKey } = data.site.siteMetadata.languages
+        const langKey = getCurrentLangKey(langs, defaultLangKey, url)
 
-          default:
-            return (
+        return (
+          <MuiThemeProvider theme={muiTheme}>
+            <IntlProvider locale={langKey} messages={i18nMessages}>
               <ThemeProvider theme={theme}>
                 <React.Fragment>
                   <Parallax />
                   <SEO />
                   <GlobalStyle />
                   <Navigation />
-                  {/* {children} */}
-                  <Transtion location={location}>{children}</Transtion>
+
+                  {children}
 
                   <Scroller>
                     <VerticalAlignTopIcon
                       style={{ marginRight: '0px', transform: 'scale(1.5)' }}
                     ></VerticalAlignTopIcon>
                   </Scroller>
-                  <Footer>
-                    <div>
-                      <SocialIcon.GitHub link="https://github.com/serializedowen" />
-                      <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-                      <SocialIcon.Wechat
-                        link={withPrefix('/social/QRcode.jpg')}
-                      />
-                      <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
-                    </div>
-                    &copy; 2018 by SerializedOwen. All rights reserved. <br />
-                    <a href="https://github.com/serializedowen/serializedowen.github.io">
-                      GitHub Repository
-                    </a>{' '}
-                    <br />
-                    <span>Last build: {data.site.buildTime}</span>
-                    <br />
-                    <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
-                  </Footer>
+                  {pageContext.layout !== 'docs' && (
+                    <Footer>
+                      <div>
+                        <SocialIcon.GitHub link="https://github.com/serializedowen" />
+                        <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+                        <SocialIcon.Wechat
+                          link={withPrefix('/social/QRcode.jpg')}
+                        />
+                        <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
+                      </div>
+                      <FormattedMessage id="copyrights"></FormattedMessage>{' '}
+                      <br />
+                      <a href="https://github.com/serializedowen/serializedowen.github.io">
+                        GitHub Repository
+                      </a>{' '}
+                      <br />
+                      <span>Last build: {data.site.buildTime}</span>
+                      <br />
+                      <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
+                    </Footer>
+                  )}
                 </React.Fragment>
               </ThemeProvider>
-            )
-        }
+            </IntlProvider>
+          </MuiThemeProvider>
+        )
       }}
     />
   )

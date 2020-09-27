@@ -16,8 +16,7 @@ import {
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
-
-// import '../utils/prismjs-theme.css'
+import withENLayout from 'src/layouts/withENLayout'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
@@ -99,7 +98,8 @@ class Post extends Component {
   }
 }
 
-export default Post
+export { Post }
+export default withENLayout(Post)
 
 Post.propTypes = {
   pageContext: PropTypes.shape({

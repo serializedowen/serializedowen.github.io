@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link, withPrefix } from 'gatsby'
 import { opacify } from 'polished'
-
+import { FormattedMessage } from 'react-intl'
 import SocialIcon from '../SocialIcon'
 import AuthenticationMenu from './AuthenticationMenu'
+import LanguageMenu from './LanguageMenu'
 import GitHubLink from '../GitHubLink'
 
 const Nav = styled.nav.attrs({
@@ -30,7 +31,7 @@ const Nav = styled.nav.attrs({
 const NavWrap = styled.div`
   padding-left: 2em;
   position: sticky;
-  z-index: 9999;
+  z-index: 200;
   top: 0;
   opacity: 0.9;
 
@@ -64,12 +65,22 @@ const Navigation = () => (
     <GitHubLink></GitHubLink>
     <div>
       <Nav>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <FormattedMessage id="mainPage"></FormattedMessage>
+        </Link>
         {/* <Link to="/">Resume</Link> */}
-        <Link to="/contact">Contact</Link>
-        <Link to="/categories">Blog</Link>
+        <Link to="/categories">
+          <FormattedMessage id="blog"></FormattedMessage>
+        </Link>
+        <Link to="/docs">
+          <FormattedMessage id="docs"></FormattedMessage>
+        </Link>
+        <Link to="/contact">
+          <FormattedMessage id="contact"></FormattedMessage>
+        </Link>
       </Nav>
       <Icons>
+        <LanguageMenu></LanguageMenu>
         <SocialIcon.GitHub link="https://github.com/serializedowen" />
         <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
         <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />

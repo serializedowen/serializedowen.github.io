@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { Wrapper, Header, Button, Content as Con } from 'components'
 
 import config from '../../config/SiteConfig'
-import withENLayout from 'src/layouts/withENLayout'
+import withZHLayout from 'src/layouts/withZHLayout'
 
 const Content = styled(Con)`
   form {
@@ -37,7 +37,7 @@ const Contact = () => (
       <Link to="/">{config.siteTitle}</Link>
     </Header>
     <Content>
-      <h1>Contact</h1>
+      <h1>联系</h1>
       <form
         name="contact-form"
         method="post"
@@ -47,24 +47,22 @@ const Contact = () => (
       >
         <p>
           <label htmlFor="contact-name">
-            Name
+            名字
             <input name="name" id="contact-name" type="text" required />
           </label>
         </p>
         <p>
           <label htmlFor="contact-email">
-            E-Mail{' '}
-            <input name="email" id="contact-email" type="email" required />
+            邮箱 <input name="email" id="contact-email" type="email" required />
           </label>
         </p>
         <p>
           <label htmlFor="contact-message">
-            Your Message{' '}
-            <textarea name="message" id="contact-message" required />
+            你的消息 <textarea name="message" id="contact-message" required />
           </label>
         </p>
         <p>
-          <Button>Send</Button>
+          <Button>发送</Button>
         </p>
         <input type="hidden" name="form-name" value="contact-form" />
       </form>
@@ -72,5 +70,5 @@ const Contact = () => (
   </Wrapper>
 )
 
-export default withENLayout(Contact)
+export default withZHLayout(Contact)
 export { Contact }
