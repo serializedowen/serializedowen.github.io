@@ -18,8 +18,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import withENLayout from 'src/layouts/withENLayout'
+import {
+  createMuiTheme,
+  ThemeProvider as MuiThemeProvider
+} from '@material-ui/core/styles'
 
-import Transition from '../components/Transition'
+const theme = createMuiTheme({})
 
 const ActiveMenuItem = styled(ListItem)`
   background-color: lightgrey !important;
@@ -51,12 +55,18 @@ const MenuTree = (nodes, actualSlug, level = 0) => {
   if (!nodes) return null
 
   const [open, setopen] = useState(nodes.map(() => true))
+  const ref = useRef(null)
+  useEffect(() => {
+    ref.current && ref.current.scrollIntoView()
+    return () => {}
+  }, [])
 
   return nodes.map((node, index) => {
     return node.isLeaf ? (
       <Link to={node.slug}>
         {node.slug === actualSlug ? (
           <ActiveMenuItem
+            ref={ref}
             button
             key={node.title}
             style={{ paddingLeft: level + 1 + 'em' }}
@@ -178,28 +188,28 @@ const Doc = ({
   const tree = buildNodeTree(navigationMeta)
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: 'calc(100vh - 50px)',
-        backgroundColor: 'white',
-        display: 'flex'
-      }}
-    >
-      <Helmet
-        title={` react-router-dom 中文文档 | ${markdownRemark.frontmatter.title}`}
-      />
-
-      <Drawer
-        open={navOpen}
-        variant="persistent"
-        classes={{ paper: classes.drawerPaper }}
-        className={classes.drawer}
+    <MuiThemeProvider theme={theme}>
+      <div
+        style={{
+          width: '100%',
+          height: 'calc(100vh - 50px)',
+          backgroundColor: 'white',
+          display: 'flex'
+        }}
       >
-        {MenuTree(tree.children, pageContext.slug)}
-      </Drawer>
+        <Helmet
+          title={` react-router-dom 中文文档 | ${markdownRemark.frontmatter.title}`}
+        />
 
-      <Transition location={location}>
+        <Drawer
+          open={navOpen}
+          variant="persistent"
+          classes={{ paper: classes.drawerPaper }}
+          className={classes.drawer}
+        >
+          {MenuTree(tree.children, pageContext.slug)}
+        </Drawer>
+
         <article
           ref={docContainer}
           className={classes.content}
@@ -265,8 +275,8 @@ const Doc = ({
             }}
           ></div>
         </Drawer>
-      </Transition>
-    </div>
+      </div>
+    </MuiThemeProvider>
   )
 }
 
