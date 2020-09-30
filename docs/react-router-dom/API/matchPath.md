@@ -5,5 +5,3 @@ category: 'docs'
 ---
 
 ### `matchPath`
-
-翻译 ing

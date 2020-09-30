@@ -2,7 +2,9 @@
 date: '2019-05-02'
 title: '深度redux整合'
 category: 'docs'
----### 深度 redux 整合
+---
+
+### 深度 redux 整合
 
 Redux 是 React 生态系统的重要组成部分。对于想要同时使用 React Router 和 Redux 的人，我们希望使其无缝集成。为此，有些人希望：
 
