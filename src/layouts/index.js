@@ -96,7 +96,6 @@ const Footer = styled.footer`
 `
 
 const Layout = ({ children, location, pageContext, i18nMessages }) => {
-  console.log(i18nMessages)
   return (
     <StaticQuery
       query={graphql`

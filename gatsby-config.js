@@ -12,8 +12,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-i18n',
       options: {
-        langKeyDefault: languages.defaultLangKey,
-        langKeyDefault: 'en',
+        langeyDefault: languages.defaultLangKey,
+
         useLangKeyLayout: false,
         prefixDefault: false,
         pagesPath: ['/src/pages', '/src/templates']
@@ -99,6 +99,7 @@ module.exports = {
           }
         ]
       }
-    }
+    },
+    'gatsby-plugin-meta-redirect'
   ]
 }

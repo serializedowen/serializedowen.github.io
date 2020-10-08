@@ -6,6 +6,7 @@ const searchData = []
 
 exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
+
   let slug
   if (node.internal.type === 'MarkdownRemark') {
     if (
@@ -16,6 +17,18 @@ exports.onCreateNode = ({ node, actions }) => {
         __dirname,
         path.parse(node.fileAbsolutePath).dir
       )}/${_.kebabCase(node.frontmatter.slug || node.frontmatter.title)}`
+
+      // add package name as a metadatafield
+
+      const packageName = path
+        .relative(__dirname, path.parse(node.fileAbsolutePath).dir)
+        .split(path.sep)[1]
+
+      createNodeField({
+        node,
+        name: 'package',
+        value: packageName
+      })
     } else if (
       Object.prototype.hasOwnProperty.call(node, 'frontmatter') &&
       Object.prototype.hasOwnProperty.call(node.frontmatter, 'slug')
@@ -34,7 +47,7 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 }
 
-exports.onPostBuild = async (_, pluginOptions) => {
+exports.onPostBuild = async ({ actions }, pluginOptions) => {
   const savePath = path.join('./public', 'search-data.json')
   return new Promise((resolve, reject) => {
     writeFile(savePath, JSON.stringify(searchData), resolve)
@@ -42,12 +55,17 @@ exports.onPostBuild = async (_, pluginOptions) => {
 }
 
 exports.onCreatePage = ({ page, actions }) => {
-  console.log(page)
+  // console.log(page)
 }
 
 exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+  const { createPage, createRedirect } = actions
 
+  // createRedirect({
+  //   fromPath: '/docs/react-router-dom',
+  //   toPath: '/docs/react-router-dom/向导/快速开始',
+  //   isPermanent: false
+  // })
   const asyncDoc = new Promise((resolve, reject) => {
     const docsPage = path.resolve('src/templates/docs.js')
     const docPage = path.resolve('src/templates/doc.js')
@@ -55,12 +73,15 @@ exports.createPages = async ({ graphql, actions }) => {
     resolve(
       graphql(`
         {
-          docs: allMarkdownRemark {
+          docs: allMarkdownRemark(
+            sort: { fields: frontmatter___date, order: DESC }
+          ) {
             edges {
               node {
                 fileAbsolutePath
                 sourceType
                 fields {
+                  package
                   slug
                 }
                 frontmatter {
@@ -81,14 +102,15 @@ exports.createPages = async ({ graphql, actions }) => {
           edge => edge.node.sourceType === 'docs'
         )
 
-        docs.forEach(edge =>
+        docs.forEach((edge, i) =>
           createPage({
             path: edge.node.fields.slug,
             component: docPage,
             context: {
+              package: edge.node.fields.package,
               slug: edge.node.fields.slug,
-              // prev: '1',
-              // next: '1',
+              prev: docs[i - 1],
+              next: docs[i + 1],
               layout: 'docs'
             }
           })
@@ -105,7 +127,9 @@ exports.createPages = async ({ graphql, actions }) => {
     resolve(
       graphql(`
         {
-          posts: allMarkdownRemark {
+          posts: allMarkdownRemark(
+            sort: { fields: frontmatter___date, order: DESC }
+          ) {
             edges {
               node {
                 fileAbsolutePath

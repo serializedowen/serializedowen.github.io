@@ -259,7 +259,7 @@ const Doc = ({
             <span>最后修改时间：{markdownRemark.lastModified}</span>
           </div>
 
-          <PrevNext prev={pageContext.prev} next={pageContext.next} />
+          {/* <PrevNext prev={pageContext.prev} next={pageContext.next} /> */}
         </article>
 
         <Drawer
@@ -292,7 +292,7 @@ Doc.propTypes = {
 }
 
 export const postQuery = graphql`
-  query doc($slug: String!) {
+  query doc($slug: String!, $package: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       timeToRead
@@ -309,7 +309,10 @@ export const postQuery = graphql`
 
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: "docs" } } }
+      filter: {
+        frontmatter: { category: { eq: "docs" } }
+        fields: { package: { eq: $package } }
+      }
     ) {
       totalCount
       edges {
@@ -317,7 +320,6 @@ export const postQuery = graphql`
           frontmatter {
             title
           }
-
           fields {
             slug
           }
