@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url> <loc>https://serializedowen.github.io/docs/react-router-dom/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/docs/random/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/快速开始</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/核心组件</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/服务端渲染</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -12,7 +10,9 @@
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/测试</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/深度redux整合</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/向导/静态路由</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/docs/react-router-dom/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/示例/基础</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/docs/random/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/示例/配置-url-参数</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/示例/嵌套路由</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/示例/重定向（鉴权）</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -28,8 +28,8 @@
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/示例/页面查询参数</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/hooks</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/browser-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/hash-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/hash-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/nav-link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/prompt</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/docs/react-router-dom/API/memory-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -51,8 +51,8 @@
 <url> <loc>https://serializedowen.github.io/code-transformation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/button-ripple-effect-w-simple-css</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/tap-tap-bug</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.github.io/ph-logo-generator</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/frontend-watermarking-images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.github.io/ph-logo-generator</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/hot-reload-env-files</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/love-dispatcher-w-secrets</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.github.io/css-sticky-balls</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
