@@ -28,7 +28,9 @@ const Hero = styled.div`
 
 const IndexPage = () => {
   const [postLimit, setpostLimit] = useState(10)
-  useEffect(() => (isSSR = false), [])
+  useEffect(() => {
+    isSSR = false
+  }, [])
 
   const {
     allMarkdownRemark: { edges: postEdges }

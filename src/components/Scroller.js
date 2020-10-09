@@ -7,7 +7,7 @@ import smoothScroll from '../utils/smoothScroll'
 const RoundedButton = styled(Button)`
   border-radius: 50%;
   position: fixed;
-  z-index: 200;
+  z-index: 9999;
   width: 60px;
   display: inline-flex;
   justify-content: center;
