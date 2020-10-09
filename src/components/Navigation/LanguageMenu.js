@@ -61,6 +61,7 @@ export default function LanguageMenu() {
       <Menu anchorEl={ref.current} open={menuOpen} onClick={handleMenuClose}>
         {menu.map(lang => (
           <MenuItem
+            key={lang.langKey}
             selected={lang.selected}
             onClick={() => navigate(lang.link)}
           >

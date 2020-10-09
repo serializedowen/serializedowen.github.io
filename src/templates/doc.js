@@ -1,20 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { Link, graphql } from 'gatsby'
-import { PrevNext } from 'components'
+import { Link, graphql, useScrollRestoration } from 'gatsby'
 import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import ListItem from '@material-ui/core/ListItem'
+import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Button from '@material-ui/core/Button'
 import styled from 'styled-components'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
-import { makeStyles } from '@material-ui/core/styles'
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import withENLayout from 'src/layouts/withENLayout'
@@ -55,9 +54,10 @@ const MenuTree = (nodes, actualSlug, level = 0) => {
   if (!nodes) return null
 
   const [open, setopen] = useState(nodes.map(() => true))
-  const ref = useRef(null)
+  const navRef = useRef(null)
+
   useEffect(() => {
-    ref.current && ref.current.scrollIntoView()
+    navRef.current && navRef.current.scrollIntoView()
     return () => {}
   }, [])
 
@@ -66,7 +66,7 @@ const MenuTree = (nodes, actualSlug, level = 0) => {
       <Link to={node.slug}>
         {node.slug === actualSlug ? (
           <ActiveMenuItem
-            ref={ref}
+            ref={navRef}
             button
             key={node.title}
             style={{ paddingLeft: level + 1 + 'em' }}
@@ -152,7 +152,8 @@ const Doc = ({
   const { edges } = allMarkdownRemark
   const [navOpen, setnavOpen] = useState(true)
   const [tocOpen, settocOpen] = useState(true)
-  const docContainer = useRef(null)
+
+  const { ref, onScroll } = useScrollRestoration()
 
   useEffect(() => {
     const screenWidth = window.screen.width
@@ -170,7 +171,7 @@ const Doc = ({
     const smoothScroll = require('../utils/smoothScroll')
 
     setTimeout(() => {
-      smoothScroll.setTarget(docContainer.current)
+      smoothScroll.setTarget(ref.current)
     }, 0)
     return () => {
       smoothScroll.setTarget(window)
@@ -211,7 +212,8 @@ const Doc = ({
         </Drawer>
 
         <article
-          ref={docContainer}
+          ref={ref}
+          onScroll={onScroll}
           className={classes.content}
           style={{
             scrollBehavior: 'smooth',

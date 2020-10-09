@@ -46,6 +46,7 @@
     "react-helmet": "^5.2.0",
     "react-intl": "^5.8.2",
     "react-typography": "^0.16.13",
+    "react-use": "^15.3.4",
     "styled-components": "^4.0.3",
     "typography": "^0.16.17"
   },
