@@ -48,7 +48,7 @@ const Docs = () => {
         </SectionTitle>
         {docsData.allMarkdownRemark.distinct.map(pkgName => (
           <Title>
-            <Link to={location.pathname + pkgName}>
+            <Link to={location.pathname + '/' + pkgName}>
               {pkgName} <FormattedMessage id="docs"></FormattedMessage> {'\n'}
             </Link>
           </Title>
