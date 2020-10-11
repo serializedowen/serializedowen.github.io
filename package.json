@@ -12,6 +12,7 @@
     "axios": "^0.20.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-styled-components": "^1.8.0",
+    "blueimp-md5": "^2.18.0",
     "gatsby": "^2.0.37",
     "gatsby-plugin-catch-links": "^2.0.6",
     "gatsby-plugin-i18n": "^1.0.1",
