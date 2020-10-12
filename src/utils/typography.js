@@ -1,8 +1,13 @@
-import Typography from 'typography';
+import Typography from 'typography'
 
-const config = require('../../config/SiteConfig');
+const config = require('../../config/SiteConfig')
 
 const typography = new Typography({
+  overrideStyles: ({ rhythm }) => ({
+    img: {
+      marginBottom: 0
+    }
+  }),
   title: 'Minimal',
   baseFontSize: config.baseFontSize,
   baseLineHeight: 1.66,
@@ -13,18 +18,18 @@ const typography = new Typography({
   googleFonts: [
     {
       name: config.headerFontFamily,
-      styles: ['700'],
+      styles: ['700']
     },
     {
       name: config.bodyFontFamily,
-      styles: ['400'],
-    },
-  ],
-});
+      styles: ['400']
+    }
+  ]
+})
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== 'production') {
-  typography.injectStyles();
+  typography.injectStyles()
 }
 
-export default typography;
+export default typography
