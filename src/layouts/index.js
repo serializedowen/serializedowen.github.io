@@ -1,13 +1,12 @@
 /* eslint no-unused-expressions:0 */
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import VerticalAlignTopIcon from '@material-ui/icons/VerticalAlignTop'
 import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n'
 import { IntlProvider, FormattedMessage } from 'react-intl'
-
 import {
   createMuiTheme,
   ThemeProvider as MuiThemeProvider
@@ -21,6 +20,8 @@ import SocialIcon from '../components/SocialIcon'
 import Parallax from '../components/Parallax'
 import Transtion from '../components/Transition'
 import Scroller from '../components/Scroller'
+import axios from 'src/utils/http'
+import { AuthenticationContext } from 'src/hooks/useAuthentication'
 
 const muiTheme = createMuiTheme({
   palette: {
@@ -96,6 +97,24 @@ const Footer = styled.footer`
 `
 
 const Layout = ({ children, location, pageContext, i18nMessages }) => {
+  const [authentication, setauthentication] = useState(null)
+
+  useEffect(() => {
+    try {
+      const user = JSON.parse(window.localStorage.getItem('user'))
+
+      if (!user) throw new Error()
+
+      setauthentication(user)
+    } catch (e) {
+      axios.get('/auth/decodeToken').then(res => {
+        const { data } = res
+        window.localStorage.setItem('user', JSON.stringify(data))
+        setauthentication(data)
+      })
+    }
+  }, [])
+
   return (
     <StaticQuery
       query={graphql`
@@ -117,47 +136,51 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
         const langKey = getCurrentLangKey(langs, defaultLangKey, url)
 
         return (
-          <MuiThemeProvider theme={muiTheme}>
-            <IntlProvider locale={langKey} messages={i18nMessages}>
-              <ThemeProvider theme={theme}>
-                <React.Fragment>
-                  <Parallax />
-                  <SEO />
-                  <GlobalStyle />
-                  <Navigation />
+          <AuthenticationContext.Provider value={authentication}>
+            <MuiThemeProvider theme={muiTheme}>
+              <IntlProvider locale={langKey} messages={i18nMessages}>
+                <ThemeProvider theme={theme}>
+                  <React.Fragment>
+                    <Parallax />
+                    <SEO />
+                    <GlobalStyle />
+                    <Navigation />
 
-                  {children}
+                    {children}
 
-                  <Scroller>
-                    <VerticalAlignTopIcon
-                      style={{ marginRight: '0px', transform: 'scale(1.5)' }}
-                    ></VerticalAlignTopIcon>
-                  </Scroller>
-                  {pageContext.layout !== 'docs' && (
-                    <Footer>
-                      <div>
-                        <SocialIcon.GitHub link="https://github.com/serializedowen" />
-                        <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
-                        <SocialIcon.Wechat
-                          link={withPrefix('/social/QRcode.jpg')}
-                        />
-                        <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
-                      </div>
-                      <FormattedMessage id="copyrights"></FormattedMessage>{' '}
-                      <br />
-                      <a href="https://github.com/serializedowen/serializedowen.github.io">
-                        GitHub Repository
-                      </a>{' '}
-                      <br />
-                      <span>Last build: {data.site.buildTime}</span>
-                      <br />
-                      <a href="http://beian.miit.gov.cn/">浙ICP备2020034764</a>
-                    </Footer>
-                  )}
-                </React.Fragment>
-              </ThemeProvider>
-            </IntlProvider>
-          </MuiThemeProvider>
+                    <Scroller>
+                      <VerticalAlignTopIcon
+                        style={{ marginRight: '0px', transform: 'scale(1.5)' }}
+                      ></VerticalAlignTopIcon>
+                    </Scroller>
+                    {pageContext.layout !== 'docs' && (
+                      <Footer>
+                        <div>
+                          <SocialIcon.GitHub link="https://github.com/serializedowen" />
+                          <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
+                          <SocialIcon.Wechat
+                            link={withPrefix('/social/QRcode.jpg')}
+                          />
+                          <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
+                        </div>
+                        <FormattedMessage id="copyrights"></FormattedMessage>{' '}
+                        <br />
+                        <a href="https://github.com/serializedowen/serializedowen.github.io">
+                          GitHub Repository
+                        </a>{' '}
+                        <br />
+                        <span>Last build: {data.site.buildTime}</span>
+                        <br />
+                        <a href="http://beian.miit.gov.cn/">
+                          浙ICP备2020034764
+                        </a>
+                      </Footer>
+                    )}
+                  </React.Fragment>
+                </ThemeProvider>
+              </IntlProvider>
+            </MuiThemeProvider>
+          </AuthenticationContext.Provider>
         )
       }}
     />
