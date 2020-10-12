@@ -4,5 +4,10 @@ import { useLocation } from '@reach/router'
 
 export default function useIdentifier() {
   const { pathname } = useLocation()
-  return useMemo(() => md5(pathname), [pathname])
+
+  const trimSlash = pathname.endsWith('/')
+    ? pathname.substr(0, pathname.length - 1)
+    : pathname
+
+  return useMemo(() => md5(trimSlash), [trimSlash])
 }
