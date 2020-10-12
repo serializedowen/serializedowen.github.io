@@ -1,8 +1,22 @@
+const { createProxyMiddleware } = require('http-proxy-middleware')
 const config = require('./config/SiteConfig')
 const languages = require('./config/languages')
 const pathPrefix = config.pathPrefix === '/' ? '' : config.pathPrefix
 
 module.exports = {
+  // development api proxying
+  developMiddleware: app => {
+    app.use(
+      '/api/gateway/',
+      createProxyMiddleware({
+        target: 'http://localhost:7001',
+        pathRewrite: {
+          '/api/gateway/': ''
+        }
+      })
+    )
+  },
+
   pathPrefix: config.pathPrefix,
   siteMetadata: {
     siteUrl: config.siteUrl + pathPrefix,

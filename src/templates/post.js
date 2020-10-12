@@ -13,6 +13,14 @@ import {
   PrevNext,
   Content
 } from 'components'
+
+import Input from '@material-ui/core/Input'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import InputAdornment from '@material-ui/core/InputAdornment'
+
+import TextField from '@material-ui/core/TextField'
+
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
@@ -21,6 +29,7 @@ import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Avatar from '@material-ui/core/Avatar'
+import useAuthentication from 'src/hooks/useAuthentication'
 import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
 
@@ -37,17 +46,12 @@ const Post = props => {
   const [progress, setprogress] = useState(0)
   const identifier = useIdentifier()
 
-  const [comments, setcomments] = useState([
-    {
-      id: 38,
-      userId: 7,
-      content: 'rssrsr',
-      identifier: 'aaa',
-      createdAt: '2020-10-10T05:49:34.000Z',
-      updatedAt: '2020-10-10T05:49:34.000Z',
-      user_id: 7
-    }
-  ])
+  const user = useAuthentication()
+
+  const [newComment, setnewComment] = useState('')
+  const [comments, setcomments] = useState([])
+
+  const [refresh, setrefresh] = useState(0)
 
   useEffect(() => {
     axios.get('/comments/' + identifier).then(res => {
@@ -55,7 +59,16 @@ const Post = props => {
 
       setcomments(data)
     })
-  }, [])
+  }, [refresh])
+
+  const submitComment = () => {
+    return axios
+      .post('/comments/' + identifier + '/add', { content: newComment })
+      .then(() => {
+        setnewComment('')
+        setrefresh(val => val + 1)
+      })
+  }
 
   useEffect(() => {
     let handler
@@ -103,23 +116,47 @@ const Post = props => {
           dangerouslySetInnerHTML={{ __html: postNode.html }}
         />
         <PrevNext prev={prev} next={next} />
-        <div>
+        <Card>
           {comments.map(comment => (
-            <Card>
+            <Card elevation={2} style={{ margin: '0.5em' }}>
               <CardContent>{comment.content}</CardContent>
               <CardHeader
                 avatar={
                   <Avatar
                     aria-label="avatar"
-                    src="https://avatars3.githubusercontent.com/u/9219215?v=4"
+                    src={comment.user.avatarUrl}
                   ></Avatar>
                 }
-                title={'serializedowen'}
+                title={comment.user.username}
                 subheader={comment.createdAt}
               ></CardHeader>
             </Card>
           ))}
-        </div>
+        </Card>
+
+        {user && user.userModel && (
+          <Card style={{ padding: '1em' }}>
+            <Grid container spacing={1} alignItems="flex-end">
+              <Grid item>
+                <Avatar
+                  aria-label="avatar"
+                  src={user.userModel.avatarUrl}
+                ></Avatar>
+              </Grid>
+              <Grid item>
+                <TextField
+                  style={{ flexGrow: 1 }}
+                  label="你的评论"
+                  value={newComment}
+                  onChange={e => setnewComment(e.target.value)}
+                />
+              </Grid>
+              <Grid item>
+                <Button onClick={submitComment}>submit</Button>
+              </Grid>
+            </Grid>
+          </Card>
+        )}
       </Content>
     </Wrapper>
   )
