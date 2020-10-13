@@ -12,14 +12,14 @@ import {
   ThemeProvider as MuiThemeProvider
 } from '@material-ui/core/styles'
 
-import SEO from '../components/SEO'
+import SEO from 'src/components/SEO'
 import theme from '../../config/Theme'
-import { media } from '../utils/media'
-import Navigation from '../components/Navigation'
-import SocialIcon from '../components/SocialIcon'
-import Parallax from '../components/Parallax'
-import Transtion from '../components/Transition'
-import Scroller from '../components/Scroller'
+import { media } from 'src/utils/media'
+import Navigation from 'src/components/Navigation'
+import SocialIcon from 'src/components/SocialIcon'
+import Parallax from 'src/components/Parallax'
+import Transtion from 'src/components/Transition'
+import Scroller from 'src/components/Scroller'
 import axios from 'src/utils/http'
 import { AuthenticationContext } from 'src/hooks/useAuthentication'
 
@@ -145,7 +145,6 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                     <SEO />
                     <GlobalStyle />
                     <Navigation />
-
                     {children}
 
                     <Scroller>

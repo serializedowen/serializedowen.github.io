@@ -55,7 +55,22 @@ exports.onPostBuild = async ({ actions }, pluginOptions) => {
 }
 
 exports.onCreatePage = ({ page, actions }) => {
-  // console.log(page)
+  const { createPage } = actions
+
+  // Only update the `/app` page.
+  if (page.path.match(/^\/app/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = '/app/*'
+    // Update the page.
+    createPage(page)
+  }
+
+  if (page.path.match(/^\/zh\/app/)) {
+    page.matchPath = '/zh/app/*'
+    // Update the page.
+    createPage(page)
+  }
 }
 
 exports.createPages = async ({ graphql, actions }) => {

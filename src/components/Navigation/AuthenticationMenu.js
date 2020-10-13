@@ -5,7 +5,7 @@ import { get } from 'lodash'
 
 import useAuthentication from 'src/hooks/useAuthentication'
 import axios from 'src/utils/http'
-import { useLocation } from '@reach/router'
+import { useLocation, navigate } from '@reach/router'
 import { FormattedMessage } from 'react-intl'
 import TelegramIcon from '@material-ui/icons/Telegram'
 
@@ -20,7 +20,9 @@ export default function AuthenticationMenu() {
 
   const signout = useCallback(() => {
     window.localStorage.removeItem('user')
-    axios.get('/auth/signout').then(() => {})
+    axios.get('/auth/signout').then(() => {
+      window.location = href
+    })
   }, [])
 
   const signin = useCallback(() => {
@@ -56,7 +58,7 @@ export default function AuthenticationMenu() {
         )}
       </Button>
       <Menu anchorEl={ref.current} open={menuOpen} onClick={handleMenuClose}>
-        <MenuItem key="account" onClick={() => {}}>
+        <MenuItem key="account" onClick={() => navigate('/app/account')}>
           <FormattedMessage id="account"></FormattedMessage>
         </MenuItem>
 

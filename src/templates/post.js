@@ -13,7 +13,6 @@ import {
   PrevNext,
   Content
 } from 'components'
-
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 
@@ -31,6 +30,7 @@ import useAuthentication from 'src/hooks/useAuthentication'
 import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
 import RelativeTimeStamp from 'src/components/RelativeTimeStamp'
+import ActionDelete from 'src/components/ActionDelete'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
@@ -52,10 +52,17 @@ const Post = props => {
 
   const [refresh, setrefresh] = useState(0)
 
+  const deleteComment = commentId => {
+    return axios
+      .delete(`/comments/${identifier}/delete/${commentId}`)
+      .then(() => {
+        setrefresh(val => val + 1)
+      })
+  }
+
   useEffect(() => {
     axios.get('/comments/' + identifier).then(res => {
       const { data } = res
-
       setcomments(data)
     })
   }, [refresh])
@@ -131,6 +138,11 @@ const Post = props => {
                   <RelativeTimeStamp
                     time={comment.createdAt}
                   ></RelativeTimeStamp>
+                }
+                action={
+                  <ActionDelete
+                    action={() => deleteComment(comment.id)}
+                  ></ActionDelete>
                 }
               ></CardHeader>
             </Card>

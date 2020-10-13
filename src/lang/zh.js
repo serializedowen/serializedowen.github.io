@@ -10,5 +10,8 @@ module.exports = {
   copyrights: '@SerializedOwen 2020. 保留所有权利。',
   login: '登录',
   logout: '登出',
-  account: '账号'
+  account: '账号',
+  delete: '删除',
+  yes: '确认',
+  no: '取消'
 }

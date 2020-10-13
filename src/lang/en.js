@@ -10,5 +10,8 @@ module.exports = {
   copyrights: '@SerializedOwen 2020. All rights reserved.',
   login: 'Login',
   logout: 'Logout',
-  account: 'Account'
+  account: 'Account',
+  delete: 'Delete',
+  yes: 'Yes',
+  no: 'No'
 }
