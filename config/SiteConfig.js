@@ -3,7 +3,7 @@ module.exports = {
 
   siteTitle: '@SerializedOwen', // Navigation and Site Title
   siteTitleAlt: 'SerializedOwen - portfolio', // Alternative Site title for SEO
-  siteUrl: 'https://serializedowen.github.io', // Domain of your site. No trailing slash!
+  siteUrl: 'https://serializedowen.com', // Domain of your site. No trailing slash!
   siteLanguage: 'en', // Language Tag on <html> element
   siteBanner: '/social/banner.jpg', // Your image for og:image tag. You can find it in the /static folder
   favicon: 'src/favicon.png', // Your image for favicons. You can find it in the /src folder
@@ -24,5 +24,5 @@ module.exports = {
   // Settings for typography.js
   headerFontFamily: 'Bitter',
   bodyFontFamily: 'Open Sans',
-  baseFontSize: '18px',
-};
+  baseFontSize: '18px'
+}

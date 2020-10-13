@@ -7,5 +7,8 @@ module.exports = {
   blog: '博客',
   docs: '文档',
   mainPage: '主页',
-  copyrights: '@SerializedOwen 2020. 保留所有权利。'
+  copyrights: '@SerializedOwen 2020. 保留所有权利。',
+  login: '登录',
+  logout: '登出',
+  account: '账号'
 }

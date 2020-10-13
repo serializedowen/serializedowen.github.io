@@ -1,12 +1,69 @@
-import React from 'react';
-// import DropdownMenu from '../DropdownMenu';
-import { Menu, MenuItem } from '../DropdownMenu';
+import React, { useRef, useState, useCallback } from 'react'
+import Button from '@material-ui/core/Button'
+import { Menu, MenuItem, Avatar } from '@material-ui/core'
+import { get } from 'lodash'
+
+import useAuthentication from 'src/hooks/useAuthentication'
+import axios from 'src/utils/http'
+import { useLocation } from '@reach/router'
+import { FormattedMessage } from 'react-intl'
+import TelegramIcon from '@material-ui/icons/Telegram'
 
 export default function AuthenticationMenu() {
+  const ref = useRef(null)
+  const [menuOpen, setmenuOpen] = useState(false)
+
+  const user = useAuthentication()
+  const { href } = useLocation()
+
+  const isLoggedIn = user && user.userModel
+
+  const signout = useCallback(() => {
+    window.localStorage.removeItem('user')
+    axios.get('/auth/signout').then(() => {})
+  }, [])
+
+  const signin = useCallback(() => {
+    window.location =
+      process.env.NODE_ENV === 'production'
+        ? 'http://gateway.serializedowen.com/auth/github/?redirect=' + href
+        : 'http://localhost:7001/auth/github/?redirect=' + href
+    // window.('http://localhost:7001/auth/github/?redirect=' + href)
+  }, [])
+
+  const handleMenuClose = () => {
+    setmenuOpen(val => !val)
+  }
+
   return (
-    <Menu>
-      <MenuItem>Your account</MenuItem>
-      <MenuItem>Logout</MenuItem>
-    </Menu>
-  );
+    <>
+      <Button
+        ref={ref}
+        onClick={() => {
+          if (isLoggedIn) setmenuOpen(true)
+          else signin()
+        }}
+      >
+        {isLoggedIn && (
+          <Avatar src={get(user, 'userModel.avatarUrl', '')}>U</Avatar>
+        )}
+
+        {!isLoggedIn && (
+          <>
+            <TelegramIcon></TelegramIcon>
+            <FormattedMessage id="login"></FormattedMessage>
+          </>
+        )}
+      </Button>
+      <Menu anchorEl={ref.current} open={menuOpen} onClick={handleMenuClose}>
+        <MenuItem key="account" onClick={() => {}}>
+          <FormattedMessage id="account"></FormattedMessage>
+        </MenuItem>
+
+        <MenuItem key="logout" onClick={signout}>
+          <FormattedMessage id="logout"></FormattedMessage>
+        </MenuItem>
+      </Menu>
+    </>
+  )
 }

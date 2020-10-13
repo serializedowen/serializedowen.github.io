@@ -7,5 +7,8 @@ module.exports = {
   blog: 'Blog',
   docs: 'Docs',
   mainPage: 'Home',
-  copyrights: '@SerializedOwen 2020. All rights reserved.'
+  copyrights: '@SerializedOwen 2020. All rights reserved.',
+  login: 'Login',
+  logout: 'Logout',
+  account: 'Account'
 }

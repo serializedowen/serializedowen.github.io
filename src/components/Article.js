@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
-
-import { Subline } from 'components'
 import { FormattedMessage } from 'react-intl'
+
+import Subline from './Subline'
+import RelativeTimeStamp from './RelativeTimeStamp'
 
 const Post = styled.article`
   display: flex;
@@ -45,7 +46,7 @@ const Article = ({ title, date, excerpt, slug, timeToRead, category }) => {
         <Link to={slug}>{title}</Link>
       </Title>
       <Subline>
-        {date} &mdash;{' '}
+        <RelativeTimeStamp time={date}></RelativeTimeStamp>{' '}
         <FormattedMessage
           id="readTime"
           values={{ time: timeToRead }}

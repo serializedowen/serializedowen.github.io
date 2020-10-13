@@ -14,10 +14,8 @@ import {
   Content
 } from 'components'
 
-import Input from '@material-ui/core/Input'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
-import InputAdornment from '@material-ui/core/InputAdornment'
 
 import TextField from '@material-ui/core/TextField'
 
@@ -32,6 +30,7 @@ import Avatar from '@material-ui/core/Avatar'
 import useAuthentication from 'src/hooks/useAuthentication'
 import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
+import RelativeTimeStamp from 'src/components/RelativeTimeStamp'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
@@ -116,9 +115,9 @@ const Post = props => {
           dangerouslySetInnerHTML={{ __html: postNode.html }}
         />
         <PrevNext prev={prev} next={next} />
-        <Card>
-          {comments.map(comment => (
-            <Card elevation={2} style={{ margin: '0.5em' }}>
+        <div>
+          {comments.map((comment, index) => (
+            <Card key={index} elevation={2} style={{ margin: '0.5em' }}>
               <CardContent>{comment.content}</CardContent>
               <CardHeader
                 avatar={
@@ -127,14 +126,18 @@ const Post = props => {
                     src={comment.user.avatarUrl}
                   ></Avatar>
                 }
-                title={comment.user.username}
-                subheader={comment.createdAt}
+                title={comment.user.name}
+                subheader={
+                  <RelativeTimeStamp
+                    time={comment.createdAt}
+                  ></RelativeTimeStamp>
+                }
               ></CardHeader>
             </Card>
           ))}
-        </Card>
+        </div>
 
-        {user && user.userModel && (
+        {user && user.userModel ? (
           <Card style={{ padding: '1em' }}>
             <Grid container spacing={1} alignItems="flex-end">
               <Grid item>
@@ -156,6 +159,8 @@ const Post = props => {
               </Grid>
             </Grid>
           </Card>
+        ) : (
+          <Card>你必须登录才能发表评论</Card>
         )}
       </Content>
     </Wrapper>

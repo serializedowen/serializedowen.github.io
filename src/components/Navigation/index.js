@@ -81,6 +81,7 @@ const Navigation = () => (
       </Nav>
       <Icons>
         <LanguageMenu></LanguageMenu>
+        <AuthenticationMenu></AuthenticationMenu>
         <SocialIcon.GitHub link="https://github.com/serializedowen" />
         <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
         <SocialIcon.Wechat link={withPrefix('/social/QRcode.jpg')} />
