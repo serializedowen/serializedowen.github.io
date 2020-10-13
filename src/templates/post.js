@@ -140,9 +140,11 @@ const Post = props => {
                   ></RelativeTimeStamp>
                 }
                 action={
-                  <ActionDelete
-                    action={() => deleteComment(comment.id)}
-                  ></ActionDelete>
+                  comment.userId === user.id && (
+                    <ActionDelete
+                      action={() => deleteComment(comment.id)}
+                    ></ActionDelete>
+                  )
                 }
               ></CardHeader>
             </Card>
