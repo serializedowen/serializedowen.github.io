@@ -49,8 +49,8 @@
 <url> <loc>https://serializedowen.com/get-tree-ancestor-ids</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/polyfilling-global-this</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/code-transformation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.com/button-ripple-effect-w-simple-css</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/tap-tap-bug</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/button-ripple-effect-w-simple-css</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/frontend-watermarking-images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/ph-logo-generator</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/hot-reload-env-files</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -75,4 +75,6 @@
 <url> <loc>https://serializedowen.com/zh/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/resume/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/success/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/app/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/zh/app/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
