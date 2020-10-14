@@ -21,6 +21,7 @@ import {
   createMuiTheme,
   ThemeProvider as MuiThemeProvider
 } from '@material-ui/core/styles'
+import RelativeTimeStamp from 'src/components/RelativeTimeStamp'
 
 const theme = createMuiTheme({})
 
@@ -258,7 +259,12 @@ const Doc = ({
                 <EditIcon></EditIcon>在Github上编辑
               </Button>
             </a>
-            <span>最后修改时间：{markdownRemark.lastModified}</span>
+            <span>
+              最后修改时间：{' '}
+              <RelativeTimeStamp
+                time={markdownRemark.lastModified}
+              ></RelativeTimeStamp>
+            </span>
           </div>
 
           {/* <PrevNext prev={pageContext.prev} next={pageContext.next} /> */}
