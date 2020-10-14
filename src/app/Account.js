@@ -4,21 +4,22 @@ import {
   CardActions,
   CardContent,
   Button,
-  TextField,
-  Input
+  TextField
 } from '@material-ui/core'
 import useAuthentication from 'src/hooks/useAuthentication'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'src/utils/http'
 import * as Yup from 'yup'
+import AvatarUploader from 'src/components/AvatarUploader'
 
 export default function Account() {
-  const user = useAuthentication()
+  const { user, refresher } = useAuthentication()
   const [showForm, setshowForm] = useState(false)
 
   useEffect(() => {
     if (user && user.userModel) {
       setTimeout(() => {
+        setshowForm(false)
         setshowForm(true)
       }, 200)
     }
@@ -36,10 +37,7 @@ export default function Account() {
             // initialValues={JSON.parse(JSON.stringify(user.userModel))}
             initialValues={user.userModel}
             onSubmit={values => {
-              axios.post(`/auth/${user.userId}/update`, values).then(() => {
-                window.localStorage.removeItem('user')
-                window.location.reload()
-              })
+              axios.post(`/auth/${user.userId}/update`, values).then(refresher)
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string()
@@ -58,19 +56,21 @@ export default function Account() {
                 handleChange,
                 handleBlur,
                 handleSubmit,
+                handleReset,
                 errors,
                 touched
               } = props
 
               return (
                 <Form onSubmit={handleSubmit}>
-                  <img
+                  <AvatarUploader
                     src={values.avatarUrl}
-                    with={200}
                     alt="avatar"
-                    height={200}
-                    style={{ borderRadius: '1em' }}
-                  ></img>
+                    style={{
+                      width: '200px',
+                      height: '200px'
+                    }}
+                  ></AvatarUploader>
                   <TextField
                     label="用户名"
                     name="name"

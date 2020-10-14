@@ -13,7 +13,7 @@ export default function AuthenticationMenu() {
   const ref = useRef(null)
   const [menuOpen, setmenuOpen] = useState(false)
 
-  const user = useAuthentication()
+  const { user } = useAuthentication()
   const { href } = useLocation()
 
   const isLoggedIn = user && user.userModel

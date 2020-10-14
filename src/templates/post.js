@@ -45,7 +45,7 @@ const Post = props => {
   const [progress, setprogress] = useState(0)
   const identifier = useIdentifier()
 
-  const user = useAuthentication()
+  const { user } = useAuthentication()
 
   const [newComment, setnewComment] = useState('')
   const [comments, setcomments] = useState([])
@@ -54,7 +54,7 @@ const Post = props => {
 
   const deleteComment = commentId => {
     return axios
-      .delete(`/comments/${identifier}/delete/${commentId}`)
+      .delete(`/comments/${identifier}/${commentId}/delete`)
       .then(() => {
         setrefresh(val => val + 1)
       })
@@ -141,7 +141,7 @@ const Post = props => {
                   ></RelativeTimeStamp>
                 }
                 action={
-                  comment.userId === user.id && (
+                  comment.userId === user.userId && (
                     <ActionDelete
                       action={() => deleteComment(comment.id)}
                     ></ActionDelete>

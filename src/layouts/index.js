@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions:0 */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql, withPrefix } from 'gatsby'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
@@ -99,6 +99,13 @@ const Footer = styled.footer`
 const Layout = ({ children, location, pageContext, i18nMessages }) => {
   const [authentication, setauthentication] = useState(null)
 
+  const [refresh, setrefresh] = useState(false)
+
+  const refresher = useCallback(() => {
+    window.localStorage.removeItem('user')
+    setrefresh(val => !val)
+  }, [])
+
   useEffect(() => {
     try {
       const user = JSON.parse(window.localStorage.getItem('user'))
@@ -113,7 +120,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
         setauthentication(data)
       })
     }
-  }, [])
+  }, [refresh])
 
   return (
     <StaticQuery
@@ -136,7 +143,9 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
         const langKey = getCurrentLangKey(langs, defaultLangKey, url)
 
         return (
-          <AuthenticationContext.Provider value={authentication}>
+          <AuthenticationContext.Provider
+            value={{ user: authentication, refresher }}
+          >
             <MuiThemeProvider theme={muiTheme}>
               <IntlProvider locale={langKey} messages={i18nMessages}>
                 <ThemeProvider theme={theme}>
