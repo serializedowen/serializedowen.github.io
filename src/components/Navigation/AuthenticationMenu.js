@@ -47,7 +47,10 @@ export default function AuthenticationMenu() {
         }}
       >
         {isLoggedIn && (
-          <Avatar src={get(user, 'userModel.avatarUrl', '')}>U</Avatar>
+          <Avatar
+            src={get(user, 'userModel.avatarUrl', '')}
+            alt={get(user, 'userModel.name', 'U')}
+          ></Avatar>
         )}
 
         {!isLoggedIn && (

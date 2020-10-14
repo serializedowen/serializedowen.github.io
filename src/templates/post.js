@@ -130,6 +130,7 @@ const Post = props => {
                 avatar={
                   <Avatar
                     aria-label="avatar"
+                    alt={comment.user.name}
                     src={comment.user.avatarUrl}
                   ></Avatar>
                 }
