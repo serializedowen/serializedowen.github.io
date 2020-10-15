@@ -45,7 +45,7 @@ const Post = props => {
   const [progress, setprogress] = useState(0)
   const identifier = useIdentifier()
 
-  const { user } = useAuthentication()
+  const { user, isAuthenticated } = useAuthentication()
 
   const [newComment, setnewComment] = useState('')
   const [comments, setcomments] = useState([])
@@ -141,6 +141,7 @@ const Post = props => {
                   ></RelativeTimeStamp>
                 }
                 action={
+                  isAuthenticated &&
                   comment.userId === user.userId && (
                     <ActionDelete
                       action={() => deleteComment(comment.id)}
@@ -152,7 +153,7 @@ const Post = props => {
           ))}
         </div>
 
-        {user && user.userModel ? (
+        {isAuthenticated ? (
           <Card style={{ padding: '1em' }}>
             <Grid container spacing={1} alignItems="flex-end">
               <Grid item>

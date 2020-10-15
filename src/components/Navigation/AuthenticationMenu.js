@@ -13,22 +13,20 @@ export default function AuthenticationMenu() {
   const ref = useRef(null)
   const [menuOpen, setmenuOpen] = useState(false)
 
-  const { user } = useAuthentication()
+  const { user, isAuthenticated, refresher } = useAuthentication()
   const { href } = useLocation()
-
-  const isLoggedIn = user && user.userModel
 
   const signout = useCallback(() => {
     window.localStorage.removeItem('user')
     axios.get('/auth/signout').then(() => {
-      window.location = href
+      refresher()
     })
   }, [])
 
   const signin = useCallback(() => {
     window.location =
       process.env.NODE_ENV === 'production'
-        ? 'http://gateway.serializedowen.com/auth/github/?redirect=' + href
+        ? 'https://gateway.serializedowen.com/auth/github/?redirect=' + href
         : 'http://localhost:7001/auth/github/?redirect=' + href
     // window.('http://localhost:7001/auth/github/?redirect=' + href)
   }, [])
@@ -42,18 +40,18 @@ export default function AuthenticationMenu() {
       <Button
         ref={ref}
         onClick={() => {
-          if (isLoggedIn) setmenuOpen(true)
+          if (isAuthenticated) setmenuOpen(true)
           else signin()
         }}
       >
-        {isLoggedIn && (
+        {isAuthenticated && (
           <Avatar
             src={get(user, 'userModel.avatarUrl', '')}
             alt={get(user, 'userModel.name', 'U')}
           ></Avatar>
         )}
 
-        {!isLoggedIn && (
+        {!isAuthenticated && (
           <>
             <TelegramIcon></TelegramIcon>
             <FormattedMessage id="login"></FormattedMessage>

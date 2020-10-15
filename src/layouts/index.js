@@ -114,13 +114,18 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
 
       setauthentication(user)
     } catch (e) {
-      axios.get('/auth/decodeToken').then(res => {
-        const { data } = res
-        window.localStorage.setItem('user', JSON.stringify(data))
-        setauthentication(data)
-      })
+      axios
+        .get('/auth/decodeToken')
+        .then(res => {
+          const { data } = res
+          window.localStorage.setItem('user', JSON.stringify(data))
+          setauthentication(data)
+        })
+        .catch(() => setauthentication({}))
     }
   }, [refresh])
+
+  const isAuthenticated = authentication && authentication.userModel
 
   return (
     <StaticQuery
@@ -144,7 +149,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
 
         return (
           <AuthenticationContext.Provider
-            value={{ user: authentication, refresher }}
+            value={{ user: authentication, refresher, isAuthenticated }}
           >
             <MuiThemeProvider theme={muiTheme}>
               <IntlProvider locale={langKey} messages={i18nMessages}>

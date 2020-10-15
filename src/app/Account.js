@@ -13,11 +13,11 @@ import * as Yup from 'yup'
 import AvatarUploader from 'src/components/AvatarUploader'
 
 export default function Account() {
-  const { user, refresher } = useAuthentication()
+  const { user, refresher, isAuthenticated } = useAuthentication()
   const [showForm, setshowForm] = useState(false)
 
   useEffect(() => {
-    if (user && user.userModel) {
+    if (isAuthenticated) {
       setTimeout(() => {
         setshowForm(false)
         setshowForm(true)
