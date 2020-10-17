@@ -7,7 +7,13 @@ import SocialIcon from '../SocialIcon'
 import AuthenticationMenu from './AuthenticationMenu'
 import LanguageMenu from './LanguageMenu'
 import GitHubLink from '../GitHubLink'
+import ToolsMenu from './ToolsMenu'
+import ContactSupportIcon from '@material-ui/icons/ContactSupport'
+import DescriptionIcon from '@material-ui/icons/Description'
+import MessageIcon from '@material-ui/icons/Message'
+import HomeIcon from '@material-ui/icons/Home'
 
+import { Button } from '@material-ui/core'
 const Nav = styled.nav.attrs({
   role: 'navigation'
 })`
@@ -22,9 +28,6 @@ const Nav = styled.nav.attrs({
     color: ${props => props.theme.colors.secondary};
     padding: 0.2rem;
     border-radius: 5px;
-    &:hover {
-      background: rgba(255, 255, 255, 0.4);
-    }
   }
 `
 
@@ -66,18 +69,32 @@ const Navigation = () => (
     <div>
       <Nav>
         <Link to="/">
-          <FormattedMessage id="mainPage"></FormattedMessage>
+          <Button>
+            <HomeIcon></HomeIcon>
+            <FormattedMessage id="mainPage"></FormattedMessage>
+          </Button>
         </Link>
         {/* <Link to="/">Resume</Link> */}
         <Link to="/categories">
-          <FormattedMessage id="blog"></FormattedMessage>
+          <Button>
+            <MessageIcon></MessageIcon>
+            <FormattedMessage id="blog"></FormattedMessage>
+          </Button>
         </Link>
         <Link to="/docs">
-          <FormattedMessage id="docs"></FormattedMessage>
+          <Button>
+            <DescriptionIcon></DescriptionIcon>
+            <FormattedMessage id="docs"></FormattedMessage>
+          </Button>
         </Link>
         <Link to="/contact">
-          <FormattedMessage id="contact"></FormattedMessage>
+          <Button>
+            <ContactSupportIcon></ContactSupportIcon>
+            <FormattedMessage id="contact"></FormattedMessage>
+          </Button>
         </Link>
+
+        <ToolsMenu></ToolsMenu>
       </Nav>
       <Icons>
         <LanguageMenu></LanguageMenu>

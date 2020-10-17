@@ -31,6 +31,7 @@ import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
 import RelativeTimeStamp from 'src/components/RelativeTimeStamp'
 import ActionDelete from 'src/components/ActionDelete'
+import ActionThumbUp from 'src/components/ActionThumbUp'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
@@ -125,7 +126,13 @@ const Post = props => {
         <div>
           {comments.map((comment, index) => (
             <Card key={index} elevation={2} style={{ margin: '0.5em' }}>
-              <CardContent>{comment.content}</CardContent>
+              <CardContent>
+                {comment.content}
+
+                <div>
+                  <ActionThumbUp action={() => {axios.post(`/comments/${identifier}/${comment.id}/like`)}}></ActionThumbUp>
+                </div>
+              </CardContent>
               <CardHeader
                 avatar={
                   <Avatar

@@ -13,5 +13,7 @@ module.exports = {
   account: 'Account',
   delete: 'Delete',
   yes: 'Yes',
-  no: 'No'
+  no: 'No',
+  tools: 'Tools',
+  'nginx-regex-tester': 'Nginx Regex Tester'
 }

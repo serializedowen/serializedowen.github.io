@@ -110,7 +110,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
     try {
       const user = JSON.parse(window.localStorage.getItem('user'))
 
-      if (!user) throw new Error()
+      if (!user || !user.userModel) throw new Error()
 
       setauthentication(user)
     } catch (e) {

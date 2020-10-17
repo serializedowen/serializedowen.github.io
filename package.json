@@ -66,6 +66,7 @@
   "scripts": {
     "build": "gatsby build",
     "start": "gatsby develop -o",
+    "dev": "gatsby develop -o",
     "serve": "gatsby build && gatsby serve",
     "lint": "yarn run lint:md && yarn run lint:js:fix",
     "lint:js": "eslint . --ext .js,.jsx --ignore-path .gitignore",
