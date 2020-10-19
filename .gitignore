@@ -62,3 +62,6 @@ public/
 bundle-stats.json
 
 package-lock.json
+
+
+plugins/gatsby-plugin-pace/
