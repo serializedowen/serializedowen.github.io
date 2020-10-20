@@ -24,11 +24,7 @@ export default function AuthenticationMenu() {
   }, [])
 
   const signin = useCallback(() => {
-    window.location =
-      process.env.NODE_ENV === 'production'
-        ? 'https://gateway.serializedowen.com/auth/github/?redirect=' + href
-        : 'http://localhost:7001/auth/github/?redirect=' + href
-    // window.('http://localhost:7001/auth/github/?redirect=' + href)
+    navigate('/app/login', { state: { href } })
   }, [])
 
   const handleMenuClose = () => {
