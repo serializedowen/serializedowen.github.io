@@ -65,6 +65,13 @@ services:
 
 > depends_on 仅仅保证容器的执行顺序，而不保证你的应用已经在可用的状态（不管可用的状态对于你的应用意味着什么）。docker 这样设计是经过了周密考虑的：为了保证应用的健壮性，你应该自行定义在容器之间服务连接错误时候的重试/重启机制。
 
+1. 接下来，你仅需要在项目目录下运行`docker-compose up` 即可看到 docker 开始构建镜像并启动服务
+2. 如果需要以后台守护进程模式启动 使用`docker-compose up -d`
+3. 用`docker-compose down`来停止运行中的容器
+4. `docker-compose build`重新构建容器
+
+运行成功后，访问http://localhost 可以看到 express 服务器的 hello world 示例，http://localhost/mysql 可以检查 mysql 连接状态
+
 docker 官网提供的其他示例：
 
 - [Wordpress](https://docs.docker.com/compose/wordpress/)
