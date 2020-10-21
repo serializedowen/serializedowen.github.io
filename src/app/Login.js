@@ -20,6 +20,7 @@ import { get } from 'lodash'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import getLoginUrl from 'src/utils/getLoginUrl'
+import Facebook from 'src/components/SocialIcon/Facebook'
 
 export default function Login() {
   const { state } = useLocation()
@@ -30,6 +31,9 @@ export default function Login() {
     window.location = getLoginUrl('github', { redirect: get(state, 'href') })
   }, [])
 
+  const signinFacebook = useCallback(() => {
+    window.location = getLoginUrl('facebook', { redirect: get(state, 'href') })
+  }, [])
   return (
     <Card style={{ margin: '2em auto', maxWidth: '400px' }}>
       <CardContent>
@@ -127,6 +131,9 @@ export default function Login() {
           </IconButton>
           <IconButton>
             <Wechat></Wechat>
+          </IconButton>
+          <IconButton onClick={signinFacebook}>
+            <Facebook></Facebook>
           </IconButton>
         </div>
       </CardContent>
