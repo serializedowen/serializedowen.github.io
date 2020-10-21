@@ -21,6 +21,8 @@ import Parallax from 'src/components/Parallax'
 import Scroller from 'src/components/Scroller'
 import axios from 'src/utils/http'
 import { AuthenticationContext } from 'src/hooks/useAuthentication'
+import { Dialog, DialogTitle, Typography } from '@material-ui/core'
+const Login = React.lazy(() => import('src/app/Login'))
 
 const muiTheme = createMuiTheme({
   palette: {
@@ -105,6 +107,16 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
     setrefresh(val => !val)
   }, [])
 
+  const [showLogin, setshowLogin] = useState(false)
+
+  useEffect(() => {
+    window.__401auth = () => {
+      window.localStorage.removeItem('user')
+      setshowLogin(true)
+    }
+    return () => {}
+  }, [])
+
   useEffect(() => {
     try {
       const user = JSON.parse(window.localStorage.getItem('user'))
@@ -160,6 +172,17 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                     <Navigation />
                     {children}
 
+                    <Dialog
+                      open={showLogin}
+                      onClose={() => setshowLogin(false)}
+                    >
+                      <DialogTitle>
+                        <Typography>登录</Typography>
+                      </DialogTitle>
+                      <React.Suspense fallback={'加载中'}>
+                        <Login></Login>
+                      </React.Suspense>
+                    </Dialog>
                     <Scroller>
                       <VerticalAlignTopIcon
                         style={{ marginRight: '0px', transform: 'scale(1.5)' }}

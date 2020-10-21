@@ -23,25 +23,31 @@ import getLoginUrl from 'src/utils/getLoginUrl'
 import Facebook from 'src/components/SocialIcon/Facebook'
 
 export default function Login() {
-  const { state } = useLocation()
+  const { state, href } = useLocation()
   const [showPassword, setshowPassword] = useState(false)
 
   const togglePassword = () => setshowPassword(val => !val)
   const signinGithub = useCallback(() => {
-    window.location = getLoginUrl('github', { redirect: get(state, 'href') })
+    window.location = getLoginUrl('github', {
+      redirect: get(state, 'href') || href
+    })
   }, [])
 
   const signinFacebook = useCallback(() => {
-    window.location = getLoginUrl('facebook', { redirect: get(state, 'href') })
+    window.location = getLoginUrl('facebook', {
+      redirect: get(state, 'href') || href
+    })
   }, [])
+
   return (
     <Card style={{ margin: '2em auto', maxWidth: '400px' }}>
       <CardContent>
         <Formik
           initialValues={{ username: '', password: '' }}
           onSubmit={values => {
+            console.log(href, state)
             window.location = getLoginUrl('local', {
-              redirect: get(state, 'href'),
+              redirect: get(state, 'href') || href,
               ...values
             })
           }}
