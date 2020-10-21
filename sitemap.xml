@@ -32,8 +32,8 @@
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/nav-link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/prompt</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.com/docs/react-router-dom/API/redirect</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/memory-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/docs/react-router-dom/API/redirect</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/route</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/static-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -43,6 +43,7 @@
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/match</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/match-path</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/with-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/docker-compose入门</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/location-配置详解</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/breezing-effect</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/count-number-of-1-s</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -52,14 +53,15 @@
 <url> <loc>https://serializedowen.com/code-transformation</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/button-ripple-effect-w-simple-css</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/tap-tap-bug</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.com/ph-logo-generator</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/frontend-watermarking-images</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/ph-logo-generator</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/hot-reload-env-files</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/love-dispatcher-w-secrets</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/css-sticky-balls</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/ice-skiing</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/test</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/markdown-cheatsheet</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/categories/docker</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/nginx</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/css-tricks</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/algorithms</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
