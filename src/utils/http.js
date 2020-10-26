@@ -9,7 +9,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
   response => response,
   error => {
-    if (get(error, 'reponse.data.code') === 401) {
+    if (get(error, 'response.data.code') === 401) {
       window.__401auth()
     }
     return error
