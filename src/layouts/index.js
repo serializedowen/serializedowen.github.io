@@ -99,6 +99,12 @@ const Footer = styled.footer`
 
 const Layout = ({ children, location, pageContext, i18nMessages }) => {
   const [authentication, setauthentication] = useState(null)
+  const [authenticationLoading, setauthenticationLoading] = useState(true)
+
+  const setAuthenticationData = data => {
+    setauthentication(data)
+    setauthenticationLoading(false)
+  }
 
   const [refresh, setrefresh] = useState(false)
 
@@ -119,20 +125,21 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
 
   useEffect(() => {
     try {
+      setauthenticationLoading(true)
       const user = JSON.parse(window.localStorage.getItem('user'))
 
       if (!user || !user.userModel) throw new Error()
 
-      setauthentication(user)
+      setAuthenticationData(user)
     } catch (e) {
       axios
         .get('/auth/decodeToken')
         .then(res => {
           const { data } = res
           window.localStorage.setItem('user', JSON.stringify(data))
-          setauthentication(data)
+          setAuthenticationData(data)
         })
-        .catch(() => setauthentication({}))
+        .catch(() => setAuthenticationData({}))
     }
   }, [refresh])
 
@@ -160,7 +167,12 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
 
         return (
           <AuthenticationContext.Provider
-            value={{ user: authentication, refresher, isAuthenticated }}
+            value={{
+              user: authentication,
+              refresher,
+              isAuthenticated,
+              authenticationLoading
+            }}
           >
             <MuiThemeProvider theme={muiTheme}>
               <IntlProvider locale={langKey} messages={i18nMessages}>
