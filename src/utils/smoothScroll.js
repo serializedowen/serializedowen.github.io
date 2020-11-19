@@ -1,6 +1,6 @@
 let useJS
 const step = 50
-
+let currentFrameId
 let scrollTarget = false
 export const setTarget = target => (scrollTarget = target)
 export default function smoothScroll(top) {
@@ -18,12 +18,16 @@ export default function smoothScroll(top) {
 
       if (current > top) {
         scrollTarget.scrollTo({ top: current - step })
-        requestAnimationFrame(scrollFunction)
+        currentFrameId = requestAnimationFrame(scrollFunction)
       } else {
         scrollTarget.scrollTo({ top: current + step })
-        requestAnimationFrame(scrollFunction)
+        currentFrameId = requestAnimationFrame(scrollFunction)
       }
     }
-    requestAnimationFrame(scrollFunction)
+    currentFrameId = requestAnimationFrame(scrollFunction)
+
+    window.addEventListener('scroll', () =>
+      cancelAnimationFrame(currentFrameId)
+    )
   } else scrollTarget.scrollTo({ top, behavior: 'smooth' })
 }

@@ -136,7 +136,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
     }
   }, [refresh])
 
-  const isAuthenticated = authentication && authentication.userModel
+  const isAuthenticated = Boolean(authentication && authentication.userModel)
 
   return (
     <StaticQuery
