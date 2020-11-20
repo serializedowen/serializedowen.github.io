@@ -15,26 +15,33 @@ import { FormattedMessage } from 'react-intl'
 
 export default function AvatarUploader(props) {
   const [open, setopen] = useState(false)
-
+  const [avatarFile, setavatarFile] = useState(null)
   const { refresher } = useAuthentication()
 
+  const upload = useCallback(() => {
+    const formdata = new FormData()
+    formdata.append('file', avatarFile)
+
+    axios
+      .post('/image/upload', formdata)
+      .then(refresher)
+      .then(() => setavatarFile(null))
+  }, [avatarFile])
+
   const onDrop = useCallback(acceptedFiles => {
+    console.log(acceptedFiles)
     acceptedFiles.forEach(file => {
-      const reader = new FileReader()
-      console.log(file)
-
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
-        // Do whatever you want with the file contents
-
-        const formdata = new FormData()
-        formdata.append('file', file)
-
-        axios.post('/image/upload', formdata).then(refresher)
-      }
-
-      reader.readAsDataURL(file)
+      setavatarFile(file)
+      // const reader = new FileReader()
+      // reader.onabort = () => console.log('file reading was aborted')
+      // reader.onerror = () => console.log('file reading has failed')
+      // reader.onload = () => {
+      //   // Do whatever you want with the file contents
+      //   const formdata = new FormData()
+      //   formdata.append('file', file)
+      //   axios.post('/image/upload', formdata).then(refresher)
+      // }
+      // reader.readAsDataURL(file)
     })
   }, [])
   const {
@@ -45,7 +52,7 @@ export default function AvatarUploader(props) {
   } = useDropzone({
     onDrop,
     accept: 'image/jpeg, image/png',
-    maxSize: 300 * 1024
+    maxSize: 500 * 1024
   })
 
   return (
@@ -59,17 +66,18 @@ export default function AvatarUploader(props) {
         <DialogContent dividers>
           <Avatar {...props} {...getRootProps()}></Avatar>
 
-          {fileRejections.length && (
-            <FormattedMessage
-              id={fileRejections[0].errors[0].message}
-            ></FormattedMessage>
-          )}
           <input {...getInputProps()}></input>
         </DialogContent>
         <DialogActions>
+          {fileRejections.length > 0 &&
+            fileRejections[0].errors.map(error => (
+              <FormattedMessage id={error.code}></FormattedMessage>
+            ))}
           <Button onClick={() => setopen(false)}>取消</Button>
           <Button
+            disabled={Boolean(fileRejections.length)}
             onClick={() => {
+              upload()
               setopen(false)
             }}
           >

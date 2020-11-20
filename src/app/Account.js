@@ -4,17 +4,32 @@ import {
   CardActions,
   CardContent,
   Button,
-  TextField
+  TextField,
+  Typography,
+  CircularProgress,
+  styled
 } from '@material-ui/core'
 import useAuthentication from 'src/hooks/useAuthentication'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import axios from 'src/utils/http'
+
 import * as Yup from 'yup'
 import AvatarUploader from 'src/components/AvatarUploader'
+import { PolymorphicIcon } from 'src/components/SocialIcon'
 import Authenticated from 'src/hoc/Authenticated'
+import { useRequest } from 'ahooks'
+import http from 'src/utils/http'
+
+const ColumnFlex = styled('div')`
+  display: flex;
+  flex-direction: column;
+`
 
 function Account() {
   const { user, refresher } = useAuthentication()
+
+  const { data, error, loading } = useRequest(() =>
+    http.get('/auth/linked-providers')
+  )
 
   return (
     <Card style={{ margin: '2em auto', maxWidth: '500px' }}>
@@ -22,7 +37,7 @@ function Account() {
         <Formik
           initialValues={user.userModel || {}}
           onSubmit={values => {
-            axios.post(`/auth/${user.userId}/update`, values).then(refresher)
+            http.post(`/auth/${user.userId}/update`, values).then(refresher)
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string()
@@ -48,14 +63,28 @@ function Account() {
 
             return (
               <Form onSubmit={handleSubmit}>
-                <AvatarUploader
-                  src={values.avatarUrl}
-                  alt="avatar"
-                  style={{
-                    width: '200px',
-                    height: '200px'
-                  }}
-                ></AvatarUploader>
+                <ColumnFlex>
+                  <AvatarUploader
+                    src={values.avatarUrl}
+                    alt="avatar"
+                    style={{
+                      width: '200px',
+                      height: '200px'
+                    }}
+                  ></AvatarUploader>
+
+                  <Typography>已关联账号：</Typography>
+                  {loading ? (
+                    <CircularProgress></CircularProgress>
+                  ) : (
+                    data.data.map(item => (
+                      <PolymorphicIcon
+                        type={item.provider}
+                        key={item.providerId}
+                      ></PolymorphicIcon>
+                    ))
+                  )}
+                </ColumnFlex>
                 <TextField
                   label="用户名"
                   name="name"
@@ -64,7 +93,7 @@ function Account() {
                   value={values.name}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={errors.name}
+                  error={Boolean(errors.name)}
                   helperText={errors.name && touched.name && errors.name}
                   margin="normal"
                 />
@@ -76,7 +105,7 @@ function Account() {
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={errors.email}
+                  error={Boolean(errors.email)}
                   helperText={errors.email && touched.email && errors.email}
                   margin="normal"
                 />
@@ -88,7 +117,7 @@ function Account() {
                   value={values.age}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={errors.age}
+                  error={Boolean(errors.age)}
                   helperText={errors.age && touched.age && errors.age}
                   margin="normal"
                 />
@@ -99,7 +128,7 @@ function Account() {
                   value={values.phone}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  error={errors.phone}
+                  error={Boolean(errors.phone)}
                   helperText={errors.phone && touched.phone && errors.phone}
                   margin="normal"
                 />
