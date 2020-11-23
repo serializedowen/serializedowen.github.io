@@ -22,6 +22,7 @@ import Scroller from 'src/components/Scroller'
 import axios from 'src/utils/http'
 import { AuthenticationContext } from 'src/hooks/useAuthentication'
 import { Dialog, DialogTitle, Typography } from '@material-ui/core'
+
 const Login = React.lazy(() => import('src/app/Login'))
 
 const muiTheme = createMuiTheme({

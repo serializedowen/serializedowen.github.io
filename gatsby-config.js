@@ -83,7 +83,11 @@ module.exports = {
     `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-plugin-pace',
-      options: { theme: 'minimal', color: 'white', cdn: 'https://cdn.bootcdn.net/ajax/libs/pace/1.0.2/pace.min.js' }
+      options: {
+        theme: 'minimal',
+        color: 'white',
+        cdn: 'https://cdn.bootcdn.net/ajax/libs/pace/1.0.2/pace.min.js'
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,

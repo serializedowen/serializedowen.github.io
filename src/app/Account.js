@@ -30,7 +30,7 @@ function Account() {
   const { data, error, loading } = useRequest(() =>
     http.get('/auth/linked-providers')
   )
-
+  console.log('renderAccount')
   return (
     <Card style={{ margin: '2em auto', maxWidth: '500px' }}>
       <CardContent>

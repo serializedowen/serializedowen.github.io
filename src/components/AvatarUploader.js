@@ -1,4 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  lazy,
+  Suspense,
+  useRef
+} from 'react'
 import {
   Avatar,
   Dialog,
@@ -6,68 +13,126 @@ import {
   Typography,
   DialogContent,
   DialogActions,
-  Button
+  Button,
+  CircularProgress
 } from '@material-ui/core'
 import { useDropzone } from 'react-dropzone'
 import axios from 'src/utils/http'
 import useAuthentication from 'src/hooks/useAuthentication'
 import { FormattedMessage } from 'react-intl'
+import useFileReader from 'src/hooks/useFileReader'
+import useThrottleDebounce from 'src/hooks/useThrottleDebounce'
+import {} from 'rxjs'
+import { useEventCallback } from 'rxjs-hooks'
+
+import 'cropperjs/dist/cropper.css'
+
+const Cropper = lazy(() => import('react-cropper'))
 
 export default function AvatarUploader(props) {
   const [open, setopen] = useState(false)
   const [avatarFile, setavatarFile] = useState(null)
   const { refresher } = useAuthentication()
+  const { error, result, reading } = useFileReader(avatarFile)
+
+  const [previewStyles, setpreviewStyles] = useState({})
+  const [cropData, setcropData] = useState({})
+  const cropperRef = useRef(null)
 
   const upload = useCallback(() => {
-    const formdata = new FormData()
-    formdata.append('file', avatarFile)
+    const formData = new FormData()
 
-    axios
-      .post('/image/upload', formdata)
+    formData.append('file', avatarFile)
+
+    return axios
+      .post('/image/upload', formData, { params: cropData })
       .then(refresher)
       .then(() => setavatarFile(null))
-  }, [avatarFile])
+  }, [avatarFile, cropData])
 
   const onDrop = useCallback(acceptedFiles => {
     console.log(acceptedFiles)
     acceptedFiles.forEach(file => {
       setavatarFile(file)
-      // const reader = new FileReader()
-      // reader.onabort = () => console.log('file reading was aborted')
-      // reader.onerror = () => console.log('file reading has failed')
-      // reader.onload = () => {
-      //   // Do whatever you want with the file contents
-      //   const formdata = new FormData()
-      //   formdata.append('file', file)
-      //   axios.post('/image/upload', formdata).then(refresher)
-      // }
-      // reader.readAsDataURL(file)
     })
   }, [])
-  const {
-    getRootProps,
-    getInputProps,
-    acceptedFiles,
-    fileRejections
-  } = useDropzone({
+
+  const previewHandler = useCallback(() => {
+    const data = cropperRef.current.cropper.getData()
+    const scale = 200 / data.width
+
+    setcropData(data)
+    setpreviewStyles({
+      transform: `translate(-${data.x * scale}px, -${data.y *
+        scale}px) scale(${scale})`,
+      transformOrigin: 'top left'
+    })
+  }, [])
+  const { getRootProps, getInputProps, fileRejections } = useDropzone({
     onDrop,
     accept: 'image/jpeg, image/png',
     maxSize: 500 * 1024
   })
 
+  const { src, style, ...rest } = props
+
   return (
     <>
       <Avatar {...props} onClick={() => setopen(true)}></Avatar>
 
-      <Dialog open={open} onClose={() => setopen(false)}>
+      <Dialog
+        open={open}
+        onClose={() => {
+          setavatarFile(null)
+          setopen(false)
+        }}
+      >
         <DialogTitle onClose={() => setopen(false)}>
           <Typography style={{ color: 'white' }}>设置新头像</Typography>
         </DialogTitle>
         <DialogContent dividers>
-          <Avatar {...props} {...getRootProps()}></Avatar>
+          {/* show custom image if in edit  */}
+          {result ? (
+            <div style={{ ...style, borderRadius: '50%', overflow: 'hidden' }}>
+              <img
+                src={result || src}
+                alt="avatar"
+                {...rest}
+                {...getRootProps()}
+                style={{ ...previewStyles, maxWidth: 'none' }}
+              ></img>
+            </div>
+          ) : (
+            <Avatar
+              src={src}
+              {...rest}
+              {...getRootProps()}
+              style={style}
+            ></Avatar>
+          )}
 
           <input {...getInputProps()}></input>
         </DialogContent>
+
+        {avatarFile && (
+          <Suspense fallback={<CircularProgress></CircularProgress>}>
+            <Cropper
+              style={{ height: 400, width: 500 }}
+              aspectRatio={1}
+              src={result}
+              crop={previewHandler}
+              viewMode={1}
+              guides
+              minCropBoxHeight={10}
+              minCropBoxWidth={10}
+              background={false}
+              responsive
+              autoCropArea={1}
+              checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+              ref={cropperRef}
+            ></Cropper>
+          </Suspense>
+        )}
         <DialogActions>
           {fileRejections.length > 0 &&
             fileRejections[0].errors.map(error => (
