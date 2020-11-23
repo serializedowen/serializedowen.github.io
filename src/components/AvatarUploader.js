@@ -21,9 +21,6 @@ import axios from 'src/utils/http'
 import useAuthentication from 'src/hooks/useAuthentication'
 import { FormattedMessage } from 'react-intl'
 import useFileReader from 'src/hooks/useFileReader'
-import useThrottleDebounce from 'src/hooks/useThrottleDebounce'
-import {} from 'rxjs'
-import { useEventCallback } from 'rxjs-hooks'
 
 import 'cropperjs/dist/cropper.css'
 
