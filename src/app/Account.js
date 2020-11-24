@@ -16,8 +16,9 @@ import * as Yup from 'yup'
 import AvatarUploader from 'src/components/AvatarUploader'
 import { PolymorphicIcon } from 'src/components/SocialIcon'
 import Authenticated from 'src/hoc/Authenticated'
-import { useRequest } from 'ahooks'
+import { useQuery } from 'react-query'
 import http from 'src/utils/http'
+import Axios from 'axios'
 
 const ColumnFlex = styled('div')`
   display: flex;
@@ -27,10 +28,11 @@ const ColumnFlex = styled('div')`
 function Account() {
   const { user, refresher } = useAuthentication()
 
-  const { data, error, loading } = useRequest(() =>
+  const requestData = useQuery('providerData', () =>
     http.get('/auth/linked-providers')
   )
-  console.log('renderAccount')
+  const { data, error, isLoading } = requestData
+
   return (
     <Card style={{ margin: '2em auto', maxWidth: '500px' }}>
       <CardContent>
@@ -74,9 +76,10 @@ function Account() {
                   ></AvatarUploader>
 
                   <Typography>已关联账号：</Typography>
-                  {loading ? (
+                  {isLoading ? (
                     <CircularProgress></CircularProgress>
                   ) : (
+                    !error &&
                     data.data.map(item => (
                       <PolymorphicIcon
                         type={item.provider}

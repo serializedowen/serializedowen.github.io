@@ -13,7 +13,8 @@ http.interceptors.response.use(
     if (get(error, 'response.status') === 401) {
       window.__401auth()
     }
-    return error
+    // return error
+    return Promise.reject(error)
   }
 )
 
