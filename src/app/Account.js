@@ -18,7 +18,6 @@ import { PolymorphicIcon } from 'src/components/SocialIcon'
 import Authenticated from 'src/hoc/Authenticated'
 import { useQuery } from 'react-query'
 import http from 'src/utils/http'
-import Axios from 'axios'
 
 const ColumnFlex = styled('div')`
   display: flex;

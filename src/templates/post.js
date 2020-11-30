@@ -13,19 +13,21 @@ import {
   PrevNext,
   Content
 } from 'components'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
 
-import TextField from '@material-ui/core/TextField'
-
+import {
+  Typography,
+  Button,
+  TextField,
+  Card,
+  CardHeader,
+  Grid,
+  CardContent,
+  Avatar
+} from '@material-ui/core'
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
 import withENLayout from 'src/layouts/withENLayout'
-import Card from '@material-ui/core/Card'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardContent from '@material-ui/core/CardContent'
-import Avatar from '@material-ui/core/Avatar'
 import useAuthentication from 'src/hooks/useAuthentication'
 import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
@@ -130,7 +132,11 @@ const Post = props => {
                 {comment.content}
 
                 <div>
-                  <ActionThumbUp action={() => {axios.post(`/comments/${identifier}/${comment.id}/like`)}}></ActionThumbUp>
+                  <ActionThumbUp
+                    action={() => {
+                      axios.post(`/comments/${identifier}/${comment.id}/like`)
+                    }}
+                  ></ActionThumbUp>
                 </div>
               </CardContent>
               <CardHeader
@@ -141,7 +147,13 @@ const Post = props => {
                     src={comment.user.avatarUrl}
                   ></Avatar>
                 }
-                title={comment.user.name}
+                title={
+                  <Typography variant="caption">
+                    <Link to={`/app/account/${comment.userId}`}>
+                      {comment.user.name}
+                    </Link>
+                  </Typography>
+                }
                 subheader={
                   <RelativeTimeStamp
                     time={comment.createdAt}
