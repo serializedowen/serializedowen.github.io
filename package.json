@@ -43,6 +43,7 @@
     "lodash": "^4.17.11",
     "material-ui-dropzone": "^3.5.0",
     "medium-editor": "^5.23.3",
+    "notistack": "^1.0.2",
     "polished": "^2.3.0",
     "prismjs": "^1.15.0",
     "prop-types": "^15.6.2",

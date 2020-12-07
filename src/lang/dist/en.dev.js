@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   selectLanguage: 'Select your language',
   greeting: 'Howdy',
@@ -11,10 +13,10 @@ module.exports = {
   login: 'Login',
   logout: 'Logout',
   account: 'Account',
-  delete: 'Delete',
+  "delete": 'Delete',
   yes: 'Yes',
   no: 'No',
   tools: 'Tools',
   checkInBanner: 'You have checked in for {days} days in a row!',
   'nginx-regex-tester': 'Nginx Regex Tester'
-}
+};

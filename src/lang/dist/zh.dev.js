@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   selectLanguage: '请选择语言',
   greeting: '你好',
@@ -11,10 +13,10 @@ module.exports = {
   login: '登录',
   logout: '登出',
   account: '账号',
-  delete: '删除',
+  "delete": '删除',
   yes: '确认',
   no: '取消',
   tools: '工具箱',
   checkInBanner: '你已经连续登陆{days}天!',
   'nginx-regex-tester': 'Nginx正则测试器'
-}
+};
