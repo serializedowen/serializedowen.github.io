@@ -2,7 +2,7 @@ const colors = {
   primary: '#242424', // Color for buttons or links
   secondary: '#ffffff',
   bg: 'white', // Background color
-  anchor: 'midnightblue',
+  anchor: '#409EFF',
   grey: {
     dark: 'rgba(0, 0, 0, 0.9)',
     default: 'rgba(0, 0, 0, 0.7)',

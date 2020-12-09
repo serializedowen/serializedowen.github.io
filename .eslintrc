@@ -45,6 +45,7 @@
     "import/no-unresolved": 0,
     "import": 0,
     "func-names": 0,
+    "no-unused-expressions": "off",
     "space-before-function-paren": 0,
     "import/extensions": 0,
     "no-underscore-dangle": 0,

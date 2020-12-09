@@ -14,16 +14,7 @@ import {
   Content
 } from 'components'
 
-import {
-  Typography,
-  Button,
-  TextField,
-  Card,
-  CardHeader,
-  Grid,
-  CardContent,
-  Avatar
-} from '@material-ui/core'
+import { Button, TextField, Card, Grid, Avatar } from '@material-ui/core'
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
@@ -31,9 +22,9 @@ import withENLayout from 'src/layouts/withENLayout'
 import useAuthentication from 'src/hooks/useAuthentication'
 import useIdentifier from 'src/hooks/useIdentifier'
 import axios from 'src/utils/http'
-import RelativeTimeStamp from 'src/components/RelativeTimeStamp'
-import ActionDelete from 'src/components/ActionDelete'
-import ActionThumbUp from 'src/components/ActionThumbUp'
+
+import { useQuery } from 'react-query'
+import Comment from 'src/components/Comment'
 
 const Title = styled.h1`
   margin-bottom: 1rem;
@@ -51,31 +42,22 @@ const Post = props => {
   const { user, isAuthenticated } = useAuthentication()
 
   const [newComment, setnewComment] = useState('')
-  const [comments, setcomments] = useState([])
 
-  const [refresh, setrefresh] = useState(0)
-
-  const deleteComment = commentId => {
-    return axios
-      .delete(`/comments/${identifier}/${commentId}/delete`)
-      .then(() => {
-        setrefresh(val => val + 1)
-      })
-  }
-
-  useEffect(() => {
-    axios.get('/comments/' + identifier).then(res => {
-      const { data } = res
-      setcomments(data)
-    })
-  }, [refresh])
+  const commentsQuery = useQuery(
+    `comments${identifier}`,
+    () =>
+      axios.get('/comments/' + identifier).then(res => {
+        return res.data
+      }),
+    { initialData: [], forceFetchOnMount: true }
+  )
 
   const submitComment = () => {
     return axios
       .post('/comments/' + identifier + '/add', { content: newComment })
       .then(() => {
         setnewComment('')
-        setrefresh(val => val + 1)
+        commentsQuery.refetch()
       })
   }
 
@@ -126,49 +108,11 @@ const Post = props => {
         />
         <PrevNext prev={prev} next={next} />
         <div>
-          {comments.map((comment, index) => (
-            <Card key={index} elevation={2} style={{ margin: '0.5em' }}>
-              <CardContent>
-                {comment.content}
-
-                <div>
-                  <ActionThumbUp
-                    action={() => {
-                      axios.post(`/comments/${identifier}/${comment.id}/like`)
-                    }}
-                  ></ActionThumbUp>
-                </div>
-              </CardContent>
-              <CardHeader
-                avatar={
-                  <Avatar
-                    aria-label="avatar"
-                    alt={comment.user.name}
-                    src={comment.user.avatarUrl}
-                  ></Avatar>
-                }
-                title={
-                  <Typography variant="caption">
-                    <Link to={`/app/account/${comment.userId}`}>
-                      {comment.user.name}
-                    </Link>
-                  </Typography>
-                }
-                subheader={
-                  <RelativeTimeStamp
-                    time={comment.createdAt}
-                  ></RelativeTimeStamp>
-                }
-                action={
-                  isAuthenticated &&
-                  comment.userId === user.userId && (
-                    <ActionDelete
-                      action={() => deleteComment(comment.id)}
-                    ></ActionDelete>
-                  )
-                }
-              ></CardHeader>
-            </Card>
+          {commentsQuery.data.map((comment, index) => (
+            <Comment
+              comment={comment}
+              refresh={commentsQuery.refetch}
+            ></Comment>
           ))}
         </div>
 

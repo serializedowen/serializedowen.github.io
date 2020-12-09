@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { IconButton } from '@material-ui/core'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import ThumbDownIcon from '@material-ui/icons/ThumbDown'
 import { FormattedMessage } from 'react-intl'
 
-export default function ActionThumbUp({ action, color }) {
+export default function ActionThumbDown({ action, color }) {
   const buttonColor = color || 'inherit'
   return (
     <IconButton
@@ -15,7 +15,7 @@ export default function ActionThumbUp({ action, color }) {
       }}
       title={<FormattedMessage id="upvote"></FormattedMessage>}
     >
-      <ThumbUpIcon color={buttonColor} />
+      <ThumbDownIcon color={buttonColor} />
     </IconButton>
   )
 }
