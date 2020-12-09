@@ -1,6 +1,7 @@
 const path = require('path')
 const _ = require('lodash')
 const { writeFile } = require('fs')
+const md5 = require('blueimp-md5')
 
 const searchData = []
 
@@ -42,7 +43,7 @@ exports.onCreateNode = ({ node, actions }) => {
     }
 
     createNodeField({ node, name: 'slug', value: slug })
-
+    createNodeField({ node, name: 'identifier', value: md5(encodeURI(slug)) })
     searchData.push({ ...node.frontmatter, content: node.internal.content })
   }
 }

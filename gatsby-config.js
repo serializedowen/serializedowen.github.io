@@ -100,7 +100,6 @@ module.exports = {
               rel: 'nofollow noopener noreferrer'
             }
           },
-
           'gatsby-remark-responsive-iframe',
           'gatsby-remark-script',
           'gatsby-remark-autolink-headers',
@@ -118,7 +117,8 @@ module.exports = {
               // base for generating different widths of each image.
               maxWidth: 590
             }
-          }
+          },
+          `gatsby-remark-copy-linked-files`
         ]
       }
     },
