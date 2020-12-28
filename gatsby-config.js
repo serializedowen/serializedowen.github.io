@@ -64,6 +64,7 @@ module.exports = {
     },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-sass',
     'gatsby-plugin-lodash',
     {
       resolve: 'gatsby-plugin-manifest',

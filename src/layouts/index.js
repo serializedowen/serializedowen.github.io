@@ -23,6 +23,7 @@ import axios from 'src/utils/http'
 import { AuthenticationContext } from 'src/hooks/useAuthentication'
 import { Dialog, DialogTitle, Typography } from '@material-ui/core'
 import DailyCheckIn from 'src/components/DailyCheckIn'
+import SnowBackground from 'src/components/SnowBackground'
 
 const Login = React.lazy(() => import('src/app/Login'))
 
@@ -181,6 +182,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                 <MuiThemeProvider theme={muiTheme}>
                   <ThemeProvider theme={theme}>
                     <React.Fragment>
+                      <SnowBackground></SnowBackground>
                       <DailyCheckIn></DailyCheckIn>
                       <Parallax />
                       <SEO />
