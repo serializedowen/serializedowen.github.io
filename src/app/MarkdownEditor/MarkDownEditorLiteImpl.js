@@ -40,6 +40,7 @@ export default function MarkDownEditorLiteImpl(props) {
         switchMap(html => {
           localStorage.setItem('md-draft', html)
 
+          http.post('/markdown/add', { content: html })
           return timer(1000).pipe(tap(() => console.log(html)))
         }),
         tap(() => setsaveState(saveStates.saved))

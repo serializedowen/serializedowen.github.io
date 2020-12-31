@@ -5,7 +5,11 @@ import { styled } from '@material-ui/core'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 import { Content, Header, Wrapper } from 'src/components'
 import EditorMdImpl from './EditorMdImpl'
-import MarkDownEditorLiteImpl from './MarkDownEditorLiteImpl'
+import Loadable from '@loadable/component'
+
+const MarkDownEditorLiteImpl = Loadable(() =>
+  import('./MarkDownEditorLiteImpl')
+)
 
 function loadSuggestions(text) {
   return new Promise((accept, reject) => {

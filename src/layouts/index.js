@@ -182,9 +182,9 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                 <MuiThemeProvider theme={muiTheme}>
                   <ThemeProvider theme={theme}>
                     <React.Fragment>
-                      <SnowBackground></SnowBackground>
+                      {/* <SnowBackground></SnowBackground> */}
                       <DailyCheckIn></DailyCheckIn>
-                      {/* <Parallax /> */}
+                      <Parallax />
                       <SEO />
                       <GlobalStyle />
                       <Navigation />
