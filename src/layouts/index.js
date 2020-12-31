@@ -184,7 +184,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                     <React.Fragment>
                       <SnowBackground></SnowBackground>
                       <DailyCheckIn></DailyCheckIn>
-                      <Parallax />
+                      {/* <Parallax /> */}
                       <SEO />
                       <GlobalStyle />
                       <Navigation />

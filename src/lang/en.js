@@ -16,5 +16,9 @@ module.exports = {
   no: 'No',
   tools: 'Tools',
   checkInBanner: 'You have checked in for {days} days in a row!',
-  'nginx-regex-tester': 'Nginx Regex Tester'
+  'nginx-regex-tester': 'Nginx Regex Tester',
+  saving: 'Saving',
+  saved: 'Saved',
+  waiting: 'Waiting for finish typing',
+  'markdown-editor': 'Markdown'
 }

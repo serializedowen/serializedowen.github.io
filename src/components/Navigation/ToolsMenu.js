@@ -29,9 +29,14 @@ export default function ToolsMenu() {
         <FormattedMessage id="tools"></FormattedMessage>
       </Button>
       <Menu anchorEl={ref.current} open={menuOpen} onClick={handleMenuClose}>
-        <MenuItem key="logout">
+        <MenuItem key="regex">
           <Link to="/regextester.php" style={{ color: 'white' }}>
             <FormattedMessage id="nginx-regex-tester"></FormattedMessage>
+          </Link>
+        </MenuItem>
+        <MenuItem key="markdown">
+          <Link to="/app/markdown" style={{ color: 'white' }}>
+            <FormattedMessage id="markdown-editor"></FormattedMessage>
           </Link>
         </MenuItem>
       </Menu>

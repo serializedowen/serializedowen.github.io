@@ -16,5 +16,9 @@ module.exports = {
   no: '取消',
   tools: '工具箱',
   checkInBanner: '你已经连续登陆{days}天!',
-  'nginx-regex-tester': 'Nginx正则测试器'
+  'nginx-regex-tester': 'Nginx正则测试器',
+  saving: '保存中',
+  saved: '已保存',
+  waiting: '等待停止打字...',
+  'markdown-editor': '文档编辑器'
 }
