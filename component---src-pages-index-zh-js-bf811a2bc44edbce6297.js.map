@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/pages/index.zh.js"],"names":["withENLayout","IndexPage"],"mappings":"4FAAA,mCAGeA,sBAAaC","file":"component---src-pages-index-zh-js-bf811a2bc44edbce6297.js","sourcesContent":["import { IndexPage } from './index'\nimport withENLayout from 'src/layouts/withZHLayout'\n\nexport default withENLayout(IndexPage)\n"],"sourceRoot":""}
