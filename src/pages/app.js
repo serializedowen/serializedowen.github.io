@@ -7,6 +7,8 @@ import Register from 'src/app/Register'
 import withENLayout from 'src/layouts/withENLayout'
 import Profile from 'src/app/Profile'
 import MarkdownEditor from 'src/app/MarkdownEditor'
+import View from 'src/app/MarkdownEditor/View'
+import MarkDownEditorLiteImpl from 'src/app/MarkdownEditor/MarkDownEditorLiteImpl'
 
 function App() {
   return (
@@ -16,7 +18,11 @@ function App() {
       <Bookmarks path="/bookmarks"></Bookmarks>
       <Login path="/login"></Login>
       <Register path="/register"></Register>
-      <MarkdownEditor path="/markdown"></MarkdownEditor>
+      <MarkdownEditor path="/markdown">
+        <MarkDownEditorLiteImpl path="/"></MarkDownEditorLiteImpl>
+        <View path="/:id"></View>
+        <MarkDownEditorLiteImpl path="/:id/edit"></MarkDownEditorLiteImpl>
+      </MarkdownEditor>
     </Router>
   )
 }

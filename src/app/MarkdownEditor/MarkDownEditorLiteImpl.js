@@ -4,9 +4,19 @@ import MdEditor from 'react-markdown-editor-lite'
 import { FormattedMessage } from 'react-intl'
 import 'react-markdown-editor-lite/lib/index.css'
 import http from 'src/utils/http'
+import { navigateTo } from 'gatsby'
+import { from, of, pipe, Subject } from 'rxjs'
 
-import { Subject, timer } from 'rxjs'
-import { switchMap, throttleTime, tap, map, debounceTime } from 'rxjs/operators'
+import {
+  switchMap,
+  tap,
+  map,
+  debounceTime,
+  catchError,
+  retry
+} from 'rxjs/operators'
+import { useLocation, useParams } from '@reach/router'
+
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
@@ -28,7 +38,15 @@ const saveStates = {
 export default function MarkDownEditorLiteImpl(props) {
   const [subject, setsubject] = useState(new Subject())
   const [saveState, setsaveState] = useState(saveStates.saved)
-  const [draft, setdraft] = useState(localStorage.getItem('md-draft') || '')
+
+  const params = useParams()
+  const isDraft = !params.id
+
+  // const localStorageToken = `md-draft${params.id || ''}`
+  const localStorageToken = `md-draft`
+  const [draft, setdraft] = useState(
+    localStorage.getItem(localStorageToken) || ''
+  )
 
   const ref = useRef(null)
   useEffect(() => {
@@ -36,14 +54,35 @@ export default function MarkDownEditorLiteImpl(props) {
       .pipe(
         tap(() => setsaveState(saveStates.waiting)),
         debounceTime(500),
+
         map(() => ref.current && ref.current.getMdValue()),
         switchMap(html => {
-          localStorage.setItem('md-draft', html)
+          localStorage.setItem(localStorageToken, html)
 
-          http.post('/markdown/add', { content: html })
-          return timer(1000).pipe(tap(() => console.log(html)))
+          // TODO: retry not working as intended
+          const processPipe = pipe(
+            retry(2),
+            catchError(err => {
+              console.log(err)
+              return of(err)
+            })
+          )
+
+          if (isDraft)
+            return from(http.post('/markdown/add', { content: html })).pipe(
+              processPipe,
+              tap(data => {
+                navigateTo(`/app/markdown/${data.data}/edit`)
+              })
+            )
+          return from(
+            http.post(`/markdown/${params.id}`, { content: html })
+          ).pipe(processPipe)
         }),
-        tap(() => setsaveState(saveStates.saved))
+
+        tap(() => {
+          setsaveState(saveStates.saved)
+        })
       )
       .subscribe(() => {})
     return () => {
