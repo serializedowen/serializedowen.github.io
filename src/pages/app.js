@@ -8,7 +8,11 @@ import withENLayout from 'src/layouts/withENLayout'
 import Profile from 'src/app/Profile'
 import MarkdownEditor from 'src/app/MarkdownEditor'
 import View from 'src/app/MarkdownEditor/View'
-import MarkDownEditorLiteImpl from 'src/app/MarkdownEditor/MarkDownEditorLiteImpl'
+import Loadable from '@loadable/component'
+
+const MarkDownEditorLiteImpl = Loadable(() =>
+  import('src/app/MarkdownEditor/MarkDownEditorLiteImpl')
+)
 
 function App() {
   return (
