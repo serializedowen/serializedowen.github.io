@@ -211,6 +211,7 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                       </Scroller>
                       {pageContext.layout !== 'docs' && (
                         <Footer>
+        
                           <div>
                             <SocialIcon.GitHub link="https://github.com/serializedowen" />
                             <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
@@ -230,6 +231,18 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                           <a href="http://beian.miit.gov.cn/">
                             浙ICP备2020034764
                           </a>
+
+                          <Typography
+                            id="busuanzi_container_site_pv"
+                            variant="span"
+                          >
+                            本站总访问量
+                            <Typography
+                              id="busuanzi_value_site_pv"
+                              variant="span"
+                            ></Typography>
+                            次
+                          </Typography>
                         </Footer>
                       )}
                     </React.Fragment>
