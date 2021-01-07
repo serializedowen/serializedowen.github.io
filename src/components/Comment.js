@@ -21,10 +21,11 @@ export default function Comment({ comment, refresh }) {
 
   const [locallyLiked, setlocallyLiked] = useState(false)
 
+  console.log(comment, user)
   const isLiked =
     locallyLiked ||
     Array.prototype.some.call(
-      comment.likes,
+      comment.Likes,
       like => like.userId === user.userId
     )
 
@@ -45,15 +46,15 @@ export default function Comment({ comment, refresh }) {
         avatar={
           <Avatar
             aria-label="avatar"
-            alt={comment.user.name}
-            src={comment.user.avatarUrl}
+            alt={comment.User.name}
+            src={comment.User.avatarUrl}
           ></Avatar>
         }
         title={
           <>
             <Typography variant="caption" style={{ marginRight: '1em' }}>
               <Link to={`/app/account/${comment.userId}`}>
-                {comment.user.name}
+                {comment.User.name}
               </Link>
             </Typography>
             <RelativeTimeStamp time={comment.createdAt}></RelativeTimeStamp>

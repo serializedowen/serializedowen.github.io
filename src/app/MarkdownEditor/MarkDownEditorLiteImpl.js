@@ -16,6 +16,14 @@ import {
   retry
 } from 'rxjs/operators'
 import { useLocation, useParams } from '@reach/router'
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  FormLabel,
+  FormControl,
+  Typography
+} from '@material-ui/core'
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -38,6 +46,8 @@ const saveStates = {
 export default function MarkDownEditorLiteImpl(props) {
   const [subject, setsubject] = useState(new Subject())
   const [saveState, setsaveState] = useState(saveStates.saved)
+
+  const [visibility, setvisibility] = useState('private')
 
   const params = useParams()
   const isDraft = !params.id
@@ -69,14 +79,16 @@ export default function MarkDownEditorLiteImpl(props) {
           )
 
           if (isDraft)
-            return from(http.post('/markdown/add', { content: html })).pipe(
+            return from(
+              http.post('/markdown/add', { content: html, visibility })
+            ).pipe(
               processPipe,
               tap(data => {
                 navigateTo(`/app/markdown/${data.data}/edit`)
               })
             )
           return from(
-            http.post(`/markdown/${params.id}`, { content: html })
+            http.post(`/markdown/${params.id}`, { content: html, visibility })
           ).pipe(processPipe)
         }),
 
@@ -92,8 +104,33 @@ export default function MarkDownEditorLiteImpl(props) {
 
   return (
     <>
-      <FormattedMessage id={saveState}></FormattedMessage>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">
+          <FormattedMessage id="visibility"></FormattedMessage>
+        </FormLabel>
 
+        <RadioGroup
+          row
+          value={visibility}
+          onChange={e => {
+            setvisibility(e.target.value)
+            subject.next('')
+          }}
+        >
+          <FormControlLabel
+            control={<Radio value="public"></Radio>}
+            label={<FormattedMessage id="public"></FormattedMessage>}
+          ></FormControlLabel>
+          <FormControlLabel
+            control={<Radio value="private"></Radio>}
+            label={<FormattedMessage id="private"></FormattedMessage>}
+          ></FormControlLabel>
+        </RadioGroup>
+      </FormControl>
+
+      <Typography>
+        <FormattedMessage id={saveState}></FormattedMessage>
+      </Typography>
       <MdEditor
         ref={ref}
         defaultValue={draft}

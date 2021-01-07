@@ -48,7 +48,7 @@ export default function RelativeTimeStamp({ time, popover }) {
         // onClose={handlePopoverClose}
         disableRestoreFocus
       >
-        <FormattedDate value={dayjs(time)}></FormattedDate>{' '}
+        <FormattedDate value={dayjs(time)}></FormattedDate>
         <FormattedTime value={dayjs(time)}></FormattedTime>
       </Popover>
     </>

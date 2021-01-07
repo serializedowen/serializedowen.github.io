@@ -101,7 +101,7 @@ const Footer = styled.footer`
 `
 
 const Layout = ({ children, location, pageContext, i18nMessages }) => {
-  const [authentication, setauthentication] = useState(null)
+  const [authentication, setauthentication] = useState({})
   const [authenticationLoading, setauthenticationLoading] = useState(true)
 
   const setAuthenticationData = data => {
@@ -182,9 +182,9 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                 <MuiThemeProvider theme={muiTheme}>
                   <ThemeProvider theme={theme}>
                     <React.Fragment>
-                      <SnowBackground></SnowBackground>
+                      {/* <SnowBackground></SnowBackground>
                       <DailyCheckIn></DailyCheckIn>
-                      <Parallax />
+                      <Parallax /> */}
                       <SEO />
                       <GlobalStyle />
                       <Navigation />
@@ -211,7 +211,6 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                       </Scroller>
                       {pageContext.layout !== 'docs' && (
                         <Footer>
-        
                           <div>
                             <SocialIcon.GitHub link="https://github.com/serializedowen" />
                             <SocialIcon.LinkedIn link="https://www.linkedin.com/in/jiahao-wang-7319b45b/" />
@@ -231,16 +230,9 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                           <a href="http://beian.miit.gov.cn/">
                             浙ICP备2020034764
                           </a>
-
-                          <Typography
-                            id="busuanzi_container_site_pv"
-                            variant="span"
-                          >
+                          <Typography id="busuanzi_container_site_pv">
                             本站总访问量
-                            <Typography
-                              id="busuanzi_value_site_pv"
-                              variant="span"
-                            ></Typography>
+                            <Typography id="busuanzi_value_site_pv"></Typography>
                             次
                           </Typography>
                         </Footer>
