@@ -4,13 +4,13 @@ import { useQuery } from 'react-query'
 import http from 'src/utils/http'
 
 export default function Collection() {
-  const { data, isFetched } = useQuery('my_markdown', () =>
+  const { data, isFetched, isError } = useQuery('my_markdown', () =>
     http.get('/markdown')
   )
 
   return (
     <>
-      {isFetched && (
+      {isFetched && !isError && (
         <ul>
           {data.data.map(i => (
             <>
