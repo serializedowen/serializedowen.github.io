@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import lax from 'lax.js'
 import styled from 'styled-components'
 
-const Parallaxee = styled.div`
+const Background = styled.div`
   position: fixed;
   background-image: url('/parallax.jpg');
   /* background-attachment: fixed;
@@ -16,24 +16,25 @@ const Parallaxee = styled.div`
 `
 
 export default function Parallax() {
-  useEffect(() => {
-    let timer
-    lax.setup() // init
-    const updateLax = () => {
-      lax.update(window.scrollY)
-      timer = requestAnimationFrame(updateLax)
-    }
+  // useEffect(() => {
+  //   lax.init()
 
-    timer = requestAnimationFrame(updateLax)
-    return () => {
-      cancelAnimationFrame(timer)
-    }
-  }, [])
-  return (
-    <Parallaxee
-      className="lax"
-      data-lax-translate-y="0 0, vh 400"
-      data-lax-blur="(vh*0.3) 0, 0 40"
-    />
-  )
+  //   lax.addDriver('scrollY', () => window.scrollY)
+
+  //   lax.addElements(
+  //     '.background-lax',
+  //     {
+  //       scrollY: {
+  //         rotate: [
+  //           [0, 1e9],
+  //           [0, 1e9]
+  //         ]
+  //       }
+  //     },
+  //     []
+  //   )
+  //   return () => {}
+  // }, [])
+
+  return <Background className="background-lax" />
 }

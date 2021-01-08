@@ -42,7 +42,7 @@
     "gatsby-source-filesystem": "^2.0.7",
     "gatsby-transformer-remark": "^2.6.15",
     "gh-pages": "^2.0.1",
-    "lax.js": "^1.2.5",
+    "lax.js": "^2.0.3",
     "lodash": "^4.17.11",
     "markdown-it": "^12.0.4",
     "material-ui-dropzone": "^3.5.0",

@@ -5,17 +5,19 @@ import { FormattedMessage } from 'react-intl'
 import 'react-markdown-editor-lite/lib/index.css'
 import http from 'src/utils/http'
 import { navigateTo } from 'gatsby'
-import { from, of, pipe, Subject } from 'rxjs'
-
+import { combineLatest, from, of, pipe, Subject } from 'rxjs'
+import { useQuery } from 'react-query'
 import {
   switchMap,
   tap,
   map,
   debounceTime,
   catchError,
-  retry
+  retry,
+  withLatestFrom,
+  startWith
 } from 'rxjs/operators'
-import { useLocation, useParams } from '@reach/router'
+import { useParams } from '@reach/router'
 import {
   RadioGroup,
   FormControlLabel,
@@ -44,7 +46,8 @@ const saveStates = {
 }
 
 export default function MarkDownEditorLiteImpl(props) {
-  const [subject, setsubject] = useState(new Subject())
+  const [md$] = useState(new Subject())
+  const [visibility$] = useState(new Subject())
   const [saveState, setsaveState] = useState(saveStates.saved)
 
   const [visibility, setvisibility] = useState('private')
@@ -52,21 +55,35 @@ export default function MarkDownEditorLiteImpl(props) {
   const params = useParams()
   const isDraft = !params.id
 
-  // const localStorageToken = `md-draft${params.id || ''}`
-  const localStorageToken = `md-draft`
-  const [draft, setdraft] = useState(
+  const localStorageToken = 'md-draft' + params.id || ''
+
+  const [mdValue, setMdValue] = useState(
     localStorage.getItem(localStorageToken) || ''
   )
 
-  const ref = useRef(null)
   useEffect(() => {
-    const subscription = subject
+    if (!isDraft) {
+      http.get(`/markdown/${params.id}`).then(({ data }) => {
+        console.log(data)
+        setvisibility(data.visibility)
+        setMdValue(data.content)
+      })
+
+      return () => {}
+    }
+  }, [])
+
+  useEffect(() => {
+    const subscription = combineLatest(
+      md$.pipe(startWith(mdValue)),
+      visibility$.pipe(startWith(visibility))
+    )
       .pipe(
         tap(() => setsaveState(saveStates.waiting)),
         debounceTime(500),
-
-        map(() => ref.current && ref.current.getMdValue()),
-        switchMap(html => {
+        tap(console.log),
+        // eslint-disable-next-line no-shadow
+        switchMap(([html, visibility]) => {
           localStorage.setItem(localStorageToken, html)
 
           // TODO: retry not working as intended
@@ -96,6 +113,7 @@ export default function MarkDownEditorLiteImpl(props) {
           setsaveState(saveStates.saved)
         })
       )
+
       .subscribe(() => {})
     return () => {
       subscription.unsubscribe()
@@ -114,7 +132,7 @@ export default function MarkDownEditorLiteImpl(props) {
           value={visibility}
           onChange={e => {
             setvisibility(e.target.value)
-            subject.next('')
+            visibility$.next(e.target.value)
           }}
         >
           <FormControlLabel
@@ -132,13 +150,13 @@ export default function MarkDownEditorLiteImpl(props) {
         <FormattedMessage id={saveState}></FormattedMessage>
       </Typography>
       <MdEditor
-        ref={ref}
-        defaultValue={draft}
+        value={mdValue}
         style={{ height: '500px' }}
         onImageUpload={imageUploadHandler}
         renderHTML={text => mdParser.render(text)}
         onChange={e => {
-          subject.next(e)
+          setMdValue(e.text)
+          md$.next(e.text)
         }}
       />
     </>
