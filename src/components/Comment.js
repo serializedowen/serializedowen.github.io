@@ -21,7 +21,6 @@ export default function Comment({ comment, refresh }) {
 
   const [locallyLiked, setlocallyLiked] = useState(false)
 
-  console.log(comment, user)
   const isLiked =
     locallyLiked ||
     Array.prototype.some.call(
