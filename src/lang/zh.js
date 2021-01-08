@@ -20,5 +20,8 @@ module.exports = {
   saving: '保存中',
   saved: '已保存',
   waiting: '等待停止打字...',
-  'markdown-editor': '文档编辑器'
+  'markdown-editor': '文档编辑器',
+  public: '公开',
+  private: '私密',
+  visibility: '可见性'
 }

@@ -20,5 +20,8 @@ module.exports = {
   saving: 'Saving',
   saved: 'Saved',
   waiting: 'Waiting for finish typing',
-  'markdown-editor': 'Markdown'
+  'markdown-editor': 'Markdown',
+  public: 'Public',
+  private: 'Private',
+  visibility: 'Visibility'
 }
