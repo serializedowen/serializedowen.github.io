@@ -50,7 +50,9 @@ const GlobalStyle = createGlobalStyle`
   ::selection {
 
   }
-
+  body {
+    font-family: 'Open Sans', sans-serif;
+  }
   a {
     text-decoration: none;
     transition: all ${theme.transitions.normal};
