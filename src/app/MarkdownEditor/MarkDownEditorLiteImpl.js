@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import MarkdownIt from 'markdown-it'
 import MdEditor from 'react-markdown-editor-lite'
 import { FormattedMessage } from 'react-intl'
@@ -6,15 +6,13 @@ import 'react-markdown-editor-lite/lib/index.css'
 import http from 'src/utils/http'
 import { navigateTo } from 'gatsby'
 import { combineLatest, from, of, pipe, Subject } from 'rxjs'
-import { useQuery } from 'react-query'
+
 import {
   switchMap,
   tap,
-  map,
   debounceTime,
   catchError,
   retry,
-  withLatestFrom,
   startWith
 } from 'rxjs/operators'
 import { useParams } from '@reach/router'
@@ -64,7 +62,6 @@ export default function MarkDownEditorLiteImpl(props) {
   useEffect(() => {
     if (!isDraft) {
       http.get(`/markdown/${params.id}`).then(({ data }) => {
-        console.log(data)
         setvisibility(data.visibility)
         setMdValue(data.content)
       })

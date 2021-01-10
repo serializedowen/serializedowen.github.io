@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
-import { Article, Wrapper, Button, SectionTitle, Content } from 'components'
+import { Article, Wrapper, Button, SectionTitle, Content } from 'src/components'
+import { Typography, Card } from '@material-ui/core'
+
 import { media } from '../utils/media'
 import withENLayout from 'src/layouts/withENLayout'
 import LoadMore from 'src/components/LoadMore'
@@ -58,14 +60,13 @@ const IndexPage = () => {
   return (
     <Wrapper>
       <Hero>
-        <h1 style={{ color: 'white' }}>
+        <Typography variant="h1" color="textPrimary">
           <FormattedMessage id="greeting"></FormattedMessage>
-          {/* Howdy. */}
-        </h1>
-        <p style={{ color: 'white' }}>
+        </Typography>
+        <Typography variant="h5" color="textPrimary">
           I'm SerializedOwen, a Full-stack Web Developer with five years of
           industry experience
-        </p>
+        </Typography>
 
         <Link to="/contact">
           <Button big>

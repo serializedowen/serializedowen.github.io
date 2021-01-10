@@ -12,9 +12,16 @@ import {
   SEO,
   PrevNext,
   Content
-} from 'components'
+} from 'src/components'
 
-import { Button, TextField, Card, Grid, Avatar } from '@material-ui/core'
+import {
+  Button,
+  TextField,
+  Card,
+  Grid,
+  Avatar,
+  Typography
+} from '@material-ui/core'
 import config from '../../config/SiteConfig'
 import '../utils/medium-editor.css'
 import 'medium-editor/dist/css/medium-editor.min.css'
@@ -25,10 +32,6 @@ import axios from 'src/utils/http'
 
 import { useQuery } from 'react-query'
 import Comment from 'src/components/Comment'
-
-const Title = styled.h1`
-  margin-bottom: 1rem;
-`
 
 const PostContent = styled.div`
   outline: none;
@@ -67,7 +70,6 @@ const Post = props => {
       const height = document.body.clientHeight
       const { innerHeight } = window
 
-      console.log(height, innerHeight)
       handler = () => {
         setprogress(Number((window.scrollY * 100) / (height - innerHeight)))
       }
@@ -94,14 +96,14 @@ const Post = props => {
         <Link to="/">{config.siteTitle}</Link>
       </Header>
       <Content>
-        <Title>{post.title}</Title>
+        <Typography variant="h3">{post.title}</Typography>
         <div id="medium-toolbar" />
-        <Subline>
+        <Typography variant="subtitle2">
           {post.date} &mdash; {postNode.timeToRead} Min Read &mdash; In{' '}
           <Link to={`/categories/${kebabCase(post.category)}`}>
             {post.category}
           </Link>
-        </Subline>
+        </Typography>
         <PostContent
           className="editable"
           dangerouslySetInnerHTML={{ __html: postNode.html }}
