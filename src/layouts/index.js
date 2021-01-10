@@ -14,14 +14,13 @@ import {
 import { SnackbarProvider } from 'notistack'
 import SEO from 'src/components/SEO'
 import theme from '../../config/Theme'
-import { media } from 'src/utils/media'
 import Navigation from 'src/components/Navigation'
 import SocialIcon from 'src/components/SocialIcon'
 import Parallax from 'src/components/Parallax'
 import Scroller from 'src/components/Scroller'
 import axios from 'src/utils/http'
 import { AuthenticationContext } from 'src/hooks/useAuthentication'
-import { Dialog, DialogTitle, Typography } from '@material-ui/core'
+import { Dialog, DialogTitle, Link, Typography } from '@material-ui/core'
 import DailyCheckIn from 'src/components/DailyCheckIn'
 import SnowBackground from 'src/components/SnowBackground'
 
@@ -30,34 +29,33 @@ const Login = React.lazy(() => import('src/app/Login'))
 const muiTheme = createMuiTheme({
   palette: {
     type: 'dark'
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"'
+    ].join(',')
   }
 })
 
 const GlobalStyle = createGlobalStyle`
   ::selection {
-    color: ${theme.colors.bg};
-    background: ${theme.colors.primary};
-    
-  }
-  body {
-    background: ${theme.colors.bg};
-    color: ${theme.colors.light};
 
-    @media ${media.phone} {
-      font-size: 14px;
-    }
   }
+
   a {
-    color: ${theme.colors.anchor};
     text-decoration: none;
     transition: all ${theme.transitions.normal};
   }
-  a:hover {
-    color: ${theme.colors.primary};
-  }
-  h1, h2, h3, h4 {
-    color: ${theme.colors.grey.dark};
-  }
+
   blockquote {
     font-style: italic;
     position: relative;
@@ -89,14 +87,8 @@ const GlobalStyle = createGlobalStyle`
 const Footer = styled.footer`
   text-align: center;
   padding: 3rem 0;
-  color: ${theme.colors.secondary};
-
   span {
     font-size: 0.75rem;
-  }
-
-  a {
-    color: ${theme.colors.secondary};
   }
 `
 
@@ -219,21 +211,27 @@ const Layout = ({ children, location, pageContext, i18nMessages }) => {
                             />
                             <SocialIcon.Facebook link="https://www.facebook.com/owentheoracle" />
                           </div>
-                          <FormattedMessage id="copyrights"></FormattedMessage>{' '}
+                          <Typography variant="subtitle1" color="textPrimary">
+                            <FormattedMessage id="copyrights"></FormattedMessage>
+                          </Typography>
                           <br />
-                          <a href="https://github.com/serializedowen/serializedowen.github.io">
+                          <Link href="https://github.com/serializedowen/serializedowen.github.io">
                             GitHub Repository
-                          </a>{' '}
+                          </Link>
                           <br />
-                          <span>Last build: {data.site.buildTime}</span>
+                          <Typography color="textPrimary">
+                            Last build: {data.site.buildTime}
+                          </Typography>
                           <br />
-                          <a href="http://beian.miit.gov.cn/">
+                          <Link href="http://beian.miit.gov.cn/">
                             浙ICP备2020034764
-                          </a>
-                          <Typography id="busuanzi_container_site_pv">
+                          </Link>
+                          <Typography
+                            id="busuanzi_container_site_pv"
+                            color="textPrimary"
+                          >
                             本站总访问量
-                            <Typography id="busuanzi_value_site_pv"></Typography>
-                            次
+                            <span id="busuanzi_value_site_pv"></span>次
                           </Typography>
                         </Footer>
                       )}

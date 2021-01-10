@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
+import { Typography } from '@material-ui/core'
 
-const SectionTitle = styled.div`
+const Wrapper = styled('div')`
   font-size: ${props => props.theme.fontSize.small};
   text-transform: uppercase;
   font-weight: bold;
@@ -20,6 +22,14 @@ const SectionTitle = styled.div`
     margin-left: -25px;
     background: ${props => props.theme.colors.grey.ultraLight};
   }
-`;
+`
 
-export default SectionTitle;
+const SectionTitle = ({ props, children }) => (
+  <Wrapper>
+    <Typography {...props} variant="subtitle1">
+      {children}
+    </Typography>
+  </Wrapper>
+)
+
+export default SectionTitle

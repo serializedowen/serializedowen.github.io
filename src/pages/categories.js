@@ -2,18 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
-import styled from 'styled-components'
+
 import kebabCase from 'lodash/kebabCase'
-import { Wrapper, Header, SectionTitle, Content } from 'components'
+import { Wrapper, Header, SectionTitle, Content } from 'src/components'
 import withENLayout from 'src/layouts/withENLayout'
-
+import { Typography } from '@material-ui/core'
 import config from '../../config/SiteConfig'
-
-const Title = styled.h3`
-  position: relative;
-  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  margin-bottom: 0.75rem;
-`
 
 const Category = ({
   data: {
@@ -28,12 +22,12 @@ const Category = ({
     <Content>
       <SectionTitle>Categories</SectionTitle>
       {group.map(category => (
-        <Title key={category.fieldValue}>
+        <Typography key={category.fieldValue}>
           <Link to={`/categories/${kebabCase(category.fieldValue)}`}>
             {category.fieldValue}
           </Link>
           ({category.totalCount})
-        </Title>
+        </Typography>
       ))}
     </Content>
   </Wrapper>

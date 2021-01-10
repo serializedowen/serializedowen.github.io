@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import kebabCase from 'lodash/kebabCase'
 import { FormattedMessage } from 'react-intl'
-
+import { Typography } from '@material-ui/core'
 import Subline from './Subline'
 import RelativeTimeStamp from './RelativeTimeStamp'
 
@@ -25,6 +25,7 @@ const Initiale = styled.span`
   position: absolute;
   font-size: 7rem;
   transform: translate(-50%, -50%);
+
   opacity: 0.08;
   user-select: none;
   z-index: -1;
@@ -41,11 +42,18 @@ const Article = ({ title, date, excerpt, slug, timeToRead, category }) => {
 
   return (
     <Post>
-      <Title>
-        <Initiale>{firstChar}</Initiale>
-        <Link to={slug}>{title}</Link>
-      </Title>
-      <Subline>
+      <Typography variant="h5">
+        <Title>
+          <Initiale>
+            <Typography variant="body1">{firstChar}</Typography>
+            {firstChar}
+          </Initiale>
+
+          <Link to={slug}>{title}</Link>
+        </Title>
+      </Typography>
+
+      <Typography variant="subtitle1">
         <RelativeTimeStamp time={date}></RelativeTimeStamp>{' '}
         <FormattedMessage
           id="readTime"
@@ -53,8 +61,11 @@ const Article = ({ title, date, excerpt, slug, timeToRead, category }) => {
         ></FormattedMessage>{' '}
         &mdash; In{' '}
         <Link to={`/categories/${kebabCase(category)}`}>{category}</Link>
-      </Subline>
-      <Excerpt>{excerpt}</Excerpt>
+      </Typography>
+
+      <Typography>
+        <Excerpt>{excerpt}</Excerpt>
+      </Typography>
     </Post>
   )
 }
