@@ -39,7 +39,6 @@ const PostContent = styled.div`
 `
 
 const Post = props => {
-  const [progress, setprogress] = useState(0)
   const identifier = useIdentifier()
 
   const { user, isAuthenticated } = useAuthentication()
@@ -64,22 +63,6 @@ const Post = props => {
       })
   }
 
-  useEffect(() => {
-    let handler
-    setTimeout(() => {
-      const height = document.body.clientHeight
-      const { innerHeight } = window
-
-      handler = () => {
-        setprogress(Number((window.scrollY * 100) / (height - innerHeight)))
-      }
-      window.addEventListener('scroll', handler)
-    }, 500)
-    return () => {
-      window.removeEventListener('scroll', handler)
-    }
-  }, [])
-
   const {
     pageContext: { slug, prev, next },
     data: { markdownRemark: postNode }
@@ -87,9 +70,10 @@ const Post = props => {
 
   const post = postNode.frontmatter
 
+  console.log('render post')
   return (
     <Wrapper>
-      <ProgressBar progress={progress}></ProgressBar>
+      <ProgressBar></ProgressBar>
       <SEO postPath={slug} postNode={postNode} postSEO />
       <Helmet title={`${post.title} | ${config.siteTitle}`} />
       <Header>
@@ -112,6 +96,7 @@ const Post = props => {
         <div>
           {commentsQuery.data.map((comment, index) => (
             <Comment
+              key={index}
               comment={comment}
               refresh={commentsQuery.refetch}
             ></Comment>

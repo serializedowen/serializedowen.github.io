@@ -7,7 +7,6 @@ export default function ActionThumbDown({ action, color }) {
   const buttonColor = color || 'inherit'
   return (
     <IconButton
-      color={buttonColor}
       aria-label="delete"
       size="small"
       onClick={e => {
