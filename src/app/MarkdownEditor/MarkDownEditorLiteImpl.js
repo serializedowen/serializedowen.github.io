@@ -4,18 +4,19 @@ import MdEditor from 'react-markdown-editor-lite'
 import { FormattedMessage } from 'react-intl'
 import 'react-markdown-editor-lite/lib/index.css'
 import http from 'src/utils/http'
+import { retryWithDelay, rxhttp } from 'src/utils/rxjs-utils'
 import { navigateTo } from 'gatsby'
-import { combineLatest, from, of, pipe, Subject } from 'rxjs'
-
+import { combineLatest, from, of, pipe, throwError } from 'rxjs'
 import {
   switchMap,
   tap,
   debounceTime,
   catchError,
   retry,
-  startWith
+  pluck
 } from 'rxjs/operators'
 import { useParams } from '@reach/router'
+import useObservableState from 'src/hooks/useObservableState'
 import {
   RadioGroup,
   FormControlLabel,
@@ -44,66 +45,46 @@ const saveStates = {
 }
 
 export default function MarkDownEditorLiteImpl(props) {
-  const [md$] = useState(new Subject())
-  const [visibility$] = useState(new Subject())
   const [saveState, setsaveState] = useState(saveStates.saved)
 
-  const [visibility, setvisibility] = useState('private')
+  const [visibility, setVisibility, visibility$] = useObservableState('private')
 
   const params = useParams()
   const isDraft = !params.id
 
   const localStorageToken = 'md-draft' + params.id || ''
 
-  const [mdValue, setMdValue] = useState(
+  const [mdValue, setMdValue, md$] = useObservableState(
     localStorage.getItem(localStorageToken) || ''
   )
 
   useEffect(() => {
-    if (!isDraft) {
-      http.get(`/markdown/${params.id}`).then(({ data }) => {
-        setvisibility(data.visibility)
-        setMdValue(data.content)
-      })
-
-      return () => {}
-    }
-  }, [])
-
-  useEffect(() => {
-    const subscription = combineLatest(
-      md$.pipe(startWith(mdValue)),
-      visibility$.pipe(startWith(visibility))
-    )
+    const subscription = combineLatest(md$, visibility$)
       .pipe(
         tap(() => setsaveState(saveStates.waiting)),
         debounceTime(500),
-        tap(console.log),
         // eslint-disable-next-line no-shadow
-        switchMap(([html, visibility]) => {
-          localStorage.setItem(localStorageToken, html)
-
-          // TODO: retry not working as intended
-          const processPipe = pipe(
-            retry(2),
-            catchError(err => {
-              console.log(err)
-              return of(err)
-            })
-          )
+        switchMap(([content, visibility]) => {
+          localStorage.setItem(localStorageToken, content)
 
           if (isDraft)
-            return from(
-              http.post('/markdown/add', { content: html, visibility })
+            return rxhttp(() =>
+              http.post('/markdown/add', { content, visibility })
             ).pipe(
-              processPipe,
+              retryWithDelay(200, 2),
+
               tap(data => {
                 navigateTo(`/app/markdown/${data.data}/edit`)
               })
             )
-          return from(
-            http.post(`/markdown/${params.id}`, { content: html, visibility })
-          ).pipe(processPipe)
+          return rxhttp(() =>
+            http.post(`/markdown/${params.id}`, { content, visibility })
+          ).pipe(
+            retryWithDelay(200, 2),
+            catchError(err => {
+              return of('errored')
+            })
+          )
         }),
 
         tap(() => {
@@ -111,7 +92,37 @@ export default function MarkDownEditorLiteImpl(props) {
         })
       )
 
-      .subscribe(() => {})
+      .subscribe(
+        val => {
+          console.log(val)
+        },
+        console.log,
+        () => console.log('complete')
+      )
+
+    of(isDraft)
+      .pipe(
+        switchMap(flag =>
+          flag
+            ? of({ content: '', visibility: 'private' })
+            : rxhttp(() => http.get(`/markdown/${params.id}`)).pipe(
+                pluck(['data'])
+              )
+        ),
+        retryWithDelay(200, 2),
+        catchError(err => {
+          navigateTo('/app/markdown/draft')
+          return of(err)
+        })
+      )
+      .subscribe(
+        data => {
+          setMdValue(data.content)
+          setVisibility(data.visibility)
+        },
+        err => {}
+      )
+
     return () => {
       subscription.unsubscribe()
     }
@@ -128,8 +139,7 @@ export default function MarkDownEditorLiteImpl(props) {
           row
           value={visibility}
           onChange={e => {
-            setvisibility(e.target.value)
-            visibility$.next(e.target.value)
+            setVisibility(e.target.value)
           }}
         >
           <FormControlLabel
@@ -153,7 +163,6 @@ export default function MarkDownEditorLiteImpl(props) {
         renderHTML={text => mdParser.render(text)}
         onChange={e => {
           setMdValue(e.text)
-          md$.next(e.text)
         }}
       />
     </>

@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
-
 import kebabCase from 'lodash/kebabCase'
 import { Wrapper, Header, SectionTitle, Content } from 'src/components'
 import withENLayout from 'src/layouts/withENLayout'
