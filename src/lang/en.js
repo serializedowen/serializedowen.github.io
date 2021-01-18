@@ -23,5 +23,6 @@ module.exports = {
   'markdown-editor': 'Markdown',
   public: 'Public',
   private: 'Private',
-  visibility: 'Visibility'
+  visibility: 'Visibility',
+  title: 'Title'
 }

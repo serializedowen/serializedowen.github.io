@@ -23,7 +23,8 @@ import {
   Radio,
   FormLabel,
   FormControl,
-  Typography
+  Typography,
+  TextField
 } from '@material-ui/core'
 
 // Register plugins if required
@@ -49,6 +50,8 @@ export default function MarkDownEditorLiteImpl(props) {
 
   const [visibility, setVisibility, visibility$] = useObservableState('private')
 
+  const [title, setTitle, title$] = useObservableState('')
+
   const params = useParams()
   const isDraft = !params.id
 
@@ -59,17 +62,17 @@ export default function MarkDownEditorLiteImpl(props) {
   )
 
   useEffect(() => {
-    const subscription = combineLatest(md$, visibility$)
+    const subscription = combineLatest(md$, visibility$, title$)
       .pipe(
         tap(() => setsaveState(saveStates.waiting)),
         debounceTime(500),
         // eslint-disable-next-line no-shadow
-        switchMap(([content, visibility]) => {
+        switchMap(([content, visibility, title]) => {
           localStorage.setItem(localStorageToken, content)
 
           if (isDraft)
             return rxhttp(() =>
-              http.post('/markdown/add', { content, visibility })
+              http.post('/markdown/add', { content, visibility, title })
             ).pipe(
               retryWithDelay(200, 2),
 
@@ -78,7 +81,7 @@ export default function MarkDownEditorLiteImpl(props) {
               })
             )
           return rxhttp(() =>
-            http.post(`/markdown/${params.id}`, { content, visibility })
+            http.post(`/markdown/${params.id}`, { content, visibility, title })
           ).pipe(
             retryWithDelay(200, 2),
             catchError(err => {
@@ -119,6 +122,7 @@ export default function MarkDownEditorLiteImpl(props) {
         data => {
           setMdValue(data.content)
           setVisibility(data.visibility)
+          setTitle(data.title)
         },
         err => {}
       )
@@ -130,6 +134,17 @@ export default function MarkDownEditorLiteImpl(props) {
 
   return (
     <>
+      <FormControl component="fieldset">
+        <TextField
+          id="outlined-basic"
+          label={<FormattedMessage id="title"></FormattedMessage>}
+          variant="filled"
+          value={title}
+          onChange={e => {
+            setTitle(e.target.value)
+          }}
+        />
+      </FormControl>
       <FormControl component="fieldset">
         <FormLabel component="legend">
           <FormattedMessage id="visibility"></FormattedMessage>

@@ -15,7 +15,7 @@ export default function Collection() {
         <ul>
           {data.data.map(i => (
             <li>
-              <Link to={`/app/markdown/${i.id}`}>{i.id}</Link>
+              <Link to={`/app/markdown/${i.id}`}>{i.title || i.id}</Link>
               <FormattedDate value={i.createdAt}></FormattedDate>
             </li>
           ))}
