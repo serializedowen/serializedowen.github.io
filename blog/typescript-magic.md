@@ -30,15 +30,15 @@ Array<T>
 
 我们在日常写代码的时候，就往往会遇到这种情况，在处理函数之前，我们只知道接受的参数是个 Array 类型，但无法确认这个数组里面存的是什么类型，这时候我们应该用什么类型来描述这个对象？
 
-### 用 any？
+### `用 any？`
 
 这显然是不合适的，因为我们知道这个类型肯定会有诸如`Array.prototype.reduce()`, `Array.prototype.map()`等等挂在 Array 原型链上的函数，我们只是不知道`Array.prototype.map((...args) => {})`的中 args 的类型而已。
 
-### 用 Array<any>？
+### `用 Array<any>？`
 
 用 Array<any>显然也不合适，因为这之后我们在使用`Array.prototype.map((...args) => {})`的时候，args 将会是 any 类型，我们希望能有一种办法，在定义时候只约束类型是个 Array，而里面装的东西到运行时去确定。
 
-### Array<T>
+### `Array<T>`
 
 谜底就在谜面上，我们的最终选择就是使用`Array<T>` 这里面的 T 就是泛型，一个在编译时无法确定的类型。
 
