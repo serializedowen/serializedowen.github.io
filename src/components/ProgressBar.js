@@ -30,6 +30,5 @@ export default function ProgressBar() {
     }
   }, [])
 
-  console.log('render progress')
   return <Progress style={{ transform: `translateX(${progress}%)` }}></Progress>
 }

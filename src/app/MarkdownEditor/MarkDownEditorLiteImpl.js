@@ -26,12 +26,23 @@ import {
   Typography,
   TextField
 } from '@material-ui/core'
+import { highlight, languages } from 'prismjs'
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
 // Initialize a markdown parser
-const mdParser = new MarkdownIt(/* Markdown-it options */)
+const mdParser = new MarkdownIt({
+  highlight(str, lang) {
+    try {
+      return (
+        `<pre class="language-${lang}"><code>` +
+        highlight(str, languages.js, lang) +
+        '</code></pre>'
+      )
+    } catch (e) {}
+  }
+})
 
 const imageUploadHandler = file => {
   const formData = new FormData()

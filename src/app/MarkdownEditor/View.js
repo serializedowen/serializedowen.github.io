@@ -6,8 +6,20 @@ import { useQuery } from 'react-query'
 import { IconButton } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
 import { navigateTo } from 'gatsby'
+import { highlight, languages } from 'prismjs'
+import 'src/themes/juejin.markdown.css'
 
-const mdParser = new MarkdownIt(/* Markdown-it options */)
+const mdParser = new MarkdownIt({
+  highlight(str, lang) {
+    try {
+      return (
+        `<pre class="language-${lang}"><code>` +
+        highlight(str, languages.js, lang) +
+        '</code></pre>'
+      )
+    } catch (e) {}
+  }
+})
 
 export default function View() {
   const { id } = useParams()
@@ -29,6 +41,7 @@ export default function View() {
       }
       {!isLoading && !error && (
         <article
+          id="markdown"
           dangerouslySetInnerHTML={{
             __html: mdParser.render(data.data.content)
           }}
