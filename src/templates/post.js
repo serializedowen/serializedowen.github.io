@@ -8,7 +8,6 @@ import {
   ProgressBar,
   Wrapper,
   Header,
-  Subline,
   SEO,
   PrevNext,
   Content
@@ -32,6 +31,7 @@ import axios from 'src/utils/http'
 
 import { useQuery } from 'react-query'
 import Comment from 'src/components/Comment'
+import 'src/themes/raw.css'
 
 const PostContent = styled.div`
   outline: none;
@@ -90,6 +90,7 @@ const Post = props => {
         </Typography>
         <PostContent
           className="editable"
+          id="markdown"
           dangerouslySetInnerHTML={{ __html: postNode.html }}
         />
         <PrevNext prev={prev} next={next} />
