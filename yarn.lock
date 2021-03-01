@@ -7177,13 +7177,6 @@ gatsby-plugin-styled-components@^3.0.1:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-gatsby-plugin-typography@^2.2.1:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-typography/-/gatsby-plugin-typography-2.2.2.tgz#94217c9d61e4cc19c1060bf21a960ced459438fe"
-  integrity sha512-t13tyWcperL2aL27m6AtXn30pNrdqhg7Lz23WFm/0dyi64loxGyYKtuytoxbHRDgQMjRlht0Iucq0RNLTtMjVA==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-
 gatsby-react-router-scroll@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-react-router-scroll/-/gatsby-react-router-scroll-2.0.2.tgz#d8046ce2f3bfa52ef6ec55804007d976b0bb6bef"
@@ -9688,10 +9681,10 @@ latest-version@^3.0.0:
   dependencies:
     package-json "^4.0.0"
 
-lax.js@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/lax.js/-/lax.js-1.2.5.tgz#cf4279be9f604a0bb20fd3e808af97879c246c3d"
-  integrity sha512-Ytf7ZUhn2YLtyYoUFT8KpoRYvzw0awTr66J0vrp4NpwPaXPp504yhvsrqtP6ZDny3/Y7UOQsWHylV9iLl3cuoQ==
+lax.js@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/lax.js/-/lax.js-2.0.3.tgz#74aed57a628db42fcfa91b7a746cec443a611a38"
+  integrity sha512-q2q0jVRwruvFdQZeeE3OwIszRIkey6CItPmB+BcTUFPgHd2R8LI+bntAI7d2GJEjheu79mzQ++MROkODuZoXlA==
 
 lcid@^1.0.0:
   version "1.0.0"
@@ -12391,10 +12384,10 @@ pretty-error@^2.1.1:
     renderkid "^2.0.1"
     utila "~0.4"
 
-prismjs@^1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.15.0.tgz#8801d332e472091ba8def94976c8877ad60398d9"
-  integrity sha512-Lf2JrFYx8FanHrjoV5oL8YHCclLQgbJcVZR+gikGGMqz6ub5QVWDTM6YIwm3BuPxM/LOV+rKns3LssXNLIf+DA==
+prismjs@^1.23.0:
+  version "1.23.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.23.0.tgz#d3b3967f7d72440690497652a9d40ff046067f33"
+  integrity sha512-c29LVsqOaLbBHuIbsTxaKENh1N2EQBOHaWv7gkHN4dgRbxSREqDnDbtFJYdpPauS4YCplMSNCABQ6Eeor69bAA==
   optionalDependencies:
     clipboard "^2.0.0"
 
