@@ -28,15 +28,15 @@
 <url> <loc>https://serializedowen.com/docs/react-router-dom/示例/页面查询参数</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/hooks</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/browser-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.com/docs/react-router-dom/API/link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/hash-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/docs/react-router-dom/API/link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/nav-link</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/prompt</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/memory-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/redirect</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/route</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://serializedowen.com/docs/react-router-dom/API/static-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/docs/react-router-dom/API/static-router</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/switch</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/history</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/docs/react-router-dom/API/location</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -63,6 +63,7 @@
 <url> <loc>https://serializedowen.com/ice-skiing</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/test</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/markdown-cheatsheet</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/how-i-cut-gta-online-loading-times-by-70</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/type-script</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/java-script</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/docker</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -73,6 +74,7 @@
 <url> <loc>https://serializedowen.com/categories/packages</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/trips</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/general</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://serializedowen.com/categories/game</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/categories/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/zh/categories/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://serializedowen.com/contact/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
