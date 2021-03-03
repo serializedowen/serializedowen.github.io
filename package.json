@@ -64,9 +64,7 @@
     "react-mde": "^11.0.0",
     "react-query": "^2.26.3",
     "react-typography": "^0.16.13",
-    "react-use": "^15.3.4",
     "rxjs": "^6.6.3",
-    "rxjs-hooks": "^0.6.2",
     "styled-components": "^4.0.3",
     "typography": "^0.16.17",
     "yup": "^0.29.3"
