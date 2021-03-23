@@ -4,9 +4,28 @@ title: 'Concurrency in Golang'
 category: 'Golang'
 ---
 
+## 前言
+
+golang 的并发操作和 Java 等语言需要实例化 Thread 操作线程不太相同。而是采用了轻量化的 goroutine（golang 特有的协程）来实现。
+
+这也是 golang 在并发层面性能胜于其他语言的重要原因之一
+
+#### 对比
+
+| 对比项   | thread                          | goroutine            |
+| -------- | ------------------------------- | -------------------- |
+| 控制     | 由操作系统控制                  | 由 golang 运行时控制 |
+| 硬件依赖 | 不同硬件可能实现不同            | 与硬件无关           |
+| 通信中介 | 不易实现                        | 由 channel 管道控制  |
+| ID       | 有唯一标识符和 ThreadLocal 存储 | 无                   |
+| 调度     | preemptive                      | co-operative         |
+| 栈       | 不可伸缩的分段栈                | 可伸缩的分段栈       |
+
 ## goroutine
 
-> golang 多线程操作和 Java 等语言需要实例化 Thread 不太相同。而是采用了轻量化的 goroutine 来实现：
+> Goroutine 是一个与其他 goroutines 并发运行在同一地址空间的 Go 函数或方法。一个运行的程序由一个或更多个 goroutine 组成。它与线程、协程、进程等不同。它是一个 goroutine。
+
+By Rob Pike(Auther of Golang)
 
 ```golang
 go func() {}()
@@ -232,3 +251,4 @@ func main() {
 References:
 
 - [gobyexample](https://gobyexample.com/)
+- [difference-between-goroutine-and-thread-in-golang](https://www.tutorialspoint.com/difference-between-goroutine-and-thread-in-golang)
