@@ -11,7 +11,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete'
 import { FormattedMessage } from 'react-intl'
 
-export default function ActionDelete({ action }) {
+export default function ActionDelete({ action, prompt }) {
   const [anchorEl, setanchorEl] = useState(null)
 
   const open = Boolean(anchorEl)
@@ -37,7 +37,7 @@ export default function ActionDelete({ action }) {
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Card elevation={2}>
-              <CardContent>确认删除这条评论吗</CardContent>
+              <CardContent>{prompt}</CardContent>
               <CardActions>
                 <Button
                   onClick={e => {

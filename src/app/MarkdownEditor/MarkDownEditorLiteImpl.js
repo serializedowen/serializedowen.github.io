@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import 'react-markdown-editor-lite/lib/index.css'
 import http from 'src/utils/http'
 import { retryWithDelay, rxhttp } from 'src/utils/rxjs-utils'
-import { navigateTo } from 'gatsby'
+import { navigate } from 'gatsby'
 import { combineLatest, from, of, pipe, throwError } from 'rxjs'
 import {
   switchMap,
@@ -27,6 +27,7 @@ import {
   TextField
 } from '@material-ui/core'
 import { highlight, languages } from 'prismjs'
+import ActionDelete from 'src/components/ActionDelete'
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
@@ -88,7 +89,7 @@ export default function MarkDownEditorLiteImpl(props) {
               retryWithDelay(200, 2),
 
               tap(data => {
-                navigateTo(`/app/markdown/${data.data}/edit`)
+                navigate(`/app/markdown/${data.data}/edit`, { replace: true })
               })
             )
           return rxhttp(() =>
@@ -125,7 +126,7 @@ export default function MarkDownEditorLiteImpl(props) {
         ),
         retryWithDelay(200, 2),
         catchError(err => {
-          navigateTo('/app/markdown/draft')
+          navigate('/app/markdown/draft', { replace: true })
           return of(err)
         })
       )
@@ -179,6 +180,16 @@ export default function MarkDownEditorLiteImpl(props) {
         </RadioGroup>
       </FormControl>
 
+      <FormControl>
+        <ActionDelete
+          action={() =>
+            http
+              .delete(`/markdown/${params.id}`)
+              .then(() => navigate('/app/markdown', { replace: true }))
+          }
+          prompt="确认删除这篇笔记吗？"
+        ></ActionDelete>
+      </FormControl>
       <Typography>
         <FormattedMessage id={saveState}></FormattedMessage>
       </Typography>

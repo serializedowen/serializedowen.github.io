@@ -5,7 +5,7 @@ import http from 'src/utils/http'
 import { useQuery } from 'react-query'
 import { IconButton } from '@material-ui/core'
 import { Edit } from '@material-ui/icons'
-import { navigateTo } from 'gatsby'
+import { navigate } from 'gatsby'
 import { highlight, languages } from 'prismjs'
 import 'src/themes/juejin.markdown.css'
 
@@ -28,7 +28,7 @@ export default function View() {
   )
 
   const navigateToEdit = useCallback(
-    () => navigateTo(`/app/markdown/${id}/edit`),
+    () => navigate(`/app/markdown/${id}/edit`),
     [id]
   )
 

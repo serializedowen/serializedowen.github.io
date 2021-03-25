@@ -74,6 +74,7 @@ export default function Comment({ comment, refresh }) {
           isAuthenticated &&
           comment.userId === user.userId && (
             <ActionDelete
+              prompt="确认删除这条评论吗？"
               action={() => deleteComment(comment.id)}
             ></ActionDelete>
           )
